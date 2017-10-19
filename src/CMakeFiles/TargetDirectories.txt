@@ -1,0 +1,4 @@
+/home/bryden/Software_Projects/Beaglebone_Build/src/CMakeFiles/edit_cache.dir
+/home/bryden/Software_Projects/Beaglebone_Build/src/CMakeFiles/rebuild_cache.dir
+/home/bryden/Software_Projects/Beaglebone_Build/src/CMakeFiles/test.dir
+/home/bryden/Software_Projects/Beaglebone_Build/src/CMakeFiles/BoostExample.dir
