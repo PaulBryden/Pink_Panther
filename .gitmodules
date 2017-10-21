@@ -1,0 +1,4 @@
+[submodule "submodules/cpprestsdk"]
+	path = submodules/cpprestsdk
+	url = https://github.com/Microsoft/cpprestsdk.git
+	branch = origin/casablanca

@@ -6,13 +6,43 @@ HunterGate(
     SHA1 "53b198e364dc7bc8360fc545f798563229bd7e20"
 )
 
-project(Foo)
-
-hunter_add_package(Boost COMPONENTS regex system filesystem)
-find_package(Boost CONFIG REQUIRED regex system filesystem)
+project(Foo C CXX)
+#set_target_properties(cppREST PROPERTIES LINKER_LANGUAGE Cxx) 
+set(CMAKE_CXX_STANDARD 11)
+#set(CMAKE_MODULE_PATH "${PROJECT_ROOT}/cmake")
+hunter_add_package(Boost COMPONENTS random system thread filesystem chrono atomic date_time regex)
+find_package(Boost CONFIG REQUIRED random system thread filesystem chrono atomic date_time regex)
 
 hunter_add_package(OpenSSL)
 find_package(OpenSSL REQUIRED )
 
-add_executable(foo src/BoostExample.cpp)
-target_link_libraries(foo PUBLIC Boost::regex Boost::system Boost::filesystem)
+#SET(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+#set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+#find_package(CppREST)
+#add_library(CppREST STATIC "lib/libcpprestd.a")
+#message(STATUS "CPPRESTLIBS")
+#message(STATUS ${CppREST_LIBS})
+
+#set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIRS})
+
+add_executable(helloworldspeaker src/main.cpp)
+target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/lib/libcpprestd.a
+  Boost::boost
+  Boost::random
+  Boost::system
+  Boost::thread
+  Boost::filesystem
+  Boost::chrono
+  Boost::atomic
+  Boost::date_time
+  Boost::regex
+  ${OPENSSL_LIBRARIES}
+)
+
+#add_executable(helloworldlistener src/listen.cpp)
+#target_link_libraries(helloworldlistener ${CppREST_LIBS})
