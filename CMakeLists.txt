@@ -26,12 +26,12 @@ find_package(OpenSSL REQUIRED )
 
 #set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build_panther/usr/local/include)
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(helloworldspeaker src/main.cpp)
-target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/lib/libcpprestd.a
+target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/../build_panther/usr/local/lib/libcpprestd.a
   Boost::boost
   Boost::random
   Boost::system
