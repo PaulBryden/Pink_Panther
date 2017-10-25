@@ -26,11 +26,13 @@ find_package(OpenSSL REQUIRED )
 
 #set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 
+ADD_LIBRARY(wiffy_module src/iwlib.c)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build_panther/usr/local/include)
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(helloworldspeaker src/main.cpp)
+add_executable(helloworldspeaker src/main.cpp src/Node.cpp src/inc/Node.h src/Nodes.cpp src/inc/Nodes.h src/RestModule.cpp src/inc/RestModule.h src/WifiScanModule.cpp src/inc/WifiScanModule.h)
 target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/../build_panther/usr/local/lib/libcpprestd.a
   Boost::boost
   Boost::random
@@ -42,6 +44,7 @@ target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/../build_panther/usr
   Boost::date_time
   Boost::regex
   ${OPENSSL_LIBRARIES}
+  wiffy_module
 )
 
 #add_executable(helloworldlistener src/listen.cpp)

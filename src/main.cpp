@@ -1,5 +1,6 @@
 #include <cpprest/http_client.h>
 #include <cpprest/filestream.h>
+#include "inc/iwlib.h"
 
 using namespace utility;                    // Common utilities like string conversions
 using namespace web;                        // Common features like URIs.
