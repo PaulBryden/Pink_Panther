@@ -5,13 +5,14 @@
 #ifndef FOO_NODES_H
 #define FOO_NODES_H
 #include "Node.h"
-#include <List>
+#include <list>
+#include <memory>
 
 class Nodes {
     Nodes();
 
     public:
-        List<std::shared_ptr<Node>> m_Nodes;
+        std::list<std::shared_ptr<Node>> m_Nodes;
         void RefreshNodes();
 
 };

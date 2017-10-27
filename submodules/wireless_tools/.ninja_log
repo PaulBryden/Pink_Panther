@@ -1,0 +1,5 @@
+# ninja log v5
+1	626	0	CMakeFiles/wiffy_module.dir/iwlib.c.o	8daf0f62b38cd0b5
+627	921	0	libwiffy_module.a	b59d627fa555b145
+0	946	0	CMakeFiles/wifi_test.dir/wifi_test.cpp.o	c3cc3f76d541523e
+946	1061	0	wifi_test	323bcdcb7a63d3f5

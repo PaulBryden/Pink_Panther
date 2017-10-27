@@ -2,7 +2,7 @@
 //
 // g++ -O3 -Wall wifiscan.cxx -o wifiscan -liw
 
-#include <iwlib.h>
+#include "iwlib.h"
 #include <unistd.h>
 
 #include <sys/socket.h>
@@ -28,7 +28,7 @@ int main(void)
 
     //---------------------------------------------------------------------
 
-    struct iw_range range;
+
 
     if ((iw_get_range_info(sockfd, interfaceName, &range) < 0) ||
         (range.we_version_compiled < 14))

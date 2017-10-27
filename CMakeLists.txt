@@ -32,7 +32,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build_panther/usr/local/inclu
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(helloworldspeaker src/main.cpp src/Node.cpp src/inc/Node.h src/Nodes.cpp src/inc/Nodes.h src/RestModule.cpp src/inc/RestModule.h src/WifiScanModule.cpp src/inc/WifiScanModule.h)
+add_executable(helloworldspeaker src/main.cpp src/messagetypes.h src/stdafx.h src/MyServer.h src/MyServer.cpp src/Node.cpp src/inc/Node.h src/Nodes.cpp src/inc/Nodes.h src/inc/wireless.h src/RestModule.cpp src/inc/RestModule.h src/WifiScanModule.cpp src/inc/WifiScanModule.h)
 target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/../build_panther/usr/local/lib/libcpprestd.a
   Boost::boost
   Boost::random

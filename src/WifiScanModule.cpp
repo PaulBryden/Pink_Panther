@@ -3,10 +3,18 @@
 //
 
 #include "inc/WifiScanModule.h"
+#include "inc/iwlib.h"
+#include <unistd.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <memory>
 #include <list>
+#include <cstdio>
+#include <cstring>
+
 
 WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
-
+    iw_range range;
     const char* interfaceName = "wlan0";
 
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -109,8 +117,8 @@ WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
                              request.u.data.length);
 
         char eventBuffer[512];
-        std::shared_ptr<Node> newNode = new Node();
-        Nodes.insert(newNode);
+        std::shared_ptr<Node> newNode(std::make_shared<Node>());
+        Nodes.push_back(newNode);
 
         while (iw_extract_event_stream(&stream, &iwe, wev) > 0)
         {
@@ -187,8 +195,8 @@ WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
 
                     newNode->m_name=essid;
                     /*Last SSID*/
-                    newNode = new Node();
-                    Nodes.insert(newNode);
+                    newNode = std::make_shared<Node>();
+                    Nodes.push_back(newNode);
 
                     break;
                 }

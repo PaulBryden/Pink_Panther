@@ -5,16 +5,8 @@
 #ifndef FOO_WIFISCANMODULE_H
 #define FOO_WIFISCANMODULE_H
 
-#include "inc/iwlib.h"
-#include <unistd.h>
-
-#include <sys/socket.h>
-#include <sys/time.h>
-
-#include <cstdio>
-#include <cstring>
-#include "inc/Node"
-#include "inc/Nodes"
+#include "Node.h"
+#include "Nodes.h"
 
 class WifiScanModule {
 

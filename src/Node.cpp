@@ -8,10 +8,6 @@ Node::Node(){
 
 }
 
-Node::Node(){
-
-}
-
-Node::Node(){
+Node::Node(std::string Name, std::string Mac, int SigStrength, int Rssi){
 
 }
