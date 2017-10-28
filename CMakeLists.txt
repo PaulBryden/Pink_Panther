@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 include("cmake/HunterGate.cmake")
 HunterGate(
-    URL "https://github.com/ruslo/hunter/archive/v0.10.9.tar.gz"
-    SHA1 "53b198e364dc7bc8360fc545f798563229bd7e20"
+    URL "https://github.com/ruslo/hunter/archive/v0.19.137.tar.gz"
+    SHA1 "e99ddb16d3b92b7ea9ac4b526faf9415db1c5c5b"
 )
 
 project(Foo C CXX)
@@ -28,12 +28,12 @@ find_package(OpenSSL REQUIRED )
 
 ADD_LIBRARY(wiffy_module src/iwlib.c)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build_panther/usr/local/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/usr/local/include)
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(helloworldspeaker src/main.cpp src/messagetypes.h src/stdafx.h src/MyServer.h src/MyServer.cpp src/Node.cpp src/inc/Node.h src/Nodes.cpp src/inc/Nodes.h src/inc/wireless.h src/RestModule.cpp src/inc/RestModule.h src/WifiScanModule.cpp src/inc/WifiScanModule.h)
-target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/../build_panther/usr/local/lib/libcpprestd.a
+target_link_libraries(helloworldspeaker ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a
   Boost::boost
   Boost::random
   Boost::system
@@ -46,6 +46,21 @@ target_link_libraries(helloworldspeaker ${CMAKE_SOURCE_DIR}/../build_panther/usr
   ${OPENSSL_LIBRARIES}
   wiffy_module
 )
+
+add_executable(test_wifi src/TestWifiScanModule.cpp src/messagetypes.h src/stdafx.h src/MyServer.h src/MyServer.cpp src/Node.cpp src/inc/Node.h src/Nodes.cpp src/inc/Nodes.h src/inc/wireless.h src/RestModule.cpp src/inc/RestModule.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/TestWifiScanModule.cpp)
+target_link_libraries(test_wifi ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a
+        Boost::boost
+        Boost::random
+        Boost::system
+        Boost::thread
+        Boost::filesystem
+        Boost::chrono
+        Boost::atomic
+        Boost::date_time
+        Boost::regex
+        ${OPENSSL_LIBRARIES}
+        wiffy_module
+        )
 
 #add_executable(helloworldlistener src/listen.cpp)
 #target_link_libraries(helloworldlistener ${CppREST_LIBS})

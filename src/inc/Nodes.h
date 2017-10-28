@@ -7,13 +7,19 @@
 #include "Node.h"
 #include <list>
 #include <memory>
+#include "WifiScanModule.h"
 
 class Nodes {
-    Nodes();
 
-    public:
+public:
+    Nodes();
+    web::json::value ToJson();
+        WifiScanModule m_Scanner;
         std::list<std::shared_ptr<Node>> m_Nodes;
         void RefreshNodes();
+        void PrintNodes();
+
+
 
 };
 

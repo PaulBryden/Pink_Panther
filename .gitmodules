@@ -2,3 +2,6 @@
 	path = submodules/cpprestsdk
 	url = https://github.com/Microsoft/cpprestsdk.git
 	branch = origin/casablanca
+[submodule "submodules/OpenSSL-CMake"]
+	path = submodules/OpenSSL-CMake
+	url = https://github.com/pol51/OpenSSL-CMake

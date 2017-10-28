@@ -3,7 +3,7 @@
 //
 
 #include "inc/WifiScanModule.h"
-#include "inc/iwlib.h"
+
 #include <unistd.h>
 #include <sys/socket.h>
 #include <sys/time.h>
@@ -12,19 +12,19 @@
 #include <cstdio>
 #include <cstring>
 
+WifiScanModule::~WifiScanModule()
+{
 
-WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
-    iw_range range;
-    const char* interfaceName = "wlan0";
+    close(sockfd);
+}
 
-    int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-
+WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& NodesList) : Nodes(NodesList)
+{
     if (sockfd == -1)
     {
         perror("socket");
         exit(EXIT_FAILURE);
     }
-    //---------------------------------------------------------------------
 
     if ((iw_get_range_info(sockfd, interfaceName, &range) < 0) ||
         (range.we_version_compiled < 14))
@@ -34,11 +34,9 @@ WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
         exit(EXIT_FAILURE);
     }
 
-    __u8 wev = range.we_version_compiled;
+    wev = range.we_version_compiled;
 
-    //---------------------------------------------------------------------
-
-    struct iwreq request;
+    //----------------------
 
     request.u.param.flags = IW_SCAN_DEFAULT;
     request.u.param.value = 0;
@@ -46,8 +44,14 @@ WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
     if (iw_set_ext(sockfd, interfaceName, SIOCSIWSCAN, &request) == -1)
     {
         perror("iw_set_ext(SIOCSIWSCAN)");
-        exit(EXIT_FAILURE);
+        printf("Error during set");
+
     }
+
+}
+void WifiScanModule::Scan()
+{
+
 
     //---------------------------------------------------------------------
 
@@ -79,7 +83,7 @@ WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
             if (errno != EAGAIN)
             {
                 perror("iw_get_ext(SICGIWSCAN)");
-                exit(EXIT_FAILURE);
+                printf("Error at get_ext");
             }
         }
 
@@ -100,8 +104,6 @@ WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
             usleep(100000);
         }
     }
-
-    close(sockfd);
 
     //---------------------------------------------------------------------
 
@@ -223,7 +225,6 @@ WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes){
                         }
 
                         printf("%d dBm ", dbLevel);
-
                         newNode->m_Rssi=dbLevel;
                     }
                     else if ((iwe.u.qual.updated & IW_QUAL_LEVEL_INVALID) == 0)

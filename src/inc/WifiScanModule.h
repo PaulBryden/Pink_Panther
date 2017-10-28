@@ -6,12 +6,29 @@
 #define FOO_WIFISCANMODULE_H
 
 #include "Node.h"
-#include "Nodes.h"
-
+#include <memory>
+#include <list>
+#include "iwlib.h"
 class WifiScanModule {
 
 
-    WifiScanModule(std::list<std::shared_ptr<Node>>& Nodes);
+
+public:
+    WifiScanModule(std::list<std::shared_ptr<Node>>& NodesList);
+    ~WifiScanModule();
+    void Scan();
+    iw_range range;
+    const char* interfaceName = "wlan0";
+
+    int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+
+    struct iwreq request;
+    __u8 wev;
+
+    //-----
+
+private:
+    std::list<std::shared_ptr<Node>>& Nodes;
 };
 
 #endif //FOO_WIFISCANMODULE_H
