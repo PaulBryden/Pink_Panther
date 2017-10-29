@@ -21,7 +21,7 @@ double Node::CalculateDistance(){
     double Power=(-(static_cast<double>(m_Rssi) - (-60.0))/(10.0*3.0));
 
     printf("Calculating Distance: %f",pow(10.0,Power));
-    
+
     return pow(10.0,Power);
 }
 

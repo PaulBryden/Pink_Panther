@@ -24,8 +24,21 @@ void MyServer::handle_get(http_request message)
 {
     ucout <<  message.to_string() << endl;
 
-	NodeList->RefreshNodes();
-    message.reply(status_codes::OK,NodeList->ToJson());
+    NodeList->RefreshNodes();
+    auto query_string = message.absolute_uri().query();
+    auto query_map = uri::split_query(query_string);
+    auto it = query_map.find(U("callback"));
+    if (it != query_map.end())
+    {
+        // Query uses JSONP
+        auto callback = it->second;
+        std::stringstream ss;
+        ss << callback << "(" << NodeList->ToJson().serialize() << ")";
+        message.reply(status_codes::OK, ss.str());
+    }else {
+
+        message.reply(status_codes::OK, NodeList->ToJson());
+    }
 };
 
 void MyServer::handle_post(http_request message)
