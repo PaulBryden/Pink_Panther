@@ -7,14 +7,14 @@
 
 #include "Node.h"
 #include <memory>
-#include <list>
+#include <vector>
 #include "iwlib.h"
 class WifiScanModule {
 
 
 
 public:
-    WifiScanModule(std::list<std::shared_ptr<Node>>& NodesList);
+    WifiScanModule(std::vector<std::shared_ptr<Node>>& NodesList);
     ~WifiScanModule();
     void Scan();
     iw_range range;
@@ -28,7 +28,7 @@ public:
     //-----
 
 private:
-    std::list<std::shared_ptr<Node>>& Nodes;
+    std::vector<std::shared_ptr<Node>>& Nodes;
 };
 
 #endif //FOO_WIFISCANMODULE_H

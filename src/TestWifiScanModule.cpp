@@ -10,8 +10,8 @@
 int main(int argc, wchar_t *argv[])
 {
 
-    Nodes* NodeList;
-    NodeList = new Nodes();
+    node::Nodes* NodeList;
+    NodeList = new node::Nodes();
     while(true)
     {
         NodeList->RefreshNodes();

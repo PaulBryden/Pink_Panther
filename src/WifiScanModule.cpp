@@ -18,7 +18,7 @@ WifiScanModule::~WifiScanModule()
     close(sockfd);
 }
 
-WifiScanModule::WifiScanModule(std::list<std::shared_ptr<Node>>& NodesList) : Nodes(NodesList)
+WifiScanModule::WifiScanModule(std::vector<std::shared_ptr<Node>>& NodesList) : Nodes(NodesList)
 {
     if (sockfd == -1)
     {

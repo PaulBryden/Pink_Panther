@@ -5,9 +5,9 @@
 #ifndef FOO_NODE_H
 #define FOO_NODE_H
 #include <string>
-#include <http_client.h>
+#include <cpprest/http_client.h>
 #include <iostream>
-#include <json.h>
+#include <cpprest/json.h>
 class Node {
 
 public:
