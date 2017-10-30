@@ -11,7 +11,6 @@
 #include <list>
 #include <cstdio>
 #include <cstring>
-
 WifiScanModule::~WifiScanModule()
 {
 
@@ -26,6 +25,7 @@ WifiScanModule::WifiScanModule(std::vector<std::shared_ptr<Node>>& NodesList) : 
 void WifiScanModule::Scan()
 {
 
+    boost::mutex::scoped_lock lock{g_i_mutex};
     std::shared_ptr<Node> newNode(std::make_shared<Node>());
 
     wireless_scan_head head;

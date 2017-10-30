@@ -11,6 +11,9 @@
 #include "iwlib.h"
 #include <stdio.h>
 #include <time.h>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/bind.hpp>
 class WifiScanModule {
 
 
@@ -23,6 +26,7 @@ public:
 
 private:
     std::vector<std::shared_ptr<Node>>& Nodes;
+    boost::mutex g_i_mutex;
 };
 
 #endif //FOO_WIFISCANMODULE_H
