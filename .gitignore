@@ -1,3 +1,4 @@
 _builds
 src/CMakeFiles/*
 CMakeFiles
+usr

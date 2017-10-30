@@ -64,7 +64,7 @@ void WifiScanModule::Scan()
         printf("%d",dbLevel);
 
         newNode->m_name=result->b.essid;
-
+        newNode->m_channel=result->b.freq;
         newNode->m_Rssi=dbLevel;
 
         result = result->next;

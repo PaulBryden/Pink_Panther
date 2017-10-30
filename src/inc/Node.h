@@ -19,7 +19,7 @@ public:
         std::string m_Mac;
         int m_SigStrength;
         int m_Rssi;
-        int m_txPower;
+        double m_channel;
     double CalculateDistance();
 };
 

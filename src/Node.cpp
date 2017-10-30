@@ -34,6 +34,7 @@ using namespace web;
     response["SSID"] = json::value::string(m_name);
     response["RSSI"] = json::value::number(m_Rssi);
     response["Distance"] = json::value::number(CalculateDistance());
+    response["Channel"] = json::value::number(m_channel);
     auto aValue = response.at(U("RSSI"));
     cout << aValue;
     return response;

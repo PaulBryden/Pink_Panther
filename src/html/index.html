@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>mperry Line Charts</title>
+    <link class="include" rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+    <script class="include" type="text/javascript" src="jquery.js"></script>
+    <script class="include" type="text/javascript" src="jquery.jqplot.js"></script>
+    <script class="include" type="text/javascript" src="plugins/jqplot.canvasTextRenderer.js"></script>
+    <script class="include" type="text/javascript" src="plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+   <script type="text/javascript" src="plugins/jqplot.dateAxisRenderer.js"></script>
+    <script type="text/javascript" src="plugins/jqplot.highlighter.js"></script>
+    <script type="text/javascript" src="plugins/jqplot.enhancedLegendRenderer.js"></script>
+    <style>
+        .chart { height:400px; width:700px; }
+    </style>
+<script>
+var eduroamRSSI;
+var eduroamDISTANCE;
+function getRSSI(){
+$.ajax({
+    url: 'http://192.168.7.2:34568/MyServer/Action/',
+	 jsonp: "callback",
+          dataType: "jsonp",
+          crossDomain: true,
+    success: function (data) {
+        console.log(data);
+		data["Nodes"].forEach(function(element){
+			if(element["SSID"]=="eduroam" && element["Channel"]=="2412000000"){
+			eduroamRSSI=element["RSSI"];
+			eduroamDISTANCE=element["Distance"];
+			}
+		});
+    }
+});
+}
+
+
+</script>
+</head>
+<div>RSSI Against Time</div>
+<div id="RSSI_PLOT" style="height:300px;width:500px;"></div>
+<div>Distance Against Time</div>
+<div id="DISTANCE_PLOT" style="height:300px;width:500px;"></div>
+
+<button>Update</button>
+<body>
+
+<script class="code" type="text/javascript">
+
+//from www.meccanismocomplesso.org
+//by F.Nelli Dec 2013
+// this is based on a buffer of 19 values.
+$(document).ready(function(){	
+//refresh time (in millisec)
+var t = 4000;
+//samples to draw
+var n = 20;
+var x = (new Date()).getTime(); // current time
+//buffer of n samples
+var data = [];
+var distData =[];
+for(i=0; i<n; i++){
+	data.push([x - (n-1-i)*t,0]);
+	distData.push([x - (n-1-i)*t,0]);
+} 
+
+var options = {
+    axes: {
+  	   xaxis: {
+  	   	  numberTicks: 4,
+          renderer:$.jqplot.DateAxisRenderer,
+          tickOptions:{formatString:'%H:%M:%S'},
+          min : data[0][0],
+		  label:'Time (H::M::S)',
+          //max : data[19][0]
+          max: data[data.length-1][0]
+	   },
+	   yaxis: {min:-50, max: -100,numberTicks: 20,
+		  label:'RSSI (dBm)',
+  	        tickOptions:{formatString:'%.1f'} 
+	   }
+    },
+    seriesDefaults: {
+  	   rendererOptions: { smooth: true}
+    }
+};
+var optionsDist = {
+    axes: {
+  	   xaxis: {
+  	   	  numberTicks: 4,
+          renderer:$.jqplot.DateAxisRenderer,
+          tickOptions:{formatString:'%H:%M:%S'},
+          min : distData[0][0],
+		  label:'Time (H::M::S)',
+          //max : data[19][0]
+          max: distData[distData.length-1][0]
+	   },
+	   yaxis: {min:0, max: 10,numberTicks: 20,
+			label:'Distance (m)',
+  	        tickOptions:{formatString:'%.2f'} 
+	   }
+    },
+    seriesDefaults: {
+  	   rendererOptions: { smooth: true}
+    }
+};
+
+var plot1 = $.jqplot ('RSSI_PLOT', [data],options);
+
+var plot2 = $.jqplot ('DISTANCE_PLOT', [distData],optionsDist);
+
+$('button').click( function(){  
+    doUpdate();
+    $(this).hide();
+});
+
+function doUpdate() {
+	getRSSI();
+    if(data.length > n-1){
+    	data.shift();
+    }
+    var y = eduroamRSSI;
+    var x = (new Date()).getTime();
+	
+    data.push([x,y]);
+    if (plot1) {
+    	plot1.destroy();
+    }
+    plot1.series[0].data = data; 
+    //il problema è che adesso i valori su y delle ticks non sono più statici
+    //e cambiano ad ogni aggiornamento, quindi cambia la logica sottostante
+    // devo intervenire sui valori all'interno di options.
+    options.axes.xaxis.min = data[0][0];
+    options.axes.xaxis.max = data[data.length-1][0];    
+	plot1 = $.jqplot ('RSSI_PLOT', [data],options);
+	
+	    if(distData.length > n-1){
+    	distData.shift();
+    }
+    var y = eduroamDISTANCE;
+    var x = (new Date()).getTime();
+	
+    distData.push([x,y]);
+    if (plot2) {
+    	plot2.destroy();
+    }
+    plot1.series[0].distData = distData; 
+    //il problema è che adesso i valori su y delle ticks non sono più statici
+    //e cambiano ad ogni aggiornamento, quindi cambia la logica sottostante
+    // devo intervenire sui valori all'interno di options.
+    optionsDist.axes.xaxis.min = distData[0][0];
+    optionsDist.axes.xaxis.max = distData[distData.length-1][0];    
+	plot2 = $.jqplot ('DISTANCE_PLOT', [distData],optionsDist);
+	
+	
+    setTimeout(doUpdate, t);
+}
+
+});
+</script>
+</body>
+</html>
