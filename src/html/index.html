@@ -56,7 +56,7 @@ $.ajax({
 // this is based on a buffer of 19 values.
 $(document).ready(function(){	
 //refresh time (in millisec)
-var t = 4000;
+var t = 4500;
 //samples to draw
 var n = 20;
 var x = (new Date()).getTime(); // current time
@@ -79,7 +79,7 @@ var options = {
           //max : data[19][0]
           max: data[data.length-1][0]
 	   },
-	   yaxis: {min:-50, max: -100,numberTicks: 20,
+	   yaxis: {min:-100, max: -50,numberTicks: 20,
 		  label:'RSSI (dBm)',
   	        tickOptions:{formatString:'%.1f'} 
 	   }
