@@ -40,7 +40,7 @@ int main(int argc, wchar_t *argv[])
 
     }
 
-    utility::string_t address = U("http://192.168.7.2:");
+    utility::string_t address = U("http://127.0.0.1:");
     address.append(port);
 
     on_initialize(address);

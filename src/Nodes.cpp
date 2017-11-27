@@ -15,6 +15,13 @@ Nodes::Nodes() : m_Scanner(m_Nodes){
 void Nodes::RefreshNodes(){
     m_Nodes.clear();
     m_Scanner.Scan();
+    int i=0;
+
+}
+
+void Nodes::AddNode(std::shared_ptr<Node> node){
+    m_Nodes.push_back(node);
+
 }
 
 void Nodes::PrintNodes(){

@@ -2,15 +2,20 @@
 #include "messagetypes.h"
 #include "MyServer.h"
 #include "inc/Nodes.h"
+#include "inc/FileIO.h"
 using namespace std;
 using namespace web; 
 using namespace utility;
 using namespace http;
 using namespace web::http::experimental::listener;
 node::Nodes* NodeList;
+node::Nodes* serialNodes;
+
 MyServer::MyServer(utility::string_t url) : m_listener(url)
 {
-
+    serialNodes = new node::Nodes();
+    FileIO::FileIO newFileIO(serialNodes);
+    newFileIO.ReadIn();
     m_listener.support(methods::GET, std::bind(&MyServer::handle_get, this, std::placeholders::_1));
     m_listener.support(methods::PUT, std::bind(&MyServer::handle_put, this, std::placeholders::_1));
     m_listener.support(methods::POST, std::bind(&MyServer::handle_post, this, std::placeholders::_1));
@@ -24,7 +29,21 @@ void MyServer::handle_get(http_request message)
 {
     ucout <<  message.to_string() << endl;
 
-    NodeList->RefreshNodes();
+        NodeList->RefreshNodes();
+        for (auto const& i : serialNodes->m_Nodes) {
+              for (auto const& n : NodeList->m_Nodes) {
+                  if(i->m_name==n->m_name){
+                      n->x_coord=i->x_coord;
+                      n->y_coord=i->y_coord;
+                      n->m_RssiCalib=i->m_RssiCalib;
+                  }
+              }
+            std::cout << i->m_name;
+            std::cout << i->m_Rssi;
+            std::cout << "/n";
+
+
+        }
     auto query_string = message.absolute_uri().query();
     auto query_map = uri::split_query(query_string);
     auto it = query_map.find(U("callback"));

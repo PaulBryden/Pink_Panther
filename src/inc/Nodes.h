@@ -27,6 +27,9 @@ namespace node {
         void PrintNodes();
 
 
+        void AddNode(std::shared_ptr<Node> node);
+
+
     };
 }
 
