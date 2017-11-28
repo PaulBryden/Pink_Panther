@@ -1,49 +1,43 @@
 #include "stdafx.h"
 #include "messagetypes.h"
 #include "MyServer.h"
-#include "inc/Nodes.h"
+#include "inc/Node_Container.h"
 #include "inc/FileIO.h"
+#include "inc/WifiScanModule.h"
 using namespace std;
 using namespace web; 
 using namespace utility;
 using namespace http;
 using namespace web::http::experimental::listener;
-node::Nodes* NodeList;
-node::Nodes* serialNodes;
+std::shared_ptr<node::Node_Container> ScannedNodes;
+std::shared_ptr<node::Node_Container> TargetNodes;
+std::shared_ptr<WifiScanModule> ScanModule;
 
 MyServer::MyServer(utility::string_t url) : m_listener(url)
 {
-    serialNodes = new node::Nodes();
-    FileIO::FileIO newFileIO(serialNodes);
+    TargetNodes = new node::Node_Container();
+    FileIO::FileIO newFileIO(TargetNodes);
     newFileIO.ReadIn();
     m_listener.support(methods::GET, std::bind(&MyServer::handle_get, this, std::placeholders::_1));
     m_listener.support(methods::PUT, std::bind(&MyServer::handle_put, this, std::placeholders::_1));
     m_listener.support(methods::POST, std::bind(&MyServer::handle_post, this, std::placeholders::_1));
     m_listener.support(methods::DEL, std::bind(&MyServer::handle_delete, this, std::placeholders::_1));
 
-    NodeList = new node::Nodes();
-   
+    ScannedNodes = new node::Node_Container();
+    ScanModule = new WifiScanModule(ScannedNodes,TargetNodes);
+
+    boost::thread t{ScanModule->Scan()};
+
 }
 
 void MyServer::handle_get(http_request message)
 {
     ucout <<  message.to_string() << endl;
+    web::json::value yourJson;
+    yourJson[U("System")] = web::json::value::array(2);
+    yourJson[U("System")].as_array()[0] = web::json::value(TargetNodes->ToJson());
+    yourJson[U("System")].as_array()[1] = web::json::value(ScannedNodes->ToJson());
 
-        NodeList->RefreshNodes();
-        for (auto const& i : serialNodes->m_Nodes) {
-              for (auto const& n : NodeList->m_Nodes) {
-                  if(i->m_name==n->m_name){
-                      n->x_coord=i->x_coord;
-                      n->y_coord=i->y_coord;
-                      n->m_RssiCalib=i->m_RssiCalib;
-                  }
-              }
-            std::cout << i->m_name;
-            std::cout << i->m_Rssi;
-            std::cout << "/n";
-
-
-        }
     auto query_string = message.absolute_uri().query();
     auto query_map = uri::split_query(query_string);
     auto it = query_map.find(U("callback"));
@@ -52,11 +46,11 @@ void MyServer::handle_get(http_request message)
         // Query uses JSONP
         auto callback = it->second;
         std::stringstream ss;
-        ss << callback << "(" << NodeList->ToJson().serialize() << ")";
+        ss << callback << "(" << yourJson.serialize() << ")";
         message.reply(status_codes::OK, ss.str());
     }else {
 
-        message.reply(status_codes::OK, NodeList->ToJson());
+        message.reply(status_codes::OK, yourJson);
     }
 };
 

@@ -9,45 +9,34 @@
 #include <cmath>
 #include <utility>
 using namespace std;
-Node::Node(){
 
+
+Node::Node(std::string Name, int RSSI, double Channel):m_name(Name),m_Rssi(RSSI),m_channel(Channel){
 }
 
-Node::Node(web::json::value node){
+Node::Node(web::json::value node) {
     try {
-        const std::string &s = "SSID";
-        cout << node["SSID"];
         m_name = node["SSID"].as_string();
-        cout << node["XCoord"];
-        y_coord = node["XCoord"].as_double();
-        cout << node["YCoord"];
-        x_coord = node["YCoord"].as_double();
-        cout << node["RSSICalib"];
-        m_RssiCalib = node["RSSICalib"].as_double();
+        cout << node["SSID"];
     }catch(std::exception e){
-        printf("Error:: Cannot parse node from settings file.");
+        printf("Error:: Cannot parse SSID from JSON. Please check Syntax");
+        return;
     }
-
-
-}
-
-Node::Node(std::string Name, std::string Mac, int SigStrength, int Rssi){
-
-
-}
-double Node::CalculateDistance(){
-
-    printf("Calculating range base on RSSI of:%d",m_Rssi);
     try {
-        double Power = (-(static_cast<double>(m_Rssi) - (m_RssiCalib)) / (10.0 * 3.0));
-
-        printf("Calculating Distance: %f", pow(10.0, Power));
-
-        return pow(10.0, Power);
-    }catch(std::exception X){
-        printf("Error:: No Calibration Data Available");
-        return 0;
+        m_channel = node["Channel"].as_double();
+        cout << node["Channel"];
+    }catch(std::exception e){
+        printf("Error:: Cannot parse Channel from JSON. Please check Syntax");
+        return;
     }
+    try{
+        m_Rssi = node["RSSI"].as_double();
+        cout << node["RSSI"];
+    }catch(std::exception e){
+        printf("Error:: Cannot parse RSSI from JSON. Please check Syntax");
+        return;
+    }
+
 }
 
 web::json::value Node::ToJson(){
@@ -58,12 +47,26 @@ using namespace web;
 
     response["SSID"] = json::value::string(m_name);
     response["RSSI"] = json::value::number(m_Rssi);
-    response["Distance"] = json::value::number(CalculateDistance());
-    response["XCoord"] = json::value::number(x_coord);
-    response["YCoord"] = json::value::number(y_coord);
-    response["RSSICalib"] = json::value::number(m_RssiCalib);
     response["Channel"] = json::value::number(m_channel);
     auto aValue = response.at(U("RSSI"));
     cout << aValue;
     return response;
+}
+
+double Node::getChannel() {
+    return m_channel;
+}
+
+int Node::getRSSI() {
+    return m_Rssi;
+}
+
+std::string Node::getSSID() {
+    return m_name;
+}
+
+void Node::Update(std::shared_ptr<INode> Node){
+    m_channel=Node->getChannel();
+    m_Rssi=Node->getRSSI();
+    m_name=Node->getSSID();
 }

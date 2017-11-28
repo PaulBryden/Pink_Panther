@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 namespace FileIO {
-    FileIO::FileIO(node::Nodes* nodeList):m_NodeList(nodeList) {
+    FileIO::FileIO(std::shared_ptr<node::Node_Container> nodeList):m_NodeList(nodeList) {
 
     }
 
@@ -26,7 +26,7 @@ namespace FileIO {
                 f.close();                                              // close the filestream
                 v=web::json::value::parse(s.str());
                 std::cout <<s.str();// parse the resultant string stream.
-                std::shared_ptr<Node> newNode(std::make_shared<Node>(v.as_array()[0]));
+                std::shared_ptr<Target_Node> newNode(std::make_shared<Target_Node>(v.as_array()[0]));
                 std::cout << "AFTER PARSING:" << v.serialize();
                 /*for (auto iter = v.as_array().cbegin(); iter != v.as_array().cend(); ++iter)
                 {

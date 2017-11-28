@@ -28,7 +28,7 @@ $.ajax({
           crossDomain: true,
     success: function (data) {
         console.log(data);
-		data["Nodes"].forEach(function(element){
+		data["Scanned_Nodes"].forEach(function(element){
 			if(element["SSID"]=="eduroam" && element["Channel"]=="2412000000"){
 			eduroamRSSI=element["RSSI"];
 			eduroamDISTANCE=element["Distance"];

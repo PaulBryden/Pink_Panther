@@ -14,18 +14,20 @@
 #include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/bind.hpp>
+#include "Node_Container.h"
 class WifiScanModule {
 
 
 
 public:
-    WifiScanModule(std::vector<std::shared_ptr<Node>>& NodesList);
+    WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes));
     ~WifiScanModule();
     void Scan();
 
 
 private:
-    std::vector<std::shared_ptr<Node>>& Nodes;
+    std::shared_ptr<node::Node_Container> m_Nodes;
+    std::shared_ptr<node::Node_Container> m_TargetNodes;
     boost::mutex g_i_mutex;
 };
 

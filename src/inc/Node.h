@@ -8,23 +8,22 @@
 #include <cpprest/http_client.h>
 #include <iostream>
 #include <cpprest/json.h>
-class Node {
-
+#include "INode.h"
+#include <atomic>
+class Node: public INode {
+private:
+    std::string m_name;
+    double m_channel;
+    int m_Rssi;
 public:
-    Node(std::string Name, std::string Mac, int SigStrength, int Rssi);
+    Node(std::string Name, int Rssi, double Channel);
     Node(web::json::value node);
-    Node();
     web::json::value ToJson();
-        float approxDistance();
-        std::string m_name;
-        std::string m_Mac;
-        int m_SigStrength;
-        double x_coord;
-        double y_coord;
-        int m_Rssi;
-        double m_channel;
-        double m_RssiCalib;
-    double CalculateDistance();
+    void Update(std::shared_ptr<INode> Node);
+    int getRSSI();
+    double getChannel();
+    std::string getSSID();
+
 };
 
 

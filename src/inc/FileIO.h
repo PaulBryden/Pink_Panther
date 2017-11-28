@@ -4,8 +4,8 @@
 
 #ifndef FOO_FILEIO_H
 #define FOO_FILEIO_H
-#include "Nodes.h"
-#include "Node.h"
+#include "Node_Container.h"
+#include "Target_Node.h"
 
 #include <memory>
 namespace FileIO {
@@ -13,10 +13,10 @@ namespace FileIO {
 
 
     public:
-        FileIO(node::Nodes* nodeList);
+        FileIO(std::shared_ptr<node::Node_Container> nodeList);
         void WriteOut();
         void ReadIn();
-        std::shared_ptr<node::Nodes> m_NodeList;
+        std::shared_ptr<node::Node_Container> m_NodeList;
 
     };
 }
