@@ -5,3 +5,6 @@
 [submodule "submodules/OpenSSL-CMake"]
 	path = submodules/OpenSSL-CMake
 	url = https://github.com/pol51/OpenSSL-CMake
+[submodule "submodules/lapack"]
+	path = submodules/lapack
+	url = https://github.com/Reference-LAPACK/lapack

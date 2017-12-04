@@ -11,19 +11,6 @@
 #include <memory>
 
 using namespace std;
-double Target_Node::CalculateDistance() {
-    printf("Calculating range base on RSSI of:%d",m_Node->getRSSI());
-    try {
-        double Power = (-(static_cast<double>(m_Node->getRSSI()) - (m_RssiCalib)) / (10.0 * 3.0));
-
-        printf("Calculating Distance: %f", pow(10.0, Power));
-
-        return pow(10.0, Power);
-    }catch(std::exception X){
-        printf("Error:: No Calibration Data Available");
-        return 0;
-    }
-}
 
 void Target_Node::Update(std::shared_ptr<INode> Node){
     m_Node=Node;
@@ -32,7 +19,7 @@ void Target_Node::Update(std::shared_ptr<INode> Node){
 Target_Node::Target_Node(web::json::value node){
 
 
-    m_Node=new std::shared_ptr(std::make_shared(new Node(node)));
+    m_Node=std::make_shared<Node>(node);
 
     try {
             m_XCoord = node["XCoord"].as_double();
@@ -68,6 +55,24 @@ Target_Node::Target_Node(web::json::value node){
 
 }
 
+web::json::value Target_Node::ToJson(){
+    //TO BE POPULATED
+    using namespace web;
+    json::value response = m_Node->ToJson();
+    //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_Rssi)+" }"));
+
+    response["XCoord"] = json::value::number(m_XCoord);
+    response["YCoord"] = json::value::number(m_YCoord);
+    response["ZCoord"] = json::value::number(m_ZCoord);
+    response["RSSICalib"] = json::value::number(m_RssiCalib);
+    response["Distance"] = json::value::number(CalculateDistance());
+   // cout <<response.serialize();
+
+    return response;
+
+
+}
+
 int Target_Node::getRSSI(){
     return m_Node->getRSSI();
 }
@@ -78,4 +83,30 @@ double Target_Node::getChannel(){
 
 std::string Target_Node::getSSID(){
     return m_Node->getSSID();
+}
+
+double Target_Node::CalculateDistance() {
+    printf("Calculating range base on RSSI of:%d",m_Node->getRSSI());
+    try {
+        double Power = (-(static_cast<double>(m_Node->getRSSI()) - (m_RssiCalib)) / (10.0 * 3.0));
+
+        printf("Calculating Distance: %f", pow(10.0, Power));
+
+        return pow(10.0, Power);
+    }catch(std::exception X){
+        printf("Error:: No Calibration Data Available");
+        return 0;
+    }
+}
+
+double Target_Node::getXCoord(){
+    return m_XCoord;
+}
+
+double Target_Node::getYCoord(){
+    return m_YCoord;
+}
+
+double Target_Node::getZCoord(){
+    return m_ZCoord;
 }

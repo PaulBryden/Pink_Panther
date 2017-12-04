@@ -4,8 +4,6 @@
 
 #ifndef FOO_INODE_H
 #define FOO_INODE_H
-
-#endif //FOO_INODE_H
 #include <string>
 #include <cpprest/json.h>
 #include <atomic>
@@ -13,7 +11,6 @@
 class INode {
 public:
     virtual web::json::value ToJson() = 0;
-    virtual double CalculateDistance() = 0;
     virtual void Update(std::shared_ptr<INode> Node) = 0;
     virtual int getRSSI() = 0;
     virtual double getChannel() = 0;
@@ -22,3 +19,5 @@ public:
 
 
 };
+
+#endif //FOO_INODE_H

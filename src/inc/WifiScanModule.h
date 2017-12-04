@@ -5,7 +5,6 @@
 #ifndef FOO_WIFISCANMODULE_H
 #define FOO_WIFISCANMODULE_H
 
-#include "Node.h"
 #include <memory>
 #include <vector>
 #include "iwlib.h"
@@ -15,12 +14,13 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/bind.hpp>
 #include "Node_Container.h"
+using namespace node;
 class WifiScanModule {
 
 
 
 public:
-    WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes));
+    WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes);
     ~WifiScanModule();
     void Scan();
 

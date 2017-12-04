@@ -24,6 +24,9 @@ public:
     int getRSSI();
     double getChannel();
     std::string getSSID();
+    double getXCoord();
+    double getYCoord();
+    double getZCoord();
 
 };
 

@@ -1,5 +1,5 @@
-#include "stdafx.h"
-#include "MyServer.h"
+#include "inc/stdafx.h"
+#include "inc/RestModule.h"
 
 using namespace web;
 using namespace http;

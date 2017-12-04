@@ -3,7 +3,6 @@
 //
 
 #include "inc/WifiScanModule.h"
-#include "inc/Node_Container.h"
 
 #pragma GCC diagnostic ignored "-Wwrite-strings"
 #include <unistd.h>
@@ -13,6 +12,9 @@
 #include <list>
 #include <cstdio>
 #include <cstring>
+#include "inc/Node.h"
+#include <boost/chrono.hpp>
+#include <boost/thread/thread.hpp>
 WifiScanModule::~WifiScanModule()
 {
 
@@ -24,6 +26,9 @@ WifiScanModule::WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNode
 
 
 }
+
+#ifdef 	__arm__
+
 void WifiScanModule::Scan()
 {
 
@@ -38,7 +43,6 @@ void WifiScanModule::Scan()
         sock = iw_sockets_open();
         while(true){
         node::Node_Container tempContainer;
-        std::shared_ptr<Node> newNode(std::make_shared<Node>());
                 /* Get some metadata to use for scanning */
                 if (iw_get_range_info(sock, "wlan0", &range) < 0) {
                     printf("Error during iw_get_range_info. Aborting.\n");
@@ -59,7 +63,7 @@ void WifiScanModule::Scan()
                         }
                         printf("%d", dbLevel);
 
-                        newNode = std::make_shared<Node>(result->b.essid, "N/A", dbLevel, result->b.freq);
+                        std::shared_ptr<Node> newNode = std::make_shared<Node>(result->b.essid, dbLevel, result->b.freq);
 
                         tempContainer.AddNode(newNode);
 
@@ -75,4 +79,34 @@ void WifiScanModule::Scan()
                 }
     }
 }
+#else
+
+void WifiScanModule::Scan() {
+
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    while(true) {
+        node::Node_Container tempContainer;
+        std::shared_ptr<Node> newNode = std::make_shared<Node>("TRIG1", -55, 1500);
+        tempContainer.AddNode(newNode);
+        newNode = std::make_shared<Node>("TRIG2", -55, 1501);
+        tempContainer.AddNode(newNode);
+        newNode = std::make_shared<Node>("TRIG3", -55, 1502);
+        tempContainer.AddNode(newNode);
+        newNode = std::make_shared<Node>("TRIG4", -55, 1503);
+        tempContainer.AddNode(newNode);
+
+        m_Nodes->ClearNodes();
+        for (auto &i : tempContainer.GetNodes()) {
+            m_Nodes->AddNode(i);
+        }
+        m_TargetNodes->UpdateNodes(m_Nodes);
+
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+    }
+
+
+}
+
+#endif
+
 

@@ -4,11 +4,14 @@
 
 #ifndef FOO_NODES_H
 #define FOO_NODES_H
-#include "Node.h"
+#include "INode.h"
 #include <vector>
 #include <memory>
-#include "WifiScanModule.h"
 #include <string>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/bind.hpp>
+
 
 namespace node {
     class Node_Container {

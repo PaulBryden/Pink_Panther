@@ -27,15 +27,14 @@ void Node_Container::PrintNodes(){
 
 web::json::value Node_Container::ToJson() {
     boost::mutex::scoped_lock lock(g_i_mutex);
-    web::json::value yourJson;
+    web::json::value yourJson = web::json::value::object();
     yourJson[U("Nodes")] = web::json::value::array(m_Nodes.size());
     int i = 0;
     for (i = 0; i < m_Nodes.size(); i++) {
 
-    yourJson[U("Nodes")].as_array()[i] = web::json::value(m_Nodes[i]->ToJson());
-}
-    auto aValue = yourJson.at(U("Node_Container"))[0].at(U("RSSI"));
-    cout << aValue;
+         yourJson[U("Nodes")].as_array()[i] = web::json::value(m_Nodes[i]->ToJson());
+    }
+    cout << yourJson.serialize();
     return yourJson;
 }
 void Node_Container::ClearNodes(){
@@ -54,6 +53,7 @@ void Node_Container::AddNode(std::shared_ptr<INode> node){
 }
 
 void Node_Container::UpdateNodes(std::shared_ptr<Node_Container> nodes) {
+    boost::mutex::scoped_lock lock(g_i_mutex);
      for(auto &i : nodes->GetNodes()){
          for (auto  &x : m_Nodes){
              if(x->getSSID()==i->getSSID() && x->getChannel()==i->getChannel()){
@@ -62,16 +62,5 @@ void Node_Container::UpdateNodes(std::shared_ptr<Node_Container> nodes) {
          }
      }
 }
-/*
-void Node_Container::RemoveNode(std::string SSID){
-int i = 0;
-    for(i=0;i<m_Nodes.size();i++){
-        if (m_Nodes[i]->m_name == SSID){
-            m_Nodes.erase(std::remove(m_Nodes.begin(), m_Nodes.end(), i), m_Nodes.end());
-        }
-    }
 
-
-
-}*/
 

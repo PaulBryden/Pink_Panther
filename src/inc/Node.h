@@ -10,6 +10,9 @@
 #include <cpprest/json.h>
 #include "INode.h"
 #include <atomic>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/bind.hpp>
 class Node: public INode {
 private:
     std::string m_name;

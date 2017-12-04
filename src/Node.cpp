@@ -8,6 +8,7 @@
 #include <set>
 #include <cmath>
 #include <utility>
+#include <memory>
 using namespace std;
 
 
@@ -43,13 +44,10 @@ web::json::value Node::ToJson(){
 using namespace web;
     //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_Rssi)+" }"));
 
-    auto response = json::value::object();
-
+    json::value response = json::value::object();
     response["SSID"] = json::value::string(m_name);
     response["RSSI"] = json::value::number(m_Rssi);
     response["Channel"] = json::value::number(m_channel);
-    auto aValue = response.at(U("RSSI"));
-    cout << aValue;
     return response;
 }
 

@@ -10,9 +10,9 @@ project(Foo C CXX)
 #set_target_properties(cppREST PROPERTIES LINKER_LANGUAGE Cxx) 
 set(CMAKE_CXX_STANDARD 11)
 #set(CMAKE_MODULE_PATH "${PROJECT_ROOT}/cmake")
-hunter_add_package(LAPACK)
-find_package(LAPACK CONFIG REQUIRED)
-
+#hunter_add_package(LAPACK)
+#find_package(LAPACK CONFIG REQUIRED)
+#find_package(LAPACKE)
 hunter_add_package(Boost COMPONENTS random system thread filesystem chrono atomic date_time regex)
 find_package(Boost CONFIG REQUIRED random system thread filesystem chrono atomic date_time regex)
 
@@ -33,11 +33,12 @@ find_package(OpenSSL REQUIRED )
 ADD_LIBRARY(wiffy_module src/iwlib.c)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/usr/local/include)
+include_directories(/home/green/software/build_panther/usr/local/include)
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(helloworldspeaker src/main.cpp src/messagetypes.h src/stdafx.h src/MyServer.h src/MyServer.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/RestModule.cpp src/inc/RestModule.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h)
-target_link_libraries(helloworldspeaker ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a
+add_executable(helloworldspeaker src/Main.cpp src/inc/messagetypes.h src/inc/stdafx.h src/inc/RestModule.h src/RestModule.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h src/locationModule.cpp src/inc/locationModule.h src/inc/Location.h)
+target_link_libraries(helloworldspeaker ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a
   Boost::boost
   Boost::random
   Boost::system
@@ -52,21 +53,6 @@ target_link_libraries(helloworldspeaker ${CMAKE_CURRENT_BINARY_DIR}/usr/local/li
   lapack
 )
 
-add_executable(test_wifi src/TestWifiScanModule.cpp src/messagetypes.h src/stdafx.h src/MyServer.h src/MyServer.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/RestModule.cpp src/inc/RestModule.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/TestWifiScanModule.cpp src/inc/Repository.h src/inc/FileIO.h src/FileIO.cpp)
-target_link_libraries(test_wifi ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a
-        Boost::boost
-        Boost::random
-        Boost::system
-        Boost::thread
-        Boost::filesystem
-        Boost::chrono
-        Boost::atomic
-        Boost::date_time
-        Boost::regex
-        ${OPENSSL_LIBRARIES}
-        wiffy_module
-        lapack
-)
 
 #add_executable(helloworldlistener src/listen.cpp)
 #target_link_libraries(helloworldlistener ${CppREST_LIBS})

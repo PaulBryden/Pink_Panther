@@ -26,20 +26,14 @@ namespace FileIO {
                 f.close();                                              // close the filestream
                 v=web::json::value::parse(s.str());
                 std::cout <<s.str();// parse the resultant string stream.
-                std::shared_ptr<Target_Node> newNode(std::make_shared<Target_Node>(v.as_array()[0]));
-                std::cout << "AFTER PARSING:" << v.serialize();
-                /*for (auto iter = v.as_array().cbegin(); iter != v.as_array().cend(); ++iter)
-                {
-                    auto k = iter->first;
-                    auto n = iter->second;
+                for(int i=0;i<v.as_array().size();i++){
 
-                    auto key = k.as_string();
-                    auto value = n.to_string();
+                    std::shared_ptr<Target_Node> newNode(std::make_shared<Target_Node>(v.as_array()[i]));
+                    std::cout << "AFTER PARSING " << i <<": " << v.serialize();
+                    std::cout << v.as_array()[0];
+                    m_NodeList->AddNode(newNode);
 
-                    std::cout << key << L" : " << value << " (" << n << ")" << std::endl;
-                }*/
-                std::cout << v.as_array()[0];
-                m_NodeList->AddNode(newNode);
+                }
             }else{
                 std::cout << "Settings.json Does Not Exist";
             }
