@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>Pink Panther - Location Demo</title>
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+    <script class="include" type="text/javascript" src="jquery.js"></script>
+
+<script>
+var locationX=45;
+var locationY=90;
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    ctx.fillRect(0, 0, 800, 900);
+	ctx.beginPath();
+	ctx.arc(locationX,locationY,20,0,2*Math.PI);
+	ctx.fillStyle = "red";
+	ctx.fill();
+	ctx.fillStyle = "white";
+	ctx.font = "20px Arial";
+	ctx.fillText("Hello World",locationX+20,locationY-25);
+	ctx.fillText("Hello World",locationX+20,locationY);
+	ctx.fillText("Hello World",locationX+20,locationY+25);
+  }
+}
+var eduroamRSSI;
+var eduroamDISTANCE;
+function getRSSI(){
+$.ajax({
+    url: 'http://192.168.7.2:34568/MyServer/Action/',
+	 jsonp: "callback",
+          dataType: "jsonp",
+          crossDomain: true,
+    success: function (data) {
+        console.log(data);
+		data["Scanned_Nodes"].forEach(function(element){
+			if(element["SSID"]=="eduroam" && element["Channel"]=="2412000000"){
+			eduroamRSSI=element["RSSI"];
+			eduroamDISTANCE=element["Distance"];
+			}
+		});
+    }
+});
+}
+
+
+</script>
+</head>
+ <body onload="draw();">
+   <canvas id="canvas" width="800" height="900"></canvas>
+ </body>
+</html>

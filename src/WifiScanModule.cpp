@@ -4,6 +4,7 @@
 
 #include "inc/WifiScanModule.h"
 
+#include <boost/timer/timer.hpp>
 #pragma GCC diagnostic ignored "-Wwrite-strings"
 #include <unistd.h>
 #include <sys/socket.h>
@@ -20,18 +21,19 @@ WifiScanModule::~WifiScanModule()
 
 }
 
-WifiScanModule::WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes) : m_Nodes(ScannedNodesList),m_TargetNodes(Target_Nodes)
+WifiScanModule::WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes,std::shared_ptr<locationModule> locMod,double& scanTime)
+        : m_Nodes(ScannedNodesList),m_TargetNodes(Target_Nodes),m_locMod(locMod),m_scanTime(scanTime)
 {
 
 
 
 }
 
-#ifdef 	__arm__
-
 void WifiScanModule::Scan()
 {
 
+
+#ifdef 	__arm__
         boost::mutex::scoped_lock lock(g_i_mutex);
 
         wireless_scan_head head;
@@ -42,6 +44,8 @@ void WifiScanModule::Scan()
         /* Open socket to kernel */
         sock = iw_sockets_open();
         while(true){
+
+        boost::timer::auto_cpu_timer t;
         node::Node_Container tempContainer;
                 /* Get some metadata to use for scanning */
                 if (iw_get_range_info(sock, "wlan0", &range) < 0) {
@@ -77,36 +81,37 @@ void WifiScanModule::Scan()
                     }
                     m_TargetNodes->UpdateNodes(m_Nodes);
                 }
-    }
-}
 #else
 
-void WifiScanModule::Scan() {
+        boost::mutex::scoped_lock lock(g_i_mutex);
+        while(true) {
+            boost::timer::auto_cpu_timer t;
+            node::Node_Container tempContainer;
+            std::shared_ptr<Node> newNode = std::make_shared<Node>("TRIG1", -55, 1500);
+            tempContainer.AddNode(newNode);
+            newNode = std::make_shared<Node>("TRIG2", -55, 1501);
+            tempContainer.AddNode(newNode);
+            newNode = std::make_shared<Node>("TRIG3", -55, 1502);
+            tempContainer.AddNode(newNode);
+            newNode = std::make_shared<Node>("TRIG4", -55, 1503);
+            tempContainer.AddNode(newNode);
 
-    boost::mutex::scoped_lock lock(g_i_mutex);
-    while(true) {
-        node::Node_Container tempContainer;
-        std::shared_ptr<Node> newNode = std::make_shared<Node>("TRIG1", -55, 1500);
-        tempContainer.AddNode(newNode);
-        newNode = std::make_shared<Node>("TRIG2", -55, 1501);
-        tempContainer.AddNode(newNode);
-        newNode = std::make_shared<Node>("TRIG3", -55, 1502);
-        tempContainer.AddNode(newNode);
-        newNode = std::make_shared<Node>("TRIG4", -55, 1503);
-        tempContainer.AddNode(newNode);
+            m_Nodes->ClearNodes();
+            for (auto &i : tempContainer.GetNodes()) {
+                m_Nodes->AddNode(i);
+            }
+            m_TargetNodes->UpdateNodes(m_Nodes);
 
-        m_Nodes->ClearNodes();
-        for (auto &i : tempContainer.GetNodes()) {
-            m_Nodes->AddNode(i);
+            boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+#endif
+
+            m_scanTime=t.elapsed().wall;
+            m_locMod->CalculateLocations(m_TargetNodes);
+
         }
-        m_TargetNodes->UpdateNodes(m_Nodes);
-
-        boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
-    }
 
 
 }
 
-#endif
 
 

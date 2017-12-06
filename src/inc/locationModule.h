@@ -7,10 +7,19 @@
 #include "Node_Container.h"
 #include "Target_Node.h"
 #include "Location.h"
-#include <lapacke.h>
+#include <boost/chrono/chrono.hpp>
+#include <boost/timer/timer.hpp>
 class locationModule {
 public:
-    std::shared_ptr<Location>  calculateDgels(std::shared_ptr<node::Node_Container> nodes);
+    void CalculateLocations(std::shared_ptr<node::Node_Container> nodes);
+    web::json::value ToJson();
+private:
+    boost::mutex g_i_mutex;
+    std::shared_ptr<Location> m_dgelsLoc;
+    std::shared_ptr<Location> m_dgesvLoc;
+    std::shared_ptr<Location> m_dgetrsLoc;
+    void  calculateDgels(std::shared_ptr<node::Node_Container> nodes,std::shared_ptr<Location>& dgelsLoc);
+    void  calculateDgesvDgetrs(std::shared_ptr<node::Node_Container> nodes,std::shared_ptr<Location>& dgesvLoc,std::shared_ptr<Location>& dgetrsLoc);
 
 
 };

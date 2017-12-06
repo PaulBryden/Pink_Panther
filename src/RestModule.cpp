@@ -13,6 +13,8 @@ using namespace web::http::experimental::listener;
 std::shared_ptr<node::Node_Container> ScannedNodes;
 std::shared_ptr<node::Node_Container> TargetNodes;
 std::shared_ptr<WifiScanModule> ScanModule;
+std::shared_ptr<locationModule> LocationModule;
+double scanTime;
 
 MyServer::MyServer(utility::string_t url) : m_listener(url)
 {
@@ -25,7 +27,8 @@ MyServer::MyServer(utility::string_t url) : m_listener(url)
     m_listener.support(methods::DEL, std::bind(&MyServer::handle_delete, this, std::placeholders::_1));
 
     ScannedNodes = std::make_shared<node::Node_Container>();
-    ScanModule = std::make_shared<WifiScanModule>(ScannedNodes,TargetNodes);
+    LocationModule = std::make_shared<locationModule>();
+    ScanModule = std::make_shared<WifiScanModule>(ScannedNodes,TargetNodes,LocationModule,scanTime);
 
     boost::thread t(boost::bind(&WifiScanModule::Scan,ScanModule));
 
@@ -35,9 +38,10 @@ void MyServer::handle_get(http_request message)
 {
     ucout <<  message.to_string() << endl;
    web::json::value yourJson;
-    yourJson[U("System")] = web::json::value::array(2);
-    yourJson[U("System")].as_array()[0][U("Target")] = web::json::value(TargetNodes->ToJson());
-    yourJson[U("System")].as_array()[1][U("Scan")]  = web::json::value(ScannedNodes->ToJson());
+    yourJson[U("System")][U("Target")] = web::json::value(TargetNodes->ToJson());
+    yourJson[U("System")][U("Scan")]  = web::json::value(ScannedNodes->ToJson());
+    yourJson[U("System")][U("Location")]  = web::json::value(LocationModule->ToJson());
+    yourJson[U("System")][U("ScanTime")]  = web::json::value(scanTime);
 
     auto query_string = message.absolute_uri().query();
     auto query_map = uri::split_query(query_string);
@@ -57,8 +61,6 @@ void MyServer::handle_get(http_request message)
 
     }
 
-    locationModule newLocationModule;
-    newLocationModule.calculateDgels(TargetNodes);
 
 };
 

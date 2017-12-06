@@ -17,8 +17,6 @@ void Target_Node::Update(std::shared_ptr<INode> Node){
 }
 
 Target_Node::Target_Node(web::json::value node){
-
-
     m_Node=std::make_shared<Node>(node);
 
     try {
