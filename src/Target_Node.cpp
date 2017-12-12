@@ -14,6 +14,7 @@ using namespace std;
 
 void Target_Node::Update(std::shared_ptr<INode> Node){
     m_Node=Node;
+    m_RssiVec;
 }
 
 Target_Node::Target_Node(web::json::value node){
@@ -84,9 +85,19 @@ std::string Target_Node::getSSID(){
 }
 
 double Target_Node::CalculateDistance() {
-    printf("Calculating range base on RSSI of:%d",m_Node->getRSSI());
+    if(m_RssiVec.size()==20) {
+        m_RssiVec.pop_front();
+    }
+    m_RssiVec.push_back(m_Node->getRSSI());
+
+    std::deque<int> y(m_RssiVec);
+    std::sort(y.begin(),y.end());
+    int RSSI=y[((m_RssiVec.size()/2)-1) +1];
+    cout<< RSSI;
+
+    printf("Calculating range base on RSSI of:%d",RSSI);
     try {
-        double Power = (-(static_cast<double>(m_Node->getRSSI()) - (m_RssiCalib)) / (10.0 * 3.0));
+        double Power = (-(static_cast<double>(RSSI - (m_RssiCalib)) / (10.0 * 3.3)));
 
         printf("Calculating Distance: %f", pow(10.0, Power));
 
