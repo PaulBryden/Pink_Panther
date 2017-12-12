@@ -9,27 +9,55 @@
     <script class="include" type="text/javascript" src="jquery.js"></script>
 
 <script>
-var locationX=45;
-var locationY=90;
-function draw() {
+var XVal;
+var YVal;
+var ZVal;
+var DGELSTime;
+var DGESVTime;
+var DGETRSTime;
+var ScanTime;
+var Trig1;
+var Trig2;
+var Trig3;
+var Trig4;
+
+$(setInterval(getRSSI, 4000));
+
+function drawMap() {
   var canvas = document.getElementById('canvas');
   if (canvas.getContext) {
     var ctx = canvas.getContext('2d');
-
-    ctx.fillRect(0, 0, 800, 900);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	var tempX=(XVal/9)*900
+	var tempY=(YVal/9.3)*900
+	ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, 900, 900);
 	ctx.beginPath();
-	ctx.arc(locationX,locationY,20,0,2*Math.PI);
+
 	ctx.fillStyle = "red";
+	ctx.arc(tempX,tempY,20,0,2*Math.PI);
 	ctx.fill();
 	ctx.fillStyle = "white";
 	ctx.font = "20px Arial";
-	ctx.fillText("Hello World",locationX+20,locationY-25);
-	ctx.fillText("Hello World",locationX+20,locationY);
-	ctx.fillText("Hello World",locationX+20,locationY+25);
+	ctx.fillText("X: "+XVal.toFixed(3),tempX+20,tempY-25);
+	ctx.fillText("Y: "+YVal.toFixed(3),tempX+20,tempY);
+	ctx.fillText("Z: "+ZVal.toFixed(3),tempX+20,tempY+25);
+	
+		ctx.beginPath();
+	ctx.arc((Trig1["XCoord"]/9)*900,(Trig1["YCoord"]/9.3)*900,20,0,2*Math.PI);
+		ctx.fill();
+			ctx.beginPath();
+	ctx.arc((Trig2["XCoord"]/9)*900,(Trig2["YCoord"]/9.3)*900,20,0,2*Math.PI);
+		ctx.fill();
+			ctx.beginPath();
+	ctx.arc((Trig3["XCoord"]/9)*900,(Trig3["YCoord"]/9.3)*900,20,0,2*Math.PI);
+		ctx.fill();
+			ctx.beginPath();
+	ctx.arc((Trig4["XCoord"]/9)*900,(Trig4["YCoord"]/9.3)*900,20,0,2*Math.PI);
+	ctx.fill();
+	
   }
 }
-var eduroamRSSI;
-var eduroamDISTANCE;
 function getRSSI(){
 $.ajax({
     url: 'http://192.168.7.2:34568/MyServer/Action/',
@@ -38,20 +66,35 @@ $.ajax({
           crossDomain: true,
     success: function (data) {
         console.log(data);
-		data["Scanned_Nodes"].forEach(function(element){
-			if(element["SSID"]=="eduroam" && element["Channel"]=="2412000000"){
-			eduroamRSSI=element["RSSI"];
-			eduroamDISTANCE=element["Distance"];
+		XVal=data["System"]["Location"]["DGELS"]["X"];
+		YVal=data["System"]["Location"]["DGELS"]["Y"];
+		ZVal=data["System"]["Location"]["DGELS"]["Z"];
+		DGELSTime=data["System"]["Location"]["DGELS"]["time(ns)"];
+		DGESVTime=data["System"]["Location"]["DGESV"]["time(ns)"];
+		DGETRSTime=data["System"]["Location"]["DGETRS"]["time(ns)"];
+		ScanTime=["System"]["ScanTime"];
+		data["System"]["Target"]["Nodes"].forEach(function(element){
+				if(element["SSID"]=="TRIG1" ){
+					Trig1=element;
+				}else if(element["SSID"]=="TRIG2" ){
+					Trig2=element;
+				}else if(element["SSID"]=="TRIG3" ){
+					Trig3=element;
+				}else if(element["SSID"]=="TRIG4" ){
+					Trig4=element;
+				}
+				
 			}
-		});
+		);
+		drawMap();
     }
+		
 });
 }
 
 
 </script>
 </head>
- <body onload="draw();">
-   <canvas id="canvas" width="800" height="900"></canvas>
+   <canvas id="canvas" width="900" height="900"></canvas>
  </body>
 </html>

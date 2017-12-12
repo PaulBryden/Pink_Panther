@@ -10,8 +10,8 @@ using boost::lexical_cast;
 
 void locationModule::CalculateLocations(std::shared_ptr<node::Node_Container> nodes){
     boost::mutex::scoped_lock lock(g_i_mutex);
-    calculateDgels(nodes,m_dgelsLoc);
-    calculateDgesvDgetrs(nodes,m_dgesvLoc,m_dgetrsLoc);
+    calculateDgels(nodes);
+    calculateDgesvDgetrs(nodes);
 }
 
 web::json::value locationModule::ToJson(){
@@ -23,7 +23,7 @@ web::json::value locationModule::ToJson(){
     return response;
 }
 
-void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container> nodes,std::shared_ptr<Location>& dgesvLoc,std::shared_ptr<Location>& dgetrsLoc){
+void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container> nodes){
 
 
     if(nodes->GetNodes().size()!=4){
@@ -42,9 +42,10 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
                     2*(Nodes[2]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[2]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[2]->getZCoord()-Nodes[0]->getZCoord()),
                     2*(Nodes[3]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[3]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[3]->getZCoord()-Nodes[0]->getZCoord())};
 
-    double B[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
+    double B[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[1]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[2]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[3]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
+
 
     lapack_int info,m,n,lda,ldb,nrhs;
     lapack_int *ipiv;
@@ -65,21 +66,23 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
         return;
     }
 
-    dgesvLoc = std::make_shared<Location>();
+    m_dgesvLoc = std::make_shared<Location>();
     printf("Calcuated values.");
     fflush(stdout);
-    dgesvLoc->x=B[0][0];
-    dgesvLoc->y=B[1][0];
-    dgesvLoc->z=B[2][0];
-    dgesvLoc->time=t.elapsed().wall;
+    m_dgesvLoc->x=B[0][0];
+    m_dgesvLoc->y=B[1][0];
+    m_dgesvLoc->z=B[2][0];
+    m_dgesvLoc->time=t.elapsed().wall;
 
     printf("Calculated Location: ");
-    std::cout << "X:" << lexical_cast<std::string>(B[0][0]) <<" Y:" << lexical_cast<std::string>(B[1][0]) << " Z:" << lexical_cast<std::string>(B[2][0])  << "Time:" << lexical_cast<std::string>(dgesvLoc->time) <<std::endl;
+    std::cout << "X:" << lexical_cast<std::string>(B[0][0]) <<" Y:" << lexical_cast<std::string>(B[1][0]) << " Z:" << lexical_cast<std::string>(B[2][0])  << "Time:" << lexical_cast<std::string>(m_dgesvLoc->time) <<std::endl;
 
-    double B2[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
-             (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
-             (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
-    dgetrsLoc = std::make_shared<Location>();
+
+    double B2[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[1]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[2]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[3]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
+
+    m_dgetrsLoc = std::make_shared<Location>();
     t.resume();
     LAPACKE_dgetrs(LAPACK_ROW_MAJOR,'N', n,nrhs,*A,lda,ipiv,*B2,ldb);
 
@@ -91,12 +94,12 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
     }
 
     t.stop();
-    dgetrsLoc->x=B2[0][0];
-    dgetrsLoc->y=B2[1][0];
-    dgetrsLoc->z=B2[2][0];
-    dgetrsLoc->time=t.elapsed().wall-dgesvLoc->time;
+    m_dgetrsLoc->x=B2[0][0];
+    m_dgetrsLoc->y=B2[1][0];
+    m_dgetrsLoc->z=B2[2][0];
+    m_dgetrsLoc->time=t.elapsed().wall-m_dgesvLoc->time;
 
-    std::cout << "X:" << lexical_cast<std::string>(B2[0][0]) <<" Y:" << lexical_cast<std::string>(B2[1][0]) << " Z:" << lexical_cast<std::string>(B2[2][0])  << "Time:" << lexical_cast<std::string>(dgetrsLoc->time) <<std::endl;
+    std::cout << "X:" << lexical_cast<std::string>(B2[0][0]) <<" Y:" << lexical_cast<std::string>(B2[1][0]) << " Z:" << lexical_cast<std::string>(B2[2][0])  << "Time:" << lexical_cast<std::string>(m_dgetrsLoc->time) <<std::endl;
 
 
     return;
@@ -104,7 +107,7 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
 
 
 
-void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes,std::shared_ptr<Location>& dgelsLoc){
+void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes){
 
     if(nodes->GetNodes().size()!=4){
         throw("Error::Too few Nodes!");
@@ -122,9 +125,9 @@ void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes,
                     2*(Nodes[2]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[2]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[2]->getZCoord()-Nodes[0]->getZCoord()),
                     2*(Nodes[3]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[3]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[3]->getZCoord()-Nodes[0]->getZCoord())};
 
-    double B[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
+    double B[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[1]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[2]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[3]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
 
     lapack_int info,m,n,lda,ldb,nrhs;
 
@@ -142,14 +145,14 @@ void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes,
         printf( "the least squares solution could not be computed.\n" );
         return;
     }
-    dgelsLoc = std::make_shared<Location>();
-    dgelsLoc->x=B[0][0];
-    dgelsLoc->y=B[1][0];
-    dgelsLoc->z=B[2][0];
-    dgelsLoc->time=t.elapsed().wall;
+    m_dgelsLoc = std::make_shared<Location>();
+    m_dgelsLoc->x=B[0][0];
+    m_dgelsLoc->y=B[1][0];
+    m_dgelsLoc->z=B[2][0];
+    m_dgelsLoc->time=t.elapsed().wall;
 
     printf("Calculated Location Dgels: ");
-    std::cout << "X:" << lexical_cast<std::string>(B[0][0]) <<" Y:" << lexical_cast<std::string>(B[1][0]) << " Z:" << lexical_cast<std::string>(B[2][0])  << "Time:" << lexical_cast<std::string>(dgelsLoc->time) <<std::endl;
+    std::cout << "X:" << lexical_cast<std::string>(B[0][0]) <<" Y:" << lexical_cast<std::string>(B[1][0]) << " Z:" << lexical_cast<std::string>(B[2][0])  << "Time:" << lexical_cast<std::string>(m_dgelsLoc->time) <<std::endl;
 
     return ;
 

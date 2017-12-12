@@ -15,6 +15,7 @@ private:
     std::atomic<double> m_YCoord;
     std::atomic< double> m_ZCoord;
     std::atomic<double> m_RssiCalib;
+    std::vector<double> DistVect;
 public:
     Target_Node(std::shared_ptr<INode> Node, double XCoord, double YCoord, double ZCoord, double RssiCalib);
     Target_Node(web::json::value node);

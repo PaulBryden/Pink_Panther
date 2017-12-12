@@ -21,7 +21,7 @@ WifiScanModule::~WifiScanModule()
 
 }
 
-WifiScanModule::WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes,std::shared_ptr<locationModule> locMod,double& scanTime)
+WifiScanModule::WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes,std::shared_ptr<locationModule>& locMod,double& scanTime)
         : m_Nodes(ScannedNodesList),m_TargetNodes(Target_Nodes),m_locMod(locMod),m_scanTime(scanTime)
 {
 
@@ -79,8 +79,14 @@ void WifiScanModule::Scan()
                     for (auto &i : tempContainer.GetNodes()) {
                         m_Nodes->AddNode(i);
                     }
+                    std::cout << "About to update Target Nodes.";
                     m_TargetNodes->UpdateNodes(m_Nodes);
                 }
+
+
+            m_scanTime=t.elapsed().wall;
+            m_locMod->CalculateLocations(m_TargetNodes);
+    }
 #else
 
         boost::mutex::scoped_lock lock(g_i_mutex);
@@ -102,16 +108,19 @@ void WifiScanModule::Scan()
             }
             m_TargetNodes->UpdateNodes(m_Nodes);
 
-            boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
-#endif
-
             m_scanTime=t.elapsed().wall;
             m_locMod->CalculateLocations(m_TargetNodes);
 
-        }
 
+            boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+
+        }
+#endif
 
 }
+
+
+
 
 
 

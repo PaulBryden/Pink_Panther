@@ -18,8 +18,8 @@ private:
     std::shared_ptr<Location> m_dgelsLoc;
     std::shared_ptr<Location> m_dgesvLoc;
     std::shared_ptr<Location> m_dgetrsLoc;
-    void  calculateDgels(std::shared_ptr<node::Node_Container> nodes,std::shared_ptr<Location>& dgelsLoc);
-    void  calculateDgesvDgetrs(std::shared_ptr<node::Node_Container> nodes,std::shared_ptr<Location>& dgesvLoc,std::shared_ptr<Location>& dgetrsLoc);
+    void  calculateDgels(std::shared_ptr<node::Node_Container> nodes);
+    void  calculateDgesvDgetrs(std::shared_ptr<node::Node_Container> nodes);
 
 
 };

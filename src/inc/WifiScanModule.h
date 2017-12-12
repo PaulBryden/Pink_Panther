@@ -21,7 +21,7 @@ class WifiScanModule {
 
 
 public:
-    WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes, std::shared_ptr<locationModule> locMod,double& scanTime);
+    WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes, std::shared_ptr<locationModule>& locMod,double& scanTime);
     ~WifiScanModule();
     void Scan();
 
