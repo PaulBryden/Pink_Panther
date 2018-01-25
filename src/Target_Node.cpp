@@ -85,7 +85,7 @@ std::string Target_Node::getSSID(){
 }
 
 double Target_Node::CalculateDistance() {
-    if(m_RssiVec.size()==20) {
+    if(m_RssiVec.size()==12) {
         m_RssiVec.pop_front();
     }
     m_RssiVec.push_back(m_Node->getRSSI());

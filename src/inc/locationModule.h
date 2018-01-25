@@ -11,6 +11,7 @@
 #include <boost/timer/timer.hpp>
 class locationModule {
 public:
+    locationModule();
     void CalculateLocations(std::shared_ptr<node::Node_Container> nodes);
     web::json::value ToJson();
 private:

@@ -8,6 +8,9 @@
 #include <lapacke.h>
 using boost::lexical_cast;
 
+locationModule::locationModule(): m_dgelsLoc(std::make_shared<Location>()),m_dgetrsLoc(std::make_shared<Location>()),m_dgesvLoc(std::make_shared<Location>()){
+
+}
 void locationModule::CalculateLocations(std::shared_ptr<node::Node_Container> nodes){
     boost::mutex::scoped_lock lock(g_i_mutex);
     calculateDgels(nodes);
@@ -66,12 +69,11 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
         return;
     }
 
-    m_dgesvLoc = std::make_shared<Location>();
     printf("Calcuated values.");
     fflush(stdout);
-    m_dgesvLoc->x=B[0][0];
-    m_dgesvLoc->y=B[1][0];
-    m_dgesvLoc->z=B[2][0];
+    m_dgesvLoc->pushX(B[0][0]);
+    m_dgesvLoc->pushY(B[1][0]);
+    m_dgesvLoc->pushZ(B[2][0]);
     m_dgesvLoc->time=t.elapsed().wall;
 
     printf("Calculated Location: ");
@@ -82,7 +84,6 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
                     (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[2]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
                     (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[3]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
 
-    m_dgetrsLoc = std::make_shared<Location>();
     t.resume();
     LAPACKE_dgetrs(LAPACK_ROW_MAJOR,'N', n,nrhs,*A,lda,ipiv,*B2,ldb);
 
@@ -94,9 +95,9 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
     }
 
     t.stop();
-    m_dgetrsLoc->x=B2[0][0];
-    m_dgetrsLoc->y=B2[1][0];
-    m_dgetrsLoc->z=B2[2][0];
+    m_dgetrsLoc->pushX(B2[0][0]);
+    m_dgetrsLoc->pushY(B2[1][0]);
+    m_dgetrsLoc->pushZ(B2[2][0]);
     m_dgetrsLoc->time=t.elapsed().wall-m_dgesvLoc->time;
 
     std::cout << "X:" << lexical_cast<std::string>(B2[0][0]) <<" Y:" << lexical_cast<std::string>(B2[1][0]) << " Z:" << lexical_cast<std::string>(B2[2][0])  << "Time:" << lexical_cast<std::string>(m_dgetrsLoc->time) <<std::endl;
@@ -145,10 +146,9 @@ void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes)
         printf( "the least squares solution could not be computed.\n" );
         return;
     }
-    m_dgelsLoc = std::make_shared<Location>();
-    m_dgelsLoc->x=B[0][0];
-    m_dgelsLoc->y=B[1][0];
-    m_dgelsLoc->z=B[2][0];
+    m_dgelsLoc->pushX(B[0][0]);
+    m_dgelsLoc->pushY(B[1][0]);
+    m_dgelsLoc->pushZ(B[2][0]);
     m_dgelsLoc->time=t.elapsed().wall;
 
     printf("Calculated Location Dgels: ");
