@@ -8,6 +8,8 @@
 #include <boost/shared_ptr.hpp>
 #include "Node.h"
 #include "INode.h"
+#include "KamalFilterRSSI.h"
+
 class Target_Node: public INode  {
 private:
     std::shared_ptr<INode> m_Node;
@@ -15,7 +17,7 @@ private:
     std::atomic<double> m_YCoord;
     std::atomic< double> m_ZCoord;
     std::atomic<double> m_RssiCalib;
-    std::deque<int> m_RssiVec;
+    KamalFilterRSSI m_Kalman;
 public:
     Target_Node(std::shared_ptr<INode> Node, double XCoord, double YCoord, double ZCoord, double RssiCalib);
     Target_Node(web::json::value node);
@@ -28,6 +30,7 @@ public:
     double getXCoord();
     double getYCoord();
     double getZCoord();
+    std::atomic<double> m_Kalman_Distance;
 
 };
 

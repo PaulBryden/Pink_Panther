@@ -45,9 +45,9 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
                     2*(Nodes[2]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[2]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[2]->getZCoord()-Nodes[0]->getZCoord()),
                     2*(Nodes[3]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[3]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[3]->getZCoord()-Nodes[0]->getZCoord())};
 
-    double B[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[1]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[2]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[3]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
+    double B[3][1]={(pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[1]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[2]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[3]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
 
 
     lapack_int info,m,n,lda,ldb,nrhs;
@@ -71,18 +71,18 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
 
     printf("Calcuated values.");
     fflush(stdout);
-    m_dgesvLoc->pushX(B[0][0]);
-    m_dgesvLoc->pushY(B[1][0]);
-    m_dgesvLoc->pushZ(B[2][0]);
+    m_dgesvLoc->xCoord=(B[0][0]);
+    m_dgesvLoc->yCoord=(B[1][0]);
+    m_dgesvLoc->zCoord=(B[2][0]);
     m_dgesvLoc->time=t.elapsed().wall;
 
     printf("Calculated Location: ");
     std::cout << "X:" << lexical_cast<std::string>(B[0][0]) <<" Y:" << lexical_cast<std::string>(B[1][0]) << " Z:" << lexical_cast<std::string>(B[2][0])  << "Time:" << lexical_cast<std::string>(m_dgesvLoc->time) <<std::endl;
 
 
-    double B2[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[1]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[2]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[3]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
+    double B2[3][1]={(pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[1]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[2]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[3]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
 
     t.resume();
     LAPACKE_dgetrs(LAPACK_ROW_MAJOR,'N', n,nrhs,*A,lda,ipiv,*B2,ldb);
@@ -95,9 +95,9 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
     }
 
     t.stop();
-    m_dgetrsLoc->pushX(B2[0][0]);
-    m_dgetrsLoc->pushY(B2[1][0]);
-    m_dgetrsLoc->pushZ(B2[2][0]);
+    m_dgetrsLoc->xCoord=(B2[0][0]);
+    m_dgetrsLoc->yCoord=(B2[1][0]);
+    m_dgetrsLoc->zCoord=(B2[2][0]);
     m_dgetrsLoc->time=t.elapsed().wall-m_dgesvLoc->time;
 
     std::cout << "X:" << lexical_cast<std::string>(B2[0][0]) <<" Y:" << lexical_cast<std::string>(B2[1][0]) << " Z:" << lexical_cast<std::string>(B2[2][0])  << "Time:" << lexical_cast<std::string>(m_dgetrsLoc->time) <<std::endl;
@@ -126,9 +126,9 @@ void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes)
                     2*(Nodes[2]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[2]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[2]->getZCoord()-Nodes[0]->getZCoord()),
                     2*(Nodes[3]->getXCoord()-Nodes[0]->getXCoord()),2*(Nodes[3]->getYCoord()-Nodes[0]->getYCoord()),2*(Nodes[3]->getZCoord()-Nodes[0]->getZCoord())};
 
-    double B[3][1]={(pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[1]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[2]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
-                    (pow(Nodes[0]->CalculateDistance(),2.0))-(pow(Nodes[3]->CalculateDistance(),2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
+    double B[3][1]={(pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[1]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[1]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[1]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[1]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[2]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[2]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[2]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[2]->getZCoord(),2.0)),
+                    (pow(Nodes[0]->m_Kalman_Distance,2.0))-(pow(Nodes[3]->m_Kalman_Distance,2.0))-(pow(Nodes[0]->getXCoord(),2.0))+(pow(Nodes[3]->getXCoord(),2.0))-(pow(Nodes[0]->getYCoord(),2.0))+(pow(Nodes[3]->getYCoord(),2.0))-(pow(Nodes[0]->getZCoord(),2.0))+(pow(Nodes[3]->getZCoord(),2.0))};
 
     lapack_int info,m,n,lda,ldb,nrhs;
 
@@ -146,9 +146,9 @@ void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes)
         printf( "the least squares solution could not be computed.\n" );
         return;
     }
-    m_dgelsLoc->pushX(B[0][0]);
-    m_dgelsLoc->pushY(B[1][0]);
-    m_dgelsLoc->pushZ(B[2][0]);
+    m_dgelsLoc->xCoord=(B[0][0]);
+    m_dgelsLoc->yCoord=(B[1][0]);
+    m_dgelsLoc->zCoord=(B[2][0]);
     m_dgelsLoc->time=t.elapsed().wall;
 
     printf("Calculated Location Dgels: ");

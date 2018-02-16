@@ -5,8 +5,10 @@
 #include "inc/FileIO.h"
 #include "inc/WifiScanModule.h"
 #include "inc/locationModule.h"
+#include <cpprest/http_client.h>
+
 using namespace std;
-using namespace web; 
+using namespace web;
 using namespace utility;
 using namespace http;
 using namespace web::http::experimental::listener;
@@ -31,6 +33,7 @@ MyServer::MyServer(utility::string_t url) : m_listener(url)
     ScanModule = std::make_shared<WifiScanModule>(ScannedNodes,TargetNodes,LocationModule,scanTime);
 
     boost::thread t(boost::bind(&WifiScanModule::Scan,ScanModule));
+    boost::thread t2(boost::bind(&MyServer::PostData,this));
 
 }
 
@@ -108,3 +111,42 @@ void MyServer::handle_put(http_request message)
 
 	message.reply(status_codes::OK);
 };
+
+pplx::task<int> MyServer::Post()
+{
+    return pplx::create_task([]
+                             {
+                                 web::json::value yourJson;
+                                 yourJson[U("System")][U("Target")] = web::json::value(TargetNodes->ToJson());
+                                 yourJson[U("System")][U("Scan")]  = web::json::value(ScannedNodes->ToJson());
+                                 yourJson[U("System")][U("Location")]  = web::json::value(LocationModule->ToJson());
+                                 yourJson[U("System")][U("ScanTime")]  = web::json::value(scanTime);
+
+                                 http_client client("http://marconi.sdsu.edu:9999/MyServer/Action/");
+
+                                 return client.request(methods::POST,"",
+                                                       yourJson.serialize(), "application/json");
+                             }).then([](http_response response)
+                                     {
+                                         if(response.status_code() == status_codes::OK)
+                                         {
+                                            // auto body = response.extract_string();
+                                            // std::wcout << L"Added new Id: " << body.get().c_str() << std::endl;
+
+                                             return 1;
+                                         }
+
+                                         return 0;
+                                     });
+}
+
+
+void MyServer::PostData(){
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    while(true) {
+        Post().get();
+
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+
+    }
+}

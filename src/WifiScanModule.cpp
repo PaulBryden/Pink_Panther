@@ -93,15 +93,14 @@ void WifiScanModule::Scan()
         while(true) {
             boost::timer::auto_cpu_timer t;
             node::Node_Container tempContainer;
-            std::shared_ptr<Node> newNode = std::make_shared<Node>("TRIG1", -55, 1500);
+            std::shared_ptr<Node> newNode = std::make_shared<Node>("TRIG1", -51, 1500);
             tempContainer.AddNode(newNode);
             newNode = std::make_shared<Node>("TRIG2", -55, 1501);
             tempContainer.AddNode(newNode);
-            newNode = std::make_shared<Node>("TRIG3", -55, 1502);
+            newNode = std::make_shared<Node>("TRIG3", -58, 1502);
             tempContainer.AddNode(newNode);
-            newNode = std::make_shared<Node>("TRIG4", -55, 1503);
+            newNode = std::make_shared<Node>("TRIG4", -59, 1503);
             tempContainer.AddNode(newNode);
-
             m_Nodes->ClearNodes();
             for (auto &i : tempContainer.GetNodes()) {
                 m_Nodes->AddNode(i);

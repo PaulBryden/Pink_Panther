@@ -19,7 +19,7 @@ hunter_add_package(Boost COMPONENTS random system thread filesystem atomic date_
 find_package(Boost CONFIG REQUIRED random system thread filesystem atomic date_time regex timer chrono)
 
 hunter_add_package(OpenSSL)
-find_package(OpenSSL REQUIRED )
+find_package(OpenSSL REQUIRED)
 
 
 #SET(CMAKE_FIND_LIBRARY_SUFFIXES .a)
@@ -33,6 +33,9 @@ find_package(OpenSSL REQUIRED )
 #set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 
 ADD_LIBRARY(wiffy_module src/iwlib.c)
+include_directories(../Pink_Panther/submodules/Kalman/kalman/*.hpp)
+ADD_LIBRARY(kalman ../Pink_Panther/submodules/Kalman/kstatics.cpp)
+
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/usr/local/include)
 if(RASPBERRY_PI)
@@ -43,10 +46,10 @@ endif()
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(helloworldspeaker src/Main.cpp src/inc/messagetypes.h src/inc/stdafx.h src/inc/RestModule.h src/RestModule.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h src/locationModule.cpp src/inc/locationModule.h src/inc/Location.h)
-SET_TARGET_PROPERTIES(helloworldspeaker PROPERTIES LINK_FLAGS "-lgfortran")
+add_executable(trigApp src/Main.cpp src/inc/messagetypes.h src/inc/stdafx.h src/inc/RestModule.h src/RestModule.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h src/locationModule.cpp src/inc/locationModule.h src/inc/Location.h src/KamalFilterRSSI.cpp src/inc/KamalFilterRSSI.h)
+SET_TARGET_PROPERTIES(trigApp PROPERTIES LINK_FLAGS "-lgfortran")
 
-target_link_libraries(helloworldspeaker ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libblas.a
+target_link_libraries(trigApp ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libblas.a
   Boost::boost
   Boost::random
   Boost::timer
@@ -59,17 +62,48 @@ target_link_libraries(helloworldspeaker ${CMAKE_CURRENT_BINARY_DIR}/usr/local/li
   Boost::regex
   ${OPENSSL_LIBRARIES}
   wiffy_module
+  kalman
 )
+
 if(RASPBERRY_PI)
-target_link_libraries(helloworldspeaker
+target_link_libraries(trigApp
 /usr/arm-linux-gnueabihf/lib/libgfortran.so.3
 )
 else()
-target_link_libraries(helloworldspeaker
+target_link_libraries(trigApp
 lapack
 gfortran
 )
 endif()
 
+add_executable(MainProxy src/MainProxy.cpp src/inc/messagetypes.h src/inc/stdafx.h src/inc/RestModuleProxy.h src/RestModuleProxy.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h src/locationModule.cpp src/inc/locationModule.h src/inc/Location.h src/KamalFilterRSSI.cpp src/inc/KamalFilterRSSI.h)
+SET_TARGET_PROPERTIES(MainProxy PROPERTIES LINK_FLAGS "-lgfortran")
+
+target_link_libraries(MainProxy ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libblas.a
+  Boost::boost
+  Boost::random
+  Boost::timer
+  Boost::system
+  Boost::chrono
+  Boost::filesystem
+  Boost::thread
+  Boost::atomic
+  Boost::date_time
+  Boost::regex
+  ${OPENSSL_LIBRARIES}
+  wiffy_module
+  kalman
+)
+
+if(RASPBERRY_PI)
+target_link_libraries(MainProxy
+/usr/arm-linux-gnueabihf/lib/libgfortran.so.3
+)
+else()
+target_link_libraries(MainProxy
+lapack
+gfortran
+)
+endif()
 #add_executable(helloworldlistener src/listen.cpp)
 #target_link_libraries(helloworldlistener ${CppREST_LIBS})

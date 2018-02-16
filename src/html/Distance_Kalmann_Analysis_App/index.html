@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>Pink Panther - Wifi Realtime Plots</title>
+    <link class="include" rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+    <script class="include" type="text/javascript" src="jquery.js"></script>
+    <script class="include" type="text/javascript" src="jquery.jqplot.js"></script>
+    <script class="include" type="text/javascript" src="plugins/jqplot.canvasTextRenderer.js"></script>
+    <script class="include" type="text/javascript" src="plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+   <script type="text/javascript" src="plugins/jqplot.dateAxisRenderer.js"></script>
+    <script type="text/javascript" src="plugins/jqplot.highlighter.js"></script>
+    <script type="text/javascript" src="plugins/jqplot.enhancedLegendRenderer.js"></script>
+	<script src="plugins/jqplot.pointLabels.js"></script>
+    <style>
+	.container {
+    width: 90%;
+    height: 1000px;
+    margin: auto;
+    padding: 10px;
+}
+#RSSI_PLOT {
+    width: 50%;
+    float: left;
+}
+#DISTANCE_PLOT {
+
+    margin-left: 50%;
+    width: 50%;
+}
+    </style>
+<script>
+
+var eduroamRSSI;
+var eduroamDISTANCE;
+var globData;
+
+	var trig1RSSI=[];
+	var trig2RSSI=[];
+	var trig3RSSI=[];
+	var trig4RSSI=[];
+	var trig1Distance=[];
+	var trig2Distance=[];
+	var trig3Distance=[];
+	var trig4Distance=[];
+	var trig1Kalmann=[];
+	var trig2Kalmann=[];
+	var trig3Kalmann=[];
+	var trig4Kalmann=[];
+function getData(){
+$.ajax({
+    url: 'http://marconi.sdsu.edu:9999/MyServer/Action/',
+	 jsonp: "callback",
+          dataType: "jsonp",
+          crossDomain: true,
+    success: function (data) {
+        console.log(data);
+		globData = data;
+		}
+    
+});
+return globData;
+}
+
+</script>
+</head>
+<section class="container">
+<div id="RSSI_PLOT"></div>
+<div id="DISTANCE_PLOT"></div>
+</section>
+<button>Update</button>
+<body>
+
+<script class="code" type="text/javascript">
+
+//from www.meccanismocomplesso.org
+//by F.Nelli Dec 2013
+// this is based on a buffer of 19 values.
+$(document).ready(function(){	
+//refresh time (in millisec)
+var t = 1000;
+//samples to draw
+var n = 20;
+var x = (new Date()).getTime(); // current time
+//buffer of n samples
+var data = [];
+var distData =[];
+for(i=0; i<n; i++){
+	data.push([x - (n-1-i)*t,0]);
+	distData.push([x - (n-1-i)*t,0]);
+} 
+
+var options = {
+	height:800,width:400,
+    axes: {
+  	   xaxis: {
+  	   	  numberTicks: 4,
+          renderer:$.jqplot.DateAxisRenderer,
+          tickOptions:{formatString:'%H:%M:%S'},
+          min : data[0][0],
+		  label:'Time (H::M::S)',
+          //max : data[19][0]
+          max: data[data.length-1][0]
+	   },
+	   yaxis: {min:-100, max: -50,numberTicks: 30,
+		  label:'RSSI (dBm)',
+  	        tickOptions:{formatString:'%.1f'} 
+	   }
+    },series: [
+  { label: 'Trig1 RSSI'},
+  { label: 'Trig2 RSSI' },
+  { label: 'Trig3 RSSI' },
+  { label: 'Trig4 RSSI' }
+],legend: { 
+  show: true, 
+  location: 'e',
+  background:'#FF9900'
+},
+    seriesDefaults: {
+  	   rendererOptions: { smooth: true}
+    }
+};
+var optionsDist = {
+
+	height:800,width:400,
+    axes: {
+  	   xaxis: {
+  	   	  numberTicks: 4,
+          renderer:$.jqplot.DateAxisRenderer,
+          tickOptions:{formatString:'%H:%M:%S'},
+          min : distData[0][0],
+		  label:'Time (H::M::S)',
+          //max : data[19][0]
+          max: distData[distData.length-1][0]
+	   },
+	   yaxis: {min:0, max: 10,numberTicks: 30,
+			label:'Distance (m)',
+  	        tickOptions:{formatString:'%.3f'} 
+	   }
+    },series: [
+  { label: 'Trig1 Distance'},
+  { label: 'Trig2 Distance' },
+  { label: 'Trig3 Distance' },
+  { label: 'Trig4 Distance' },
+  { label: 'Trig1 Kalmann Distance'},
+  { label: 'Trig2 Kalmann Distance ' },
+  { label: 'Trig3 Kalmann Distance' },
+  { label: 'Trig4 Kalmann Distance' }
+],legend: { 
+  show: true, 
+  location: 'e',
+  background:'#FF9900'
+},
+    seriesDefaults: {
+  	   rendererOptions: { smooth: true}
+    }
+};
+
+var plot1 = $.jqplot ('RSSI_PLOT', [data],options);
+
+var plot2 = $.jqplot ('DISTANCE_PLOT', [distData],optionsDist);
+
+$('button').click( function(){  
+    doUpdate();
+    $(this).hide();
+});
+
+function doUpdate() {
+
+	getData();
+	if(trig1RSSI.length >= n-1){
+		trig1RSSI.shift();
+		trig1Distance.shift();
+		trig1Kalmann.shift();
+	}
+	globData["System"]["Target"]["Nodes"].forEach(function(element){
+		if(element["SSID"]=="TRIG1") {
+			trig1RSSI.push([(new Date()).getTime(),element["RSSI"]]);
+			trig1Distance.push([(new Date()).getTime(),element["Distance"]]);
+			trig1Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+		}
+	});
+		if(trig2RSSI.length >= n-1){
+		trig2RSSI.shift();
+		trig2Distance.shift();
+		trig2Kalmann.shift();
+
+	}
+			globData["System"]["Target"]["Nodes"].forEach(function(element){
+			if(element["SSID"]=="TRIG2") {
+			trig2RSSI.push([(new Date()).getTime(),element["RSSI"]]);
+			trig2Distance.push([(new Date()).getTime(),element["Distance"]]);
+			trig2Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+			}
+		});
+
+		if(trig3RSSI.length >= n-1){
+		trig3RSSI.shift();
+		trig3Distance.shift();
+		trig3Kalmann.shift();
+
+	}
+			globData["System"]["Target"]["Nodes"].forEach(function(element){
+			if(element["SSID"]=="TRIG3") {
+			trig3RSSI.push([(new Date()).getTime(),element["RSSI"]]);
+			trig3Distance.push([(new Date()).getTime(),element["Distance"]]);
+			trig3Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+			}
+		});
+		if(trig4RSSI.length >= n-1){
+		trig4RSSI.shift();
+		trig4Distance.shift();
+		trig4Kalmann.shift();
+
+	}
+			globData["System"]["Target"]["Nodes"].forEach(function(element){
+			if(element["SSID"]=="TRIG4") {
+			trig4RSSI.push([(new Date()).getTime(),element["RSSI"]]);
+			trig4Distance.push([(new Date()).getTime(),element["Distance"]]);
+			trig4Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+			}
+		});
+
+
+	
+    if (plot1) {
+    	plot1.destroy();
+    }
+	
+    options.axes.xaxis.min = trig1RSSI[0][0];
+    options.axes.xaxis.max = trig1RSSI[trig1RSSI.length-1][0];
+	plot1 = $.jqplot ('RSSI_PLOT', [trig1RSSI,trig2RSSI,trig3RSSI,trig4RSSI],options);
+	
+
+    if (plot2) {
+    	plot2.destroy();
+    }
+    plot2.series[0].distData = distData; 
+    optionsDist.axes.xaxis.min = trig1Distance[0][0];
+    optionsDist.axes.xaxis.max = trig1Distance[trig1Distance.length-1][0];    
+	plot2 = $.jqplot ('DISTANCE_PLOT', [trig1Distance,trig2Distance,trig3Distance,trig4Distance,trig1Kalmann,trig2Kalmann,trig3Kalmann,trig4Kalmann],optionsDist);
+	
+	
+    setTimeout(doUpdate, t);
+}
+
+
+});
+</script>
+</body>
+</html>

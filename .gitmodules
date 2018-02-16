@@ -8,3 +8,6 @@
 [submodule "submodules/lapack"]
 	path = submodules/lapack
 	url = https://github.com/Reference-LAPACK/lapack
+[submodule "submodules/Kalman"]
+	path = submodules/Kalman
+	url = https://github.com/PaulBryden/Kalman.git

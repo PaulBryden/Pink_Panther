@@ -1,9 +1,15 @@
 #pragma once
+#include <cpprest/http_client.h>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/bind.hpp>
 
+using namespace std;
 using namespace web;
-using namespace http;
 using namespace utility;
-using namespace http::experimental::listener;
+using namespace http;
+using namespace web::http::experimental::listener;
+using namespace web::http::client;
 
 class MyServer
 {
@@ -20,6 +26,11 @@ private:
 	void handle_put(http_request message);
 	void handle_post(http_request message);
 	void handle_delete(http_request message);
+	void PostData();
+	pplx::task<int> Post();
 
+	boost::mutex g_i_mutex;
 	http_listener m_listener;
+
 };
+
