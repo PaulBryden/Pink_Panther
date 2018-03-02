@@ -14,9 +14,10 @@ using namespace std;
 
 void Target_Node::Update(std::shared_ptr<INode> Node){
     m_Node=Node;
+    updateKalmanRSSI();
 }
 
-Target_Node::Target_Node(web::json::value node): m_Kalman(0.000025, 0.17746,1){
+Target_Node::Target_Node(web::json::value node): m_Kalman_distance(0.000025, 0.17746,1),m_Kalman_rssi(0.0001, 2.36,1){
     m_Node=std::make_shared<Node>(node);
 
     try {
@@ -64,7 +65,8 @@ web::json::value Target_Node::ToJson(){
     response["ZCoord"] = json::value::number(m_ZCoord);
     response["RSSICalib"] = json::value::number(m_RssiCalib);
     response["Distance"] = json::value::number(CalculateDistance());
-    response["KalmanDistance"] = json::value::number(m_Kalman_Distance);
+    response["RSSIFiltered"] = json::value::number(m_Kalman_RSSI_Val);
+    //response["KalmanDistance"] = json::value::number(m_Kalman_Distance);
    // cout <<response.serialize();
 
     return response;
@@ -76,6 +78,7 @@ int Target_Node::getRSSI(){
     return m_Node->getRSSI();
 }
 
+
 double Target_Node::getChannel(){
     return m_Node->getChannel();
 }
@@ -84,15 +87,22 @@ std::string Target_Node::getSSID(){
     return m_Node->getSSID();
 }
 
+double Target_Node::getKalmanRSSI(){
+    return m_Kalman_RSSI_Val;
+}
+
+void Target_Node::updateKalmanRSSI() {
+    m_Kalman_RSSI_Val=m_Kalman_rssi.kalmanUpdate(this->getRSSI());
+}
+
 double Target_Node::CalculateDistance() {
+
 
     printf("Calculating range base on RSSI of:%d",m_Node->getRSSI());
     try {
-        double Power = (-(static_cast<double>(m_Node->getRSSI() - (m_RssiCalib)) / (10.0 * 2.35)));
+        double Power = (-(static_cast<double>(m_Kalman_RSSI_Val- (m_RssiCalib)) / (10.0 * 2.35)));
 
         printf("Calculating Distance: %f", pow(10.0, Power));
-
-        m_Kalman_Distance=m_Kalman.kalmanUpdate(pow(10.0, Power));
 
         return pow(10.0, Power);
     }catch(std::exception X){

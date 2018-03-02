@@ -17,7 +17,9 @@ private:
     std::atomic<double> m_YCoord;
     std::atomic< double> m_ZCoord;
     std::atomic<double> m_RssiCalib;
-    KamalFilterRSSI m_Kalman;
+    KamalFilterRSSI m_Kalman_distance;
+    KamalFilterRSSI m_Kalman_rssi;
+    double m_Kalman_RSSI_Val;
 public:
     Target_Node(std::shared_ptr<INode> Node, double XCoord, double YCoord, double ZCoord, double RssiCalib);
     Target_Node(web::json::value node);
@@ -30,6 +32,8 @@ public:
     double getXCoord();
     double getYCoord();
     double getZCoord();
+    void updateKalmanRSSI();
+    double getKalmanRSSI();
     std::atomic<double> m_Kalman_Distance;
 
 };

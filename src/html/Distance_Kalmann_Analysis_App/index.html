@@ -52,7 +52,7 @@ var globData;
 	var trig4Kalmann=[];
 function getData(){
 $.ajax({
-    url: 'http://marconi.sdsu.edu:9999/MyServer/Action/',
+    url: 'http://192.168.7.2:34568/MyServer/Action/',
 	 jsonp: "callback",
           dataType: "jsonp",
           crossDomain: true,
@@ -113,7 +113,11 @@ var options = {
   { label: 'Trig1 RSSI'},
   { label: 'Trig2 RSSI' },
   { label: 'Trig3 RSSI' },
-  { label: 'Trig4 RSSI' }
+  { label: 'Trig4 RSSI' },
+  { label: 'Trig1 RSSI (Filtered)'},
+  { label: 'Trig2 RSSI (Filtered)' },
+  { label: 'Trig3 RSSI (Filtered)' },
+  { label: 'Trig4 RSSI (Filtered)' }
 ],legend: { 
   show: true, 
   location: 'e',
@@ -136,7 +140,7 @@ var optionsDist = {
           //max : data[19][0]
           max: distData[distData.length-1][0]
 	   },
-	   yaxis: {min:0, max: 10,numberTicks: 30,
+	   yaxis: {min:0, max: 12,numberTicks: 30,
 			label:'Distance (m)',
   	        tickOptions:{formatString:'%.3f'} 
 	   }
@@ -144,11 +148,7 @@ var optionsDist = {
   { label: 'Trig1 Distance'},
   { label: 'Trig2 Distance' },
   { label: 'Trig3 Distance' },
-  { label: 'Trig4 Distance' },
-  { label: 'Trig1 Kalmann Distance'},
-  { label: 'Trig2 Kalmann Distance ' },
-  { label: 'Trig3 Kalmann Distance' },
-  { label: 'Trig4 Kalmann Distance' }
+  { label: 'Trig4 Distance' }
 ],legend: { 
   show: true, 
   location: 'e',
@@ -180,7 +180,7 @@ function doUpdate() {
 		if(element["SSID"]=="TRIG1") {
 			trig1RSSI.push([(new Date()).getTime(),element["RSSI"]]);
 			trig1Distance.push([(new Date()).getTime(),element["Distance"]]);
-			trig1Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+			trig1Kalmann.push([(new Date()).getTime(),element["RSSIFiltered"]]);
 		}
 	});
 		if(trig2RSSI.length >= n-1){
@@ -193,7 +193,7 @@ function doUpdate() {
 			if(element["SSID"]=="TRIG2") {
 			trig2RSSI.push([(new Date()).getTime(),element["RSSI"]]);
 			trig2Distance.push([(new Date()).getTime(),element["Distance"]]);
-			trig2Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+			trig2Kalmann.push([(new Date()).getTime(),element["RSSIFiltered"]]);
 			}
 		});
 
@@ -207,7 +207,7 @@ function doUpdate() {
 			if(element["SSID"]=="TRIG3") {
 			trig3RSSI.push([(new Date()).getTime(),element["RSSI"]]);
 			trig3Distance.push([(new Date()).getTime(),element["Distance"]]);
-			trig3Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+			trig3Kalmann.push([(new Date()).getTime(),element["RSSIFiltered"]]);
 			}
 		});
 		if(trig4RSSI.length >= n-1){
@@ -220,7 +220,7 @@ function doUpdate() {
 			if(element["SSID"]=="TRIG4") {
 			trig4RSSI.push([(new Date()).getTime(),element["RSSI"]]);
 			trig4Distance.push([(new Date()).getTime(),element["Distance"]]);
-			trig4Kalmann.push([(new Date()).getTime(),element["KalmanDistance"]]);
+			trig4Kalmann.push([(new Date()).getTime(),element["RSSIFiltered"]]);
 			}
 		});
 
@@ -232,7 +232,7 @@ function doUpdate() {
 	
     options.axes.xaxis.min = trig1RSSI[0][0];
     options.axes.xaxis.max = trig1RSSI[trig1RSSI.length-1][0];
-	plot1 = $.jqplot ('RSSI_PLOT', [trig1RSSI,trig2RSSI,trig3RSSI,trig4RSSI],options);
+	plot1 = $.jqplot ('RSSI_PLOT', [trig1RSSI,trig2RSSI,trig3RSSI,trig4RSSI,trig1Kalmann,trig2Kalmann,trig3Kalmann,trig4Kalmann],options);
 	
 
     if (plot2) {
@@ -241,7 +241,7 @@ function doUpdate() {
     plot2.series[0].distData = distData; 
     optionsDist.axes.xaxis.min = trig1Distance[0][0];
     optionsDist.axes.xaxis.max = trig1Distance[trig1Distance.length-1][0];    
-	plot2 = $.jqplot ('DISTANCE_PLOT', [trig1Distance,trig2Distance,trig3Distance,trig4Distance,trig1Kalmann,trig2Kalmann,trig3Kalmann,trig4Kalmann],optionsDist);
+	plot2 = $.jqplot ('DISTANCE_PLOT', [trig1Distance,trig2Distance,trig3Distance,trig4Distance],optionsDist);
 	
 	
     setTimeout(doUpdate, t);

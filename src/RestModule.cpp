@@ -33,7 +33,7 @@ MyServer::MyServer(utility::string_t url) : m_listener(url)
     ScanModule = std::make_shared<WifiScanModule>(ScannedNodes,TargetNodes,LocationModule,scanTime);
 
     boost::thread t(boost::bind(&WifiScanModule::Scan,ScanModule));
-    boost::thread t2(boost::bind(&MyServer::PostData,this));
+    //boost::thread t2(boost::bind(&MyServer::PostData,this));
 
 }
 

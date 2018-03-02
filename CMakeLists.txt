@@ -78,6 +78,7 @@ endif()
 
 add_executable(MainProxy src/MainProxy.cpp src/inc/messagetypes.h src/inc/stdafx.h src/inc/RestModuleProxy.h src/RestModuleProxy.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h src/locationModule.cpp src/inc/locationModule.h src/inc/Location.h src/KamalFilterRSSI.cpp src/inc/KamalFilterRSSI.h)
 SET_TARGET_PROPERTIES(MainProxy PROPERTIES LINK_FLAGS "-lgfortran")
+MESSAGE(${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(MainProxy ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libblas.a
   Boost::boost
