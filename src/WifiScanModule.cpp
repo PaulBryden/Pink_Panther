@@ -3,7 +3,7 @@
 //
 
 #include "inc/WifiScanModule.h"
-
+#include "inc/iwlib.h"
 #include <boost/timer/timer.hpp>
 #pragma GCC diagnostic ignored "-Wwrite-strings"
 #include <unistd.h>
@@ -31,8 +31,6 @@ WifiScanModule::WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNode
 
 void WifiScanModule::Scan()
 {
-
-
 #ifdef 	__arm__
         boost::mutex::scoped_lock lock(g_i_mutex);
 
@@ -44,7 +42,7 @@ void WifiScanModule::Scan()
         /* Open socket to kernel */
         sock = iw_sockets_open();
         while(true){
-
+            char		temp[128];
         boost::timer::auto_cpu_timer t;
         node::Node_Container tempContainer;
                 /* Get some metadata to use for scanning */
@@ -62,6 +60,7 @@ void WifiScanModule::Scan()
                         printf("%s\n", result->b.essid);
                         // printf("%d\n",result->stats.qual.level);
                         int dbLevel = result->stats.qual.level;
+                        printf("AP ADDR::%s",iw_saether_ntop(&result->ap_addr, temp));
                         if (dbLevel >= 64) {
                             dbLevel -= 0x100;
                         }
