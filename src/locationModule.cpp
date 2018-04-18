@@ -13,8 +13,25 @@ locationModule::locationModule(): m_dgelsLoc(std::make_shared<Location>()),m_dge
 }
 void locationModule::CalculateLocations(std::shared_ptr<node::Node_Container> nodes){
     boost::mutex::scoped_lock lock(g_i_mutex);
-    calculateDgels(nodes);
-    calculateDgesvDgetrs(nodes);
+    calculateDgels(GetNodeTargets(nodes));
+    calculateDgesvDgetrs(GetNodeTargets(nodes));
+}
+
+std::shared_ptr<node::Node_Container> locationModule::GetNodeTargets(std::shared_ptr<node::Node_Container> tempNodes){
+    std::shared_ptr<node::Node_Container> targetNodes = std::make_shared<node::Node_Container>();
+    std::sort(tempNodes->GetNodes().begin(),tempNodes->GetNodes().end());
+
+    for (auto &i : tempNodes->GetNodes()) {
+        if(targetNodes->GetNodes().size()==4){
+            break;
+        }
+        targetNodes->AddNode(i);
+    }
+    if(targetNodes->GetNodes().size()<4){
+        std::exception e;
+        throw(e);
+    }
+    return targetNodes;
 }
 
 web::json::value locationModule::ToJson(){
@@ -23,6 +40,14 @@ web::json::value locationModule::ToJson(){
     response["DGESV"] = m_dgesvLoc->ToJson();
     response["DGETRS"] = m_dgetrsLoc->ToJson();
     response["DGELS"] = m_dgelsLoc->ToJson();
+    return response;
+}
+
+
+web::json::value locationModule::BasicJson(){
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    web::json::value response = web::json::value::object();
+    response= m_dgesvLoc->ToJson();
     return response;
 }
 

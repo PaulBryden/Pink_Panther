@@ -15,7 +15,7 @@ public:
 
     web::json::value ToJson(){
         using namespace web;
-        //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_Rssi)+" }"));
+        //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_rssi)+" }"));
         json::value response = json::value::object();
         response["X"] = json::value::number(xCoord);
         response["Y"] = json::value::number(yCoord);

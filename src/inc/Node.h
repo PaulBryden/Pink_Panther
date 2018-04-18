@@ -16,17 +16,33 @@
 class Node: public INode {
 private:
     std::string m_name;
-    double m_channel;
-    int m_Rssi;
+    int m_rssi;
+    std::string m_mac;
 public:
-    Node(std::string Name, int Rssi, double Channel);
+    Node(std::string Name, int Rssi, std::string Mac);
     Node(web::json::value node);
     web::json::value ToJson();
     void Update(std::shared_ptr<INode> Node);
-    int getRSSI();
-    double getChannel();
+    int getRSSI() const;
     std::string getSSID();
+    std::string getMAC();
 
+    inline bool operator< (const Node & c2)
+    {
+        return (this->getRSSI() < c2.getRSSI());
+    }
+    inline bool operator> (const Node & c2)
+    {
+        return (this->getRSSI() > c2.getRSSI());
+    }
+    inline bool operator<= (const Node & c2)
+    {
+        return (this->getRSSI() <= c2.getRSSI());
+    }
+    inline bool operator>= (const Node & c2)
+    {
+        return (this->getRSSI() >= c2.getRSSI());
+    }
 };
 
 

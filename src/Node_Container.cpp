@@ -18,7 +18,7 @@ void Node_Container::PrintNodes(){
     for (auto const& i : m_Nodes) {
         std::cout << i->getSSID();
         std::cout << i->getRSSI();
-        std::cout << i->getChannel();
+        std::cout << i->getMAC();
         std::cout << "/n";
 
 
@@ -39,7 +39,9 @@ web::json::value Node_Container::ToJson() {
 }
 void Node_Container::ClearNodes(){
     boost::mutex::scoped_lock lock(g_i_mutex);
-    m_Nodes.clear();
+    if(m_Nodes.size()>0) {
+        m_Nodes.clear();
+    }
 }
 
 std::vector<std::shared_ptr<INode>>& Node_Container::GetNodes(){
@@ -56,7 +58,7 @@ void Node_Container::UpdateNodes(std::shared_ptr<Node_Container> nodes) {
     boost::mutex::scoped_lock lock(g_i_mutex);
      for(auto &i : nodes->GetNodes()){
          for (auto  &x : m_Nodes){
-             if(x->getSSID()==i->getSSID() && x->getChannel()==i->getChannel()){
+             if(x->getMAC()==i->getMAC()){
                  x->Update(i);
              }
          }

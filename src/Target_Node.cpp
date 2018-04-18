@@ -21,33 +21,37 @@ Target_Node::Target_Node(web::json::value node): m_Kalman_distance(0.000025, 0.1
     m_Node=std::make_shared<Node>(node);
 
     try {
-            m_XCoord = node["XCoord"].as_double();
-            cout << node["XCoord"];
+            m_XCoord = node["x"].as_double();
+            cout << node["x"];
         }catch(std::exception e) {
             printf("Error:: Cannot parse XCoord from JSON. Please check Syntax");
-            return;
+            std::exception ParseError;
+            throw(ParseError);
         }
     try {
-        m_YCoord = node["YCoord"].as_double();
-        cout << node["YCoord"];
+        m_YCoord = node["y"].as_double();
+        cout << node["y"];
     }catch(std::exception e) {
         printf("Error:: Cannot parse YCoord from JSON. Please check Syntax");
-        return;
+        std::exception ParseError;
+        throw(ParseError);
     }
     try {
-        m_ZCoord = node["ZCoord"].as_double();
-        cout << node["ZCoord"];
+        m_ZCoord = node["z"].as_double();
+        cout << node["z"];
 
     } catch(std::exception e) {
             printf("Error:: Cannot parse ZCoord from JSON. Please check Syntax");
-            return;
+        std::exception ParseError;
+        throw(ParseError);
         }
     try{
-        m_RssiCalib = node["RSSICalib"].as_double();
-        cout << node["RSSICalib"];
+        m_rssi_cal = node["cal"].as_integer();
+        cout << node["cal"];
     }  catch(std::exception e) {
         printf("Error:: Cannot parse RSSICalib from JSON. Please check Syntax");
-        return;
+        std::exception ParseError;
+        throw(ParseError);
     }
 
 
@@ -58,12 +62,12 @@ web::json::value Target_Node::ToJson(){
     //TO BE POPULATED
     using namespace web;
     json::value response = m_Node->ToJson();
-    //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_Rssi)+" }"));
+    //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_rssi)+" }"));
 
     response["XCoord"] = json::value::number(m_XCoord);
     response["YCoord"] = json::value::number(m_YCoord);
     response["ZCoord"] = json::value::number(m_ZCoord);
-    response["RSSICalib"] = json::value::number(m_RssiCalib);
+    response["RSSICalib"] = json::value::number(m_rssi_cal);
     response["Distance"] = json::value::number(CalculateDistance());
     response["RSSIFiltered"] = json::value::number(m_Kalman_RSSI_Val);
     //response["KalmanDistance"] = json::value::number(m_Kalman_Distance);
@@ -74,14 +78,11 @@ web::json::value Target_Node::ToJson(){
 
 }
 
-int Target_Node::getRSSI(){
+ int Target_Node::getRSSI() const{
     return m_Node->getRSSI();
 }
 
 
-double Target_Node::getChannel(){
-    return m_Node->getChannel();
-}
 
 std::string Target_Node::getSSID(){
     return m_Node->getSSID();
@@ -100,7 +101,7 @@ double Target_Node::CalculateDistance() {
 
     printf("Calculating range base on RSSI of:%d",m_Node->getRSSI());
     try {
-        double Power = (-(static_cast<double>(m_Kalman_RSSI_Val- (m_RssiCalib)) / (10.0 * 2.35)));
+        double Power = (-(static_cast<double>(m_Kalman_RSSI_Val- (m_rssi_cal)) / (10.0 * 2.35)));
 
         printf("Calculating Distance: %f", pow(10.0, Power));
 
@@ -121,4 +122,8 @@ double Target_Node::getYCoord(){
 
 double Target_Node::getZCoord(){
     return m_ZCoord;
+}
+
+std::string Target_Node::getMAC(){
+    return m_Node->getMAC();
 }

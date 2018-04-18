@@ -14,6 +14,8 @@ public:
     locationModule();
     void CalculateLocations(std::shared_ptr<node::Node_Container> nodes);
     web::json::value ToJson();
+    web::json::value BasicJson();
+
 private:
     boost::mutex g_i_mutex;
     std::shared_ptr<Location> m_dgelsLoc;
@@ -21,8 +23,7 @@ private:
     std::shared_ptr<Location> m_dgetrsLoc;
     void  calculateDgels(std::shared_ptr<node::Node_Container> nodes);
     void  calculateDgesvDgetrs(std::shared_ptr<node::Node_Container> nodes);
-
-
+    std::shared_ptr<node::Node_Container>  GetNodeTargets(std::shared_ptr<node::Node_Container> tempNodes);
 };
 
 

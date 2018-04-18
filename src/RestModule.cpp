@@ -6,7 +6,7 @@
 #include "inc/WifiScanModule.h"
 #include "inc/locationModule.h"
 #include <cpprest/http_client.h>
-
+#include "inc/GETNodes.h"
 using namespace std;
 using namespace web;
 using namespace utility;
@@ -21,8 +21,9 @@ double scanTime;
 MyServer::MyServer(utility::string_t url) : m_listener(url)
 {
     TargetNodes =  std::make_shared<node::Node_Container>();
-    FileIO::FileIO newFileIO(TargetNodes);
-    newFileIO.ReadIn();
+
+    GETNodes GETNodes("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap");
+    TargetNodes=GETNodes.get();
     m_listener.support(methods::GET, std::bind(&MyServer::handle_get, this, std::placeholders::_1));
     m_listener.support(methods::PUT, std::bind(&MyServer::handle_put, this, std::placeholders::_1));
     m_listener.support(methods::POST, std::bind(&MyServer::handle_post, this, std::placeholders::_1));
@@ -33,14 +34,19 @@ MyServer::MyServer(utility::string_t url) : m_listener(url)
     ScanModule = std::make_shared<WifiScanModule>(ScannedNodes,TargetNodes,LocationModule,scanTime);
 
     boost::thread t(boost::bind(&WifiScanModule::Scan,ScanModule));
-    //boost::thread t2(boost::bind(&MyServer::PostData,this));
+
+    boost::thread t2(boost::bind(&MyServer::PostData,this));
+
 
 }
 
 void MyServer::handle_get(http_request message)
 {
+    std::cout << message.relative_uri().to_string() << std::endl;
+
     ucout <<  message.to_string() << endl;
-   web::json::value yourJson;
+    web::json::value yourJson;
+
     yourJson[U("System")][U("Target")] = web::json::value(TargetNodes->ToJson());
     yourJson[U("System")][U("Scan")]  = web::json::value(ScannedNodes->ToJson());
     yourJson[U("System")][U("Location")]  = web::json::value(LocationModule->ToJson());
@@ -81,48 +87,27 @@ void MyServer::handle_delete(http_request message)
 
 void MyServer::handle_put(http_request message)
 {
-	ucout << message.to_string() << endl;
-
-	auto paths = uri::split_path(uri::decode(message.relative_uri().path()));
-	auto query = uri::split_query(uri::decode(message.relative_uri().query()));
-	auto queryItr = query.find(U("request"));
-	utility::string_t request = queryItr->second;
-	ucout << request << endl;
-
-	if (request == U("leave"))
-	{
-		Data data;
-		data.job = U("Devs");
-		People p1;
-		p1.age = 10;
-		p1.name = U("Franck");
-		data.peoples.push_back(p1);
-		People p2;
-		p2.age = 20;
-		p2.name = U("Joe");
-		data.peoples.push_back(p2);
-
-		utility::string_t response = data.AsJSON().serialize();
-		ucout << response << endl;
-
-		message.reply(status_codes::OK, data.AsJSON());
-		return;
-	}
-
 	message.reply(status_codes::OK);
 };
+
+void MyServer::PostData(){
+    while(true){
+        Post();
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+    }
+}
 
 pplx::task<int> MyServer::Post()
 {
     return pplx::create_task([]
                              {
                                  web::json::value yourJson;
-                                 yourJson[U("System")][U("Target")] = web::json::value(TargetNodes->ToJson());
-                                 yourJson[U("System")][U("Scan")]  = web::json::value(ScannedNodes->ToJson());
-                                 yourJson[U("System")][U("Location")]  = web::json::value(LocationModule->ToJson());
-                                 yourJson[U("System")][U("ScanTime")]  = web::json::value(scanTime);
+                                 yourJson=LocationModule->BasicJson();
+                                 yourJson[U("ID")] = web::json::value("User0");
+                                 yourJson[U("Site")] = web::json::value::number(0);
 
-                                 http_client client("http://marconi.sdsu.edu:9999/MyServer/Action/");
+
+                                 http_client client("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap");
 
                                  return client.request(methods::POST,"",
                                                        yourJson.serialize(), "application/json");
@@ -130,9 +115,6 @@ pplx::task<int> MyServer::Post()
                                      {
                                          if(response.status_code() == status_codes::OK)
                                          {
-                                            // auto body = response.extract_string();
-                                            // std::wcout << L"Added new Id: " << body.get().c_str() << std::endl;
-
                                              return 1;
                                          }
 
@@ -141,12 +123,3 @@ pplx::task<int> MyServer::Post()
 }
 
 
-void MyServer::PostData(){
-    boost::mutex::scoped_lock lock(g_i_mutex);
-    while(true) {
-        Post().get();
-
-        boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
-
-    }
-}

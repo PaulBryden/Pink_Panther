@@ -13,7 +13,7 @@ void on_initialize(const string_t& address)
     // Build our listener's URI from the configured address and the hard-coded path "MyServer/Action"
 
     uri_builder uri(address);
-    uri.append_path(U("MyServer/Action/"));
+    uri.append_path(U("Beaglebone"));
 
     auto addr = uri.to_uri().to_string();
     g_http = std::unique_ptr<MyServer>(new MyServer(addr));
@@ -32,7 +32,7 @@ void on_shutdown()
 
 int main(int argc, wchar_t *argv[])
 {
-    utility::string_t port = U("34568");
+    utility::string_t port = U("9999");
     if(argc == 2)
     {
         std::wstring ws(argv[1]);

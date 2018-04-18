@@ -26,7 +26,6 @@ double KamalFilterRSSI::kalmanUpdate(double measurement) {
     //prediction update
     //omit _x = _x
     _p = _p + _q;
-
     //measurement update
     _k = _p / (_p + _r);
     _x = _x + _k * (measurement - _x);

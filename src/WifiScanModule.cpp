@@ -60,13 +60,12 @@ void WifiScanModule::Scan()
                         printf("%s\n", result->b.essid);
                         // printf("%d\n",result->stats.qual.level);
                         int dbLevel = result->stats.qual.level;
-                        printf("AP ADDR::%s",iw_saether_ntop(&result->ap_addr, temp));
                         if (dbLevel >= 64) {
                             dbLevel -= 0x100;
                         }
                         printf("%d", dbLevel);
-
-                        std::shared_ptr<Node> newNode = std::make_shared<Node>(result->b.essid, dbLevel, result->b.freq);
+                        //result->b.freq,
+                        std::shared_ptr<Node> newNode = std::make_shared<Node>(result->b.essid, dbLevel, iw_saether_ntop(&result->ap_addr, temp));
 
                         tempContainer.AddNode(newNode);
 
@@ -92,13 +91,18 @@ void WifiScanModule::Scan()
         while(true) {
             boost::timer::auto_cpu_timer t;
             node::Node_Container tempContainer;
-            std::shared_ptr<Node> newNode = std::make_shared<Node>("TRIG1", -51, 1500);
+            std::string Mac="FF:FF:FF:FF:FF:FF";
+            std::string ID="TRIG1";
+            std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -51,Mac);
             tempContainer.AddNode(newNode);
-            newNode = std::make_shared<Node>("TRIG2", -55, 1501);
+            ID="TRIG2";
+            newNode = std::make_shared<Node>(ID, -55, Mac);
             tempContainer.AddNode(newNode);
-            newNode = std::make_shared<Node>("TRIG3", -58, 1502);
+            ID="TRIG3";
+            newNode = std::make_shared<Node>(ID, -58, Mac);
             tempContainer.AddNode(newNode);
-            newNode = std::make_shared<Node>("TRIG4", -59, 1503);
+            ID="TRIG4";
+            newNode = std::make_shared<Node>(ID, -59, Mac);
             tempContainer.AddNode(newNode);
             m_Nodes->ClearNodes();
             for (auto &i : tempContainer.GetNodes()) {
@@ -110,7 +114,7 @@ void WifiScanModule::Scan()
             m_locMod->CalculateLocations(m_TargetNodes);
 
 
-            boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+           boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
 
         }
 #endif
