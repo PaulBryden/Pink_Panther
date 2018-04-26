@@ -32,7 +32,7 @@ void on_shutdown()
 
 int main(int argc, wchar_t *argv[])
 {
-    utility::string_t port = U("9999");
+    utility::string_t port = U("34568");
     if(argc == 2)
     {
         std::wstring ws(argv[1]);

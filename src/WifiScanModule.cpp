@@ -57,13 +57,13 @@ void WifiScanModule::Scan()
                     result = head.result;
                     while (NULL != result) {
 
-                        printf("%s\n", result->b.essid);
+                        //printf("%s\n", result->b.essid);
                         // printf("%d\n",result->stats.qual.level);
                         int dbLevel = result->stats.qual.level;
                         if (dbLevel >= 64) {
-                            dbLevel -= 0x100;
+                            dbLevel -= 0x100;ccccccc
                         }
-                        printf("%d", dbLevel);
+                        //printf("%d", dbLevel);
                         //result->b.freq,
                         std::shared_ptr<Node> newNode = std::make_shared<Node>(result->b.essid, dbLevel, iw_saether_ntop(&result->ap_addr, temp));
 
@@ -93,23 +93,22 @@ void WifiScanModule::Scan()
             node::Node_Container tempContainer;
             std::string Mac="FF:FF:FF:FF:FF:FF";
             std::string ID="TRIG1";
-            std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -51,Mac);
+            std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -51,"24:F2:7F:AA:23:E1");
             tempContainer.AddNode(newNode);
             ID="TRIG2";
-            newNode = std::make_shared<Node>(ID, -55, Mac);
+            newNode = std::make_shared<Node>(ID, -55, "18:64:72:34:06:00");
             tempContainer.AddNode(newNode);
             ID="TRIG3";
-            newNode = std::make_shared<Node>(ID, -58, Mac);
+            newNode = std::make_shared<Node>(ID, -58, "24:F2:2F:AA:26:E3");
             tempContainer.AddNode(newNode);
             ID="TRIG4";
-            newNode = std::make_shared<Node>(ID, -59, Mac);
+            newNode = std::make_shared<Node>(ID, -59, "24:F2:7F:AA:2C:01");
             tempContainer.AddNode(newNode);
             m_Nodes->ClearNodes();
             for (auto &i : tempContainer.GetNodes()) {
                 m_Nodes->AddNode(i);
             }
             m_TargetNodes->UpdateNodes(m_Nodes);
-
             m_scanTime=t.elapsed().wall;
             m_locMod->CalculateLocations(m_TargetNodes);
 

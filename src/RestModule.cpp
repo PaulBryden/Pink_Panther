@@ -37,7 +37,6 @@ MyServer::MyServer(utility::string_t url) : m_listener(url)
 
     boost::thread t2(boost::bind(&MyServer::PostData,this));
 
-
 }
 
 void MyServer::handle_get(http_request message)

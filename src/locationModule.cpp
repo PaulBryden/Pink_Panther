@@ -4,7 +4,7 @@
 
 #include "inc/locationModule.h"
 #include <boost/lexical_cast.hpp>
-
+#include "inc/INode.h"
 #include <lapacke.h>
 using boost::lexical_cast;
 
@@ -13,24 +13,40 @@ locationModule::locationModule(): m_dgelsLoc(std::make_shared<Location>()),m_dge
 }
 void locationModule::CalculateLocations(std::shared_ptr<node::Node_Container> nodes){
     boost::mutex::scoped_lock lock(g_i_mutex);
-    calculateDgels(GetNodeTargets(nodes));
-    calculateDgesvDgetrs(GetNodeTargets(nodes));
+    //GetNodeTargets(nodes);
+    try {
+        calculateDgels(GetNodeTargets(nodes));
+        calculateDgesvDgetrs(GetNodeTargets(nodes));
+    }catch(std::exception e){
+        std::cout <<"Not Enough Nodes in Range." <<std::endl;
+    }
+
 }
+bool comparePtrToNode(std::shared_ptr<INode> a, std::shared_ptr<INode> b) { return (a->getRSSI() < b->getRSSI()); }
 
-std::shared_ptr<node::Node_Container> locationModule::GetNodeTargets(std::shared_ptr<node::Node_Container> tempNodes){
+    std::shared_ptr<node::Node_Container> locationModule::GetNodeTargets(std::shared_ptr<node::Node_Container> tempNodes){
+
     std::shared_ptr<node::Node_Container> targetNodes = std::make_shared<node::Node_Container>();
-    std::sort(tempNodes->GetNodes().begin(),tempNodes->GetNodes().end());
-
+    std::sort(tempNodes->GetNodes().begin(),tempNodes->GetNodes().end(),[] (std::shared_ptr<INode>& lhs, std::shared_ptr<INode>&  rhs) {
+        return lhs->getRSSI() > rhs->getRSSI();
+    });
     for (auto &i : tempNodes->GetNodes()) {
-        if(targetNodes->GetNodes().size()==4){
-            break;
+        if (targetNodes->GetNodes().size()<4 &&i->getRSSI()!=0){
+
+            targetNodes->AddNode(i);
+
         }
-        targetNodes->AddNode(i);
     }
-    if(targetNodes->GetNodes().size()<4){
-        std::exception e;
-        throw(e);
-    }
+        for (auto &i : targetNodes->GetNodes()) {
+
+            std::cout << "RSSI ORDERING" << i->getRSSI() << i->getMAC() << std::endl;
+        }
+
+        if(targetNodes->GetNodes().size()<4){
+            std::exception e;
+            throw(e);
+        }
+
     return targetNodes;
 }
 

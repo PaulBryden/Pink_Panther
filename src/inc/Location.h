@@ -8,7 +8,7 @@
 class Location{
 
 public:
-    Location(){
+    Location(double x=0, double y=0, double z=0, double time=0):xCoord(x),yCoord(y),zCoord(z),time(time){
 
     }
 
