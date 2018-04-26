@@ -18,6 +18,7 @@ private:
     std::string m_name;
     int m_rssi;
     std::string m_mac;
+    bool m_Recently_Updated;
 public:
     Node(std::string Name, int Rssi, std::string Mac);
     Node(web::json::value node);
@@ -26,6 +27,8 @@ public:
     int getRSSI() const;
     std::string getSSID();
     std::string getMAC();
+    void setRecentlyUpdated(bool status);
+    bool getRecentlyUpdated();
 
     inline bool operator< (const Node & c2)
     {

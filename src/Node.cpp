@@ -12,10 +12,10 @@
 using namespace std;
 
 
-Node::Node(std::string Name, int Rssi, std::string Mac):m_name(Name),m_rssi(Rssi),m_mac(Mac){
+Node::Node(std::string Name, int Rssi, std::string Mac):m_name(Name),m_rssi(Rssi),m_mac(Mac),m_Recently_Updated(true){
 }
 
-Node::Node(web::json::value node) {
+Node::Node(web::json::value node):m_Recently_Updated(true) {
     try {
         m_name = node["ssid"].as_string();
         cout << node["ssid"];
@@ -67,8 +67,19 @@ std::string Node::getSSID() {
 std::string Node::getMAC(){
     return m_mac;
 }
-void Node::Update(std::shared_ptr<INode> Node){
+void Node::Update(std::shared_ptr<INode> Node)
+{
     m_rssi=Node->getRSSI();
     m_name=Node->getSSID();
     m_name=Node->getMAC();
+}
+
+void Node::setRecentlyUpdated(bool status)
+{
+    m_Recently_Updated=status;
+}
+
+bool Node::getRecentlyUpdated()
+{
+    return m_Recently_Updated;
 }

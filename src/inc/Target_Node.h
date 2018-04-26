@@ -33,6 +33,8 @@ public:
     double getZCoord();
     void updateKalmanRSSI();
     double getKalmanRSSI();
+    void setRecentlyUpdated(bool status);
+    bool getRecentlyUpdated();
     std::string getMAC();
     std::atomic<double> m_Kalman_Distance;
 

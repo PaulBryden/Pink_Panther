@@ -31,7 +31,7 @@ bool comparePtrToNode(std::shared_ptr<INode> a, std::shared_ptr<INode> b) { retu
         return lhs->getRSSI() > rhs->getRSSI();
     });
     for (auto &i : tempNodes->GetNodes()) {
-        if (targetNodes->GetNodes().size()<4 &&i->getRSSI()!=0){
+        if (targetNodes->GetNodes().size()<4 &&i->getRSSI()!=0 && i->getRecentlyUpdated()){
 
             targetNodes->AddNode(i);
 

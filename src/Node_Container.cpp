@@ -56,10 +56,16 @@ void Node_Container::AddNode(std::shared_ptr<INode> node){
 
 void Node_Container::UpdateNodes(std::shared_ptr<Node_Container> nodes) {
     boost::mutex::scoped_lock lock(g_i_mutex);
+
+    for (auto  &x : m_Nodes){
+
+        x->setRecentlyUpdated(false);
+    }
      for(auto &i : nodes->GetNodes()){
          for (auto  &x : m_Nodes){
              if(x->getMAC()==i->getMAC()){
                  x->Update(i);
+                 x->setRecentlyUpdated(true);
              }
          }
      }

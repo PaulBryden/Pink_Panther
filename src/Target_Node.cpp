@@ -127,3 +127,11 @@ double Target_Node::getZCoord(){
 std::string Target_Node::getMAC(){
     return m_Node->getMAC();
 }
+
+bool Target_Node::getRecentlyUpdated(){
+    m_Node->getRecentlyUpdated();
+}
+
+void Target_Node::setRecentlyUpdated(bool status){
+    m_Node->setRecentlyUpdated(status);
+}

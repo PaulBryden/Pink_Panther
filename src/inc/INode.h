@@ -15,6 +15,8 @@ public:
     virtual int getRSSI() const = 0;
     virtual std::string getSSID() = 0;
     virtual std::string getMAC() = 0;
+    virtual void setRecentlyUpdated(bool status) = 0;
+    virtual bool getRecentlyUpdated() = 0;
 
 
 };
