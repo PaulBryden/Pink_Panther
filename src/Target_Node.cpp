@@ -46,7 +46,7 @@ Target_Node::Target_Node(web::json::value node): m_Kalman_distance(0.000025, 0.1
         throw(ParseError);
         }
     try{
-        m_rssi_cal = node["cal"].as_integer();
+        m_rssi_cal = -54;
         cout << node["cal"];
     }  catch(std::exception e) {
         printf("Error:: Cannot parse RSSICalib from JSON. Please check Syntax");

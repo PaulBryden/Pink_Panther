@@ -61,7 +61,7 @@ void WifiScanModule::Scan()
                         // printf("%d\n",result->stats.qual.level);
                         int dbLevel = result->stats.qual.level;
                         if (dbLevel >= 64) {
-                            dbLevel -= 0x100;ccccccc
+                            dbLevel -= 0x100;
                         }
                         //printf("%d", dbLevel);
                         //result->b.freq,
@@ -93,13 +93,13 @@ void WifiScanModule::Scan()
             node::Node_Container tempContainer;
             std::string Mac="FF:FF:FF:FF:FF:FF";
             std::string ID="TRIG1";
-            std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -51,"24:F2:7F:AA:23:E1");
+            std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -61,"24:F2:7F:AA:23:E1");
             tempContainer.AddNode(newNode);
             ID="TRIG2";
-            newNode = std::make_shared<Node>(ID, -55, "18:64:72:34:06:00");
+            newNode = std::make_shared<Node>(ID, -65, "18:64:72:34:06:00");
             tempContainer.AddNode(newNode);
             ID="TRIG3";
-            newNode = std::make_shared<Node>(ID, -58, "24:F2:2F:AA:26:E3");
+            newNode = std::make_shared<Node>(ID, -78, "24:F2:2F:AA:26:E3");
             tempContainer.AddNode(newNode);
             ID="TRIG4";
             newNode = std::make_shared<Node>(ID, -59, "24:F2:7F:AA:2C:01");

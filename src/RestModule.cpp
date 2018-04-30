@@ -18,16 +18,16 @@ std::shared_ptr<WifiScanModule> ScanModule;
 std::shared_ptr<locationModule> LocationModule;
 double scanTime;
 
-MyServer::MyServer(utility::string_t url) : m_listener(url)
+MyServer::MyServer(utility::string_t url) //: m_listener(url)
 {
     TargetNodes =  std::make_shared<node::Node_Container>();
 
     GETNodes GETNodes("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap");
     TargetNodes=GETNodes.get();
-    m_listener.support(methods::GET, std::bind(&MyServer::handle_get, this, std::placeholders::_1));
-    m_listener.support(methods::PUT, std::bind(&MyServer::handle_put, this, std::placeholders::_1));
-    m_listener.support(methods::POST, std::bind(&MyServer::handle_post, this, std::placeholders::_1));
-    m_listener.support(methods::DEL, std::bind(&MyServer::handle_delete, this, std::placeholders::_1));
+    //m_listener.support(methods::GET, std::bind(&MyServer::handle_get, this, std::placeholders::_1));
+    //m_listener.support(methods::PUT, std::bind(&MyServer::handle_put, this, std::placeholders::_1));
+    //m_listener.support(methods::POST, std::bind(&MyServer::handle_post, this, std::placeholders::_1));
+    //m_listener.support(methods::DEL, std::bind(&MyServer::handle_delete, this, std::placeholders::_1));
 
     ScannedNodes = std::make_shared<node::Node_Container>();
     LocationModule = std::make_shared<locationModule>();
@@ -38,7 +38,7 @@ MyServer::MyServer(utility::string_t url) : m_listener(url)
     boost::thread t2(boost::bind(&MyServer::PostData,this));
 
 }
-
+/*
 void MyServer::handle_get(http_request message)
 {
     std::cout << message.relative_uri().to_string() << std::endl;
@@ -87,29 +87,49 @@ void MyServer::handle_delete(http_request message)
 void MyServer::handle_put(http_request message)
 {
 	message.reply(status_codes::OK);
-};
+};*/
 
 void MyServer::PostData(){
     while(true){
-        Post();
-        boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+
+        try {
+           // Post();
+            web::json::value yourJson;
+            yourJson = LocationModule->BasicJson();
+            yourJson[U("ID")] = web::json::value("User0");
+            yourJson[U("Site")] = web::json::value::number(1);
+
+            http_client client("http://marconi.sdsu.edu:9999/MyServer/Action/");
+            // http_client client("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap");
+            if (yourJson["X"].as_double() > 75 || yourJson["X"].as_double()  < 0 ||
+                yourJson["Y"].as_double() > 41 || yourJson["Y"].as_double()  < 0) {
+                 client.request(methods::GET, "",
+                                      yourJson.serialize(), "application/json").get();
+            }else {
+                 client.request(methods::POST, "",
+                                      yourJson.serialize(), "application/json").get();
+            }
+        } catch(std::exception e){
+
+            }
+        catch(const boost::system::system_error& e) {
+        }
+
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
+
     }
 }
-
+/*
 pplx::task<int> MyServer::Post()
 {
     return pplx::create_task([]
-                             {
-                                 web::json::value yourJson;
-                                 yourJson=LocationModule->BasicJson();
-                                 yourJson[U("ID")] = web::json::value("User0");
-                                 yourJson[U("Site")] = web::json::value::number(0);
+                             {try {
 
+                             }catch(std::exception e){
 
-                                 http_client client("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap");
-
-                                 return client.request(methods::POST,"",
-                                                       yourJson.serialize(), "application/json");
+                             }
+                             catch(const boost::system::system_error& e) {
+                             }
                              }).then([](http_response response)
                                      {
                                          if(response.status_code() == status_codes::OK)
@@ -119,6 +139,6 @@ pplx::task<int> MyServer::Post()
 
                                          return 0;
                                      });
-}
+}*/
 
 

@@ -1,6 +1,6 @@
 #include "inc/stdafx.h"
 #include "inc/RestModule.h"
-
+#include <future>
 using namespace web;
 using namespace http;
 using namespace utility;
@@ -17,8 +17,10 @@ void on_initialize(const string_t& address)
 
     auto addr = uri.to_uri().to_string();
     g_http = std::unique_ptr<MyServer>(new MyServer(addr));
-    g_http->open().wait();
+    //g_http->open().wait();
 
+    std::promise<void> p;
+    p.get_future().wait();
     ucout << utility::string_t(U("Listening for requests at: ")) << addr << std::endl;
 
     return;
@@ -26,7 +28,7 @@ void on_initialize(const string_t& address)
 
 void on_shutdown()
 {
-    g_http->close().wait();
+    //g_http->close().wait();
     return;
 }
 
@@ -44,10 +46,8 @@ int main(int argc, wchar_t *argv[])
     address.append(port);
 
     on_initialize(address);
-    std::cout << "Press ENTER to exit." << std::endl;
-
-    std::string line;
-    std::getline(std::cin, line);
+    std::promise<void> p;
+    p.get_future().wait();
 
     on_shutdown();
     return 0;
