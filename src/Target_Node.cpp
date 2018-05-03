@@ -17,7 +17,7 @@ void Target_Node::Update(std::shared_ptr<INode> Node){
     updateKalmanRSSI();
 }
 
-Target_Node::Target_Node(web::json::value node): m_Kalman_distance(0.000025, 0.17746,1),m_Kalman_rssi(0.0001, 2.36,1){
+Target_Node::Target_Node(web::json::value node): m_Kalman_distance(0.000025, 0.17746,1),m_Kalman_rssi(0.001, 2.36,-70){
     m_Node=std::make_shared<Node>(node);
 
     try {

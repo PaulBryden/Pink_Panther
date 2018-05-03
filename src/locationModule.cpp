@@ -112,9 +112,10 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
 
     printf("Calcuated values.");
     fflush(stdout);
-    m_dgesvLoc->xCoord=(B[0][0]);
+    m_dgesvLoc->updateCoords(B[0][0],B[1][0],B[2][0]);
+    /*m_dgesvLoc->xCoord=(B[0][0]);
     m_dgesvLoc->yCoord=(B[1][0]);
-    m_dgesvLoc->zCoord=(B[2][0]);
+    m_dgesvLoc->zCoord=(B[2][0]);*/
     m_dgesvLoc->time=t.elapsed().wall;
 
     printf("Calculated Location: ");
@@ -136,9 +137,11 @@ void  locationModule::calculateDgesvDgetrs(std::shared_ptr<node::Node_Container>
     }
 
     t.stop();
-    m_dgetrsLoc->xCoord=(B2[0][0]);
+    m_dgetrsLoc->updateCoords(B2[0][0],B2[1][0],B2[2][0]);
+    /*m_dgetrsLoc->xCoord=(B2[0][0]);
     m_dgetrsLoc->yCoord=(B2[1][0]);
-    m_dgetrsLoc->zCoord=(B2[2][0]);
+    m_dgetrsLoc->zCoord=(B2[2][0]);*/
+
     m_dgetrsLoc->time=t.elapsed().wall-m_dgesvLoc->time;
 
     std::cout << "X:" << lexical_cast<std::string>(B2[0][0]) <<" Y:" << lexical_cast<std::string>(B2[1][0]) << " Z:" << lexical_cast<std::string>(B2[2][0])  << "Time:" << lexical_cast<std::string>(m_dgetrsLoc->time) <<std::endl;
@@ -187,9 +190,11 @@ void locationModule::calculateDgels(std::shared_ptr<node::Node_Container> nodes)
         printf( "the least squares solution could not be computed.\n" );
         return;
     }
-    m_dgelsLoc->xCoord=(B[0][0]);
+    /*m_dgelsLoc->xCoord=(B[0][0]);
     m_dgelsLoc->yCoord=(B[1][0]);
-    m_dgelsLoc->zCoord=(B[2][0]);
+    m_dgelsLoc->zCoord=(B[2][0]);*/
+
+    m_dgelsLoc->updateCoords(B[0][0],B[1][0],B[2][0]);
     m_dgelsLoc->time=t.elapsed().wall;
 
     printf("Calculated Location Dgels: ");

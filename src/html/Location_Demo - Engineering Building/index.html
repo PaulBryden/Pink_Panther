@@ -7,7 +7,8 @@
     <title>Pink Panther - Location Demo</title>
     <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
     <script class="include" type="text/javascript" src="jquery.js"></script>
-
+<meta name="viewport" content="width=device-width; 
+    initial-scale=1; maximum-scale=1; user-scalable=0;"/>
 <script>
 
 function metresToPixels( metres){
@@ -20,14 +21,37 @@ var YVal;
 var tempX;
 var tempY;
 var img = new Image;
-img.src="map_engineering.png"
+img.src="map_engineering_3.PNG"
 $(setInterval(getRSSI, 500));
+
+function toggleMap(){
+
+  var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if (img.src.includes("map_engineering_3.PNG")){
+		img.src="map_engineering_4.PNG";
+			ctx.drawImage(img, 0, 0, img.width,    img.height,     // source rectangle
+                   0, 0, canvas.width, canvas.height); 
+	ctx.beginPath();
+
+	ctx.fill();
+	}
+	else{
+		img.src="map_engineering_3.PNG";
+			ctx.drawImage(img, 0, 0, img.width,    img.height,     // source rectangle
+                   0, 0, canvas.width, canvas.height); 
+	ctx.beginPath();
+
+	ctx.fill();
+	}
+}
 
 function drawMap() {
   var canvas = document.getElementById('canvas');
   if (canvas.getContext) {
     var ctx = canvas.getContext('2d');
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	tempX=metresToPixels(XVal);
 	tempY=410-metresToPixels(YVal);
 	ctx.drawImage(img, 0, 0, img.width,    img.height,     // source rectangle
@@ -68,6 +92,7 @@ $.ajax({
 
 </script>
 </head>
-   <canvas id="canvas" width="750" height="410"></canvas>
+   <canvas id="canvas" width="740" height="400"></canvas>
+<input  type="button" value="Toggle Map" onclick="toggleMap();"></input>
  </body>
 </html>
