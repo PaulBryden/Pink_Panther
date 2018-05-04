@@ -5,16 +5,20 @@
 #ifndef FOO_LOCATION_H
 #define FOO_LOCATION_H
 
-class Location {
+class Location
+{
 
 public:
-    Location(double x = 0, double y = 0, double z = 0, double calculationTime = 0) : xCoord(x), yCoord(y), zCoord(z), m_calculationTime(calculationTime),
- {
+    Location(double x = 0, double y = 0, double z = 0, double calculationTime = 0) : xCoord(x), yCoord(y), zCoord(z),
+                                                                                     m_calculationTime(
+                                                                                             calculationTime)
+    {
 
     }
 
 
-    web::json::value ToJson() {
+    web::json::value ToJson()
+    {
         using namespace web;
         json::value response = json::value::object();
         response["X"] = json::value::number(xCoord);
@@ -24,7 +28,8 @@ public:
         return response;
     }
 
-    void updateCoords(double x, double y, double z) {
+    void updateCoords(double x, double y, double z)
+    {
         xCoord = x;
         yCoord = y;
         zCoord = z;

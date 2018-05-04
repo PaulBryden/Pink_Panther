@@ -5,7 +5,7 @@ body {
     width: 100%;
     background: #fff;
     min-width: 600px;
-    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 /* Header styles */
@@ -24,22 +24,23 @@ body {
 
 /* 'widths' sub menu */
 #layoutdims {
-  clear: both;
-  background: #eee;
-  border-top: 4px solid #000;
-  margin: 0;
-  padding: 6px 15px !important;
-  text-align: right;
+    clear: both;
+    background: #eee;
+    border-top: 4px solid #000;
+    margin: 0;
+    padding: 6px 15px !important;
+    text-align: right;
 }
 
 /* column container */
 .colmask {
-    position: relative;  /* This fixes the IE7 overflow hidden bug */
+    position: relative; /* This fixes the IE7 overflow hidden bug */
     clear: both;
     float: left;
-    width: 100%;     /* width of whole page */
-    overflow: hidden;    /* This chops off any overhanging divs */
+    width: 100%; /* width of whole page */
+    overflow: hidden; /* This chops off any overhanging divs */
 }
+
 /* common column settings */
 .colright,
 .colmid,
@@ -48,6 +49,7 @@ body {
     width: 100%;
     position: relative;
 }
+
 .col1,
 .col2,
 .col3 {
@@ -56,22 +58,26 @@ body {
     padding: 0 0 1em 0;
     overflow: hidden;
 }
+
 /* 2 Column (left menu) settings */
 .leftmenu {
-    background: #ffffff;    /* right column background colour */
+    background: #ffffff; /* right column background colour */
 }
+
 .leftmenu .colleft {
-    right: 75%;      /* right column width */
+    right: 75%; /* right column width */
     background: #717171; /* left column background colour */
 }
+
 .leftmenu .col1 {
-    width: 71%;      /* right column content width */
-    left: 102%;      /* 100% plus left column left padding */
+    width: 71%; /* right column content width */
+    left: 102%; /* 100% plus left column left padding */
     margin-top: 20px;
 }
+
 .leftmenu .col2 {
-    width: 21%;      /* left column content width (column width minus left and right padding) */
-    left: 6%;      /* (right column left and right padding) plus (left column left padding) */
+    width: 21%; /* left column content width (column width minus left and right padding) */
+    left: 6%; /* (right column left and right padding) plus (left column left padding) */
     margin-top: 20px;
 }
 
@@ -82,14 +88,14 @@ body {
     width: 100%;
     border-top: 1px solid #000;
 }
+
 #footer p {
     padding: 10px;
     margin: 0;
 }
 
-
 div.nav {
-    position:relative;
+    position: relative;
     top: 70px;
     text-align: right;
 }
@@ -111,7 +117,7 @@ a.nav, a.nav:link {
     text-decoration: none;
     font-family: Tahoma, "Helvetica Neue", "Trebuchet MS", Verdana, Arial, sans-serif;
     font-size: 16px;
-    color: #aaaaaa; 
+    color: #aaaaaa;
     margin-right: 11px;
 }
 
@@ -127,7 +133,7 @@ a.nav:active {
     color: #E0771C;
 }
 
-pre.code-block{
+pre.code-block {
     background: #D8F4DC;
     border: 1px solid rgb(200, 200, 200);
     padding-top: 1em;
@@ -135,9 +141,9 @@ pre.code-block{
     padding-bottom: 1em;
     margin-top: 1em;
     margin-bottom: 3em;
-    
+
 }
-    
+
 pre.code {
     border: 1px solid rgb(200, 200, 200);
     padding-top: 1em;
@@ -145,13 +151,13 @@ pre.code {
     padding-bottom: 1em;
     margin-top: 1em;
     margin-bottom: 4em;
-    
+
 }
 
 div.include {
     margin-bottom: 2em;
 }
-    
+
 p {
     margin: 2em 0;
 }

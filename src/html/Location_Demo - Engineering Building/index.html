@@ -1,98 +1,100 @@
-
 <!DOCTYPE html>
 
 
 <html>
 <head>
     <title>Pink Panther - Location Demo</title>
-    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
     <script class="include" type="text/javascript" src="jquery.js"></script>
-<meta name="viewport" content="width=device-width; 
+    <meta name="viewport" content="width=device-width;
     initial-scale=1; maximum-scale=1; user-scalable=0;"/>
-<script>
+    <script>
 
-function metresToPixels( metres){
-	var pixels = metres*10
-	return pixels;
-}
+        function metresToPixels(metres) {
+            var pixels = metres * 10
+            return pixels;
+        }
 
-var XVal;
-var YVal;
-var tempX;
-var tempY;
-var img = new Image;
-img.src="map_engineering_3.PNG"
-$(setInterval(getRSSI, 500));
+        var XVal;
+        var YVal;
+        var tempX;
+        var tempY;
+        var img = new Image;
+        img.src = "map_engineering_3.PNG"
+        $(setInterval(getRSSI, 500));
 
-function toggleMap(){
+        function toggleMap() {
 
-  var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
 
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	if (img.src.includes("map_engineering_3.PNG")){
-		img.src="map_engineering_4.PNG";
-			ctx.drawImage(img, 0, 0, img.width,    img.height,     // source rectangle
-                   0, 0, canvas.width, canvas.height); 
-	ctx.beginPath();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (img.src.includes("map_engineering_3.PNG")) {
+                img.src = "map_engineering_4.PNG";
+                ctx.drawImage(img, 0, 0, img.width, img.height,     // source rectangle
+                    0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
 
-	ctx.fill();
-	}
-	else{
-		img.src="map_engineering_3.PNG";
-			ctx.drawImage(img, 0, 0, img.width,    img.height,     // source rectangle
-                   0, 0, canvas.width, canvas.height); 
-	ctx.beginPath();
+                ctx.fill();
+            }
+            else {
+                img.src = "map_engineering_3.PNG";
+                ctx.drawImage(img, 0, 0, img.width, img.height,     // source rectangle
+                    0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
 
-	ctx.fill();
-	}
-}
+                ctx.fill();
+            }
+        }
 
-function drawMap() {
-  var canvas = document.getElementById('canvas');
-  if (canvas.getContext) {
-    var ctx = canvas.getContext('2d');
-	tempX=metresToPixels(XVal);
-	tempY=410-metresToPixels(YVal);
-	ctx.drawImage(img, 0, 0, img.width,    img.height,     // source rectangle
-                   0, 0, canvas.width, canvas.height); 
-	ctx.beginPath();
+        function drawMap() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+                tempX = metresToPixels(XVal);
+                tempY = 410 - metresToPixels(YVal);
+                ctx.drawImage(img, 0, 0, img.width, img.height,     // source rectangle
+                    0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
 
-	ctx.fill();
-	ctx.fillStyle = "white";
-	ctx.font = "20px Arial";
-	ctx.fillText("X: "+XVal.toFixed(3),tempX+20,tempY-25);
-	ctx.fillText("Y: "+YVal.toFixed(3),tempX+20,tempY);
-	
-	ctx.fillStyle = "red";
-		ctx.beginPath();
-	ctx.arc(tempX,tempY,5,0,2*Math.PI);
-		ctx.fill();
-	
-  }
-}
-function getRSSI(){
-$.ajax({
-    url: 'http://marconi.sdsu.edu:9999/MyServer/Action/',
-	 jsonp: "callback",
-          dataType: "jsonp",
-          crossDomain: true,
-    success: function (data) {
-        console.log(data);
-		XVal=data["X"];
-		YVal=data["Y"];
-		ZVal=data["Z"];
+                ctx.fill();
+                ctx.fillStyle = "white";
+                ctx.font = "20px Arial";
+                ctx.fillText("X: " + XVal.toFixed(3), tempX + 20, tempY - 25);
+                ctx.fillText("Y: " + YVal.toFixed(3), tempX + 20, tempY);
 
-		drawMap();
-    }
-		
-});
-}
+                ctx.fillStyle = "red";
+                ctx.beginPath();
+                ctx.arc(tempX, tempY, 5, 0, 2 * Math.PI);
+                ctx.fill();
+
+            }
+        }
+
+        function getRSSI() {
+            $.ajax({
+                url: 'http://marconi.sdsu.edu:9999/MyServer/Action/',
+                jsonp: "callback",
+                dataType: "jsonp",
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data);
+                    XVal = data["X"];
+                    YVal = data["Y"];
+                    ZVal = data["Z"];
+
+                    drawMap();
+                }
+
+            });
+        }
 
 
-</script>
+    </script>
 </head>
-   <canvas id="canvas" width="740" height="400"></canvas>
-<input  type="button" value="Toggle Map" onclick="toggleMap();"></input>
+  
+<canvas id="canvas" width="740" height="400"></canvas>
+<input type="button" value="Toggle Map" onclick="toggleMap();"></input>
  </body>
 </html>

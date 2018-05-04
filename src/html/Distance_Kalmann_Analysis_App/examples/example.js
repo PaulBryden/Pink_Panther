@@ -1,7 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function () {
     if (!$.jqplot._noCodeBlock) {
-        $('script.code').each(function(index) {
-            if ($('pre.code').eq(index).length  ) {
+        $('script.code').each(function (index) {
+            if ($('pre.code').eq(index).length) {
                 $('pre.code').eq(index).text($(this).html());
             }
             else {
@@ -14,11 +14,11 @@ $(document).ready(function(){
             }
         });
 
-        $('script.common').each(function(index) {
+        $('script.common').each(function (index) {
             $('pre.common').eq(index).text($(this).html());
         });
 
-        var elstr='';
+        var elstr = '';
         if ($('script.include, link.include').length > 0) {
 
             if ($('pre.include').length == 0) {
@@ -35,18 +35,18 @@ $(document).ready(function(){
             }
 
 
-            $('script.include').each(function(index) {
+            $('script.include').each(function (index) {
                 if (elstr !== '') {
                     elstr += '\n';
                 }
-                elstr += '<script type="text/javascript" src="'+$(this).attr('src')+'"></script>';
+                elstr += '<script type="text/javascript" src="' + $(this).attr('src') + '"></script>';
             });
 
-            $('link.include').each(function(index) {
+            $('link.include').each(function (index) {
                 if (elstr !== '') {
                     elstr += '\n';
                 }
-                elstr += '<link rel="stylesheet" type="text/css" href="'+$(this).attr('href')+'" />';
+                elstr += '<link rel="stylesheet" type="text/css" href="' + $(this).attr('href') + '" />';
             })
 
             $('pre.include').text(elstr);
@@ -59,7 +59,7 @@ $(document).ready(function(){
     }
 
     if (!$.jqplot.use_excanvas) {
-        $('div.jqplot-target').each(function(){
+        $('div.jqplot-target').each(function () {
             var outerDiv = $(document.createElement('div'));
             var header = $(document.createElement('div'));
             var div = $(document.createElement('div'));
@@ -77,7 +77,7 @@ $(document).ready(function(){
             close.addClass('jqplot-image-container-close');
             close.html('Close');
             close.attr('href', '#');
-            close.click(function() {
+            close.click(function () {
                 $(this).parents('div.jqplot-image-container').hide(500);
             })
             header.append(close);
@@ -91,7 +91,7 @@ $(document).ready(function(){
                 var btn = $(document.createElement('button'));
                 btn.text('View Plot Image');
                 btn.addClass('jqplot-image-button');
-                btn.bind('click', {chart: $(this)}, function(evt) {
+                btn.bind('click', {chart: $(this)}, function (evt) {
                     var imgelem = evt.data.chart.jqplotToImageElem();
                     var div = $(this).nextAll('div.jqplot-image-container').first();
                     div.children('div.jqplot-image-container-content').empty();
@@ -110,5 +110,7 @@ $(document).ready(function(){
     SyntaxHighlighter.defaults['toolbar'] = true;
     SyntaxHighlighter.all();
 
-    $(document).unload(function() {$('*').unbind(); });
+    $(document).unload(function () {
+        $('*').unbind();
+    });
 });

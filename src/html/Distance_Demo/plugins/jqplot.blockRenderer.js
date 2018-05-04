@@ -6,13 +6,13 @@
  * Revision: d96a669
  *
  * Copyright (c) 2009-2016 Chris Leonello
- * jqPlot is currently available for use in all personal or commercial projects 
- * under both the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL 
- * version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html) licenses. This means that you can 
- * choose the license that best suits your project and use it accordingly. 
+ * jqPlot is currently available for use in all personal or commercial projects
+ * under both the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL
+ * version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html) licenses. This means that you can
+ * choose the license that best suits your project and use it accordingly.
  *
- * Although not required, the author would appreciate an email letting him 
- * know of any substantial use of jqPlot.  You can reach the author at: 
+ * Although not required, the author would appreciate an email letting him
+ * know of any substantial use of jqPlot.  You can reach the author at:
  * chris at jqplot dot com or see http://www.jqplot.com/info.php .
  *
  * If you are feeling kind and generous, consider supporting the project by
@@ -26,44 +26,44 @@
  *     http://hexmen.com/js/sprintf.js
  *     The author (Ash Searle) has placed this code in the public domain:
  *     "This code is unrestricted: you are free to use it however you like."
- * 
+ *
  */
-(function($) {
+(function ($) {
     /**
      * Class: $.jqplot.BlockRenderer
      * Plugin renderer to draw a x-y block chart.  A Block chart has data points displayed as
      * colored squares with a text label inside.  Data must be supplied in the form:
-     * 
+     *
      * > [[x1, y1, "label 1", {css}], [x2, y2, "label 2", {css}], ...]
-     * 
+     *
      * The label and css object are optional.  If the label is ommitted, the
      * box will collapse unless a css height and/or width is specified.
-     * 
-     * The css object is an object specifying css properties 
+     *
+     * The css object is an object specifying css properties
      * such as:
-     * 
+     *
      * > {background:'#4f98a5', border:'3px solid gray', padding:'1px'}
-     * 
+     *
      * Note that css properties specified with the data point override defaults
      * specified with the series.
-     * 
+     *
      */
-    $.jqplot.BlockRenderer = function(){
+    $.jqplot.BlockRenderer = function () {
         $.jqplot.LineRenderer.call(this);
     };
-    
+
     $.jqplot.BlockRenderer.prototype = new $.jqplot.LineRenderer();
     $.jqplot.BlockRenderer.prototype.constructor = $.jqplot.BlockRenderer;
-    
+
     // called with scope of a series
-    $.jqplot.BlockRenderer.prototype.init = function(options) {
+    $.jqplot.BlockRenderer.prototype.init = function (options) {
         // Group: Properties
         //
         // prop: css
         // default css styles that will be applied to all data blocks.
         // these values will be overridden by css styles supplied with the
         // individulal data points.
-        this.css = {padding:'2px', border:'1px solid #999', textAlign:'center'};
+        this.css = {padding: '2px', border: '1px solid #999', textAlign: 'center'};
         // prop: escapeHtml
         // true to escape html in the box label.
         this.escapeHtml = false;
@@ -87,11 +87,11 @@
             this.css.background = this.color;
         }
         this.canvas = new $.jqplot.BlockCanvas();
-        this.shadowCanvas =  new $.jqplot.BlockCanvas();
+        this.shadowCanvas = new $.jqplot.BlockCanvas();
         this.canvas._plotDimensions = this._plotDimensions;
         this.shadowCanvas._plotDimensions = this._plotDimensions;
         this._type = 'block';
-        
+
         // group: Methods 
         //
         // Method: moveBlock
@@ -107,7 +107,7 @@
         this.moveBlock = function (idx, x, y, duration) {
             // update plotData, stackData, data and gridData
             // x and y are in data coordinates.
-            var el = this.canvas._elem.children(':eq('+idx+')');
+            var el = this.canvas._elem.children(':eq(' + idx + ')');
             this.data[idx][0] = x;
             this.data[idx][1] = y;
             this._plotData[idx][0] = x;
@@ -118,21 +118,21 @@
             this.gridData[idx][1] = this._yaxis.series_u2p(y);
             var w = el.outerWidth();
             var h = el.outerHeight();
-            var left = this.gridData[idx][0] - w/2 + 'px';
-            var top = this.gridData[idx][1] - h/2 + 'px';
+            var left = this.gridData[idx][0] - w / 2 + 'px';
+            var top = this.gridData[idx][1] - h / 2 + 'px';
             if (duration) {
                 if (parseInt(duration, 10)) {
                     duration = parseInt(duration, 10);
                 }
-                el.animate({left:left, top:top}, duration);
+                el.animate({left: left, top: top}, duration);
             }
             else {
-                el.css({left:left, top:top});
+                el.css({left: left, top: top});
             }
             el = null;
         };
     };
-    
+
     // called with scope of series
     $.jqplot.BlockRenderer.prototype.draw = function (ctx, gd, options) {
         if (this.plugins.pointLabels) {
@@ -142,7 +142,7 @@
         var opts = (options != undefined) ? options : {};
         var colorGenerator = new $.jqplot.ColorGenerator(this.seriesColors);
         this.canvas._elem.empty();
-        for (i=0; i<this.gridData.length; i++) {
+        for (i = 0; i < this.gridData.length; i++) {
             d = this.data[i];
             gd = this.gridData[i];
             t = '';
@@ -153,10 +153,10 @@
             else if (typeof d[2] == 'object') {
                 css = d[2];
             }
-            if (typeof d[3] ==  'object') {
+            if (typeof d[3] == 'object') {
                 css = d[3];
             }
-            if (this.insertBreaks){ 
+            if (this.insertBreaks) {
                 t = t.replace(/ /g, '<br />');
             }
             css = $.extend(true, {}, this.css, css);
@@ -170,28 +170,28 @@
             delete css.position;
             delete css.marginRight;
             delete css.marginLeft;
-            if (!css.background && !css.backgroundColor && !css.backgroundImage){ 
+            if (!css.background && !css.backgroundColor && !css.backgroundImage) {
                 css.background = colorGenerator.next();
             }
             el.css(css);
             w = el.outerWidth();
             h = el.outerHeight();
-            left = gd[0] - w/2 + 'px';
-            top = gd[1] - h/2 + 'px';
-            el.css({left:left, top:top});
+            left = gd[0] - w / 2 + 'px';
+            top = gd[1] - h / 2 + 'px';
+            el.css({left: left, top: top});
             el = null;
         }
     };
-    
-    $.jqplot.BlockCanvas = function() {
+
+    $.jqplot.BlockCanvas = function () {
         $.jqplot.ElemContainer.call(this);
-        this._ctx;  
+        this._ctx;
     };
-    
+
     $.jqplot.BlockCanvas.prototype = new $.jqplot.ElemContainer();
     $.jqplot.BlockCanvas.prototype.constructor = $.jqplot.BlockCanvas;
-    
-    $.jqplot.BlockCanvas.prototype.createElement = function(offsets, clss, plotDimensions) {
+
+    $.jqplot.BlockCanvas.prototype.createElement = function (offsets, clss, plotDimensions) {
         this._offsets = offsets;
         var klass = 'jqplot-blockCanvas';
         if (clss != undefined) {
@@ -209,27 +209,29 @@
         if (plotDimensions != undefined) {
             this._plotDimensions = plotDimensions;
         }
-        
+
         var w = this._plotDimensions.width - this._offsets.left - this._offsets.right + 'px';
         var h = this._plotDimensions.height - this._offsets.top - this._offsets.bottom + 'px';
         this._elem = $(elem);
-        this._elem.css({ position: 'absolute', width:w, height:h, left: this._offsets.left, top: this._offsets.top });
-        
+        this._elem.css({position: 'absolute', width: w, height: h, left: this._offsets.left, top: this._offsets.top});
+
         this._elem.addClass(klass);
         return this._elem;
     };
-    
-    $.jqplot.BlockCanvas.prototype.setContext = function() {
+
+    $.jqplot.BlockCanvas.prototype.setContext = function () {
         this._ctx = {
-            canvas:{
-                width:0,
-                height:0
+            canvas: {
+                width: 0,
+                height: 0
             },
-            clearRect:function(){return null;}
+            clearRect: function () {
+                return null;
+            }
         };
         return this._ctx;
     };
-    
+
 })(jQuery);
     
     

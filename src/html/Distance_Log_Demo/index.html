@@ -1,50 +1,51 @@
-
 <!DOCTYPE html>
 
 
 <html>
 <head>
     <title>Pink Panther - Location Demo</title>
-    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
     <script class="include" type="text/javascript" src="jquery.js"></script>
 
-<script>
-var DistanceList=[];
-var RssiList=[];
-var Limit=30;
-var Counter=0;
-$(setInterval(getRSSI, 1200));
+    <script>
+        var DistanceList = [];
+        var RssiList = [];
+        var Limit = 30;
+        var Counter = 0;
+        $(setInterval(getRSSI, 1200));
 
-function getRSSI(){
-if(Counter<Limit){
-$.ajax({
-    url: 'http://192.168.7.2:34568/MyServer/Action/',
-	 jsonp: "callback",
-          dataType: "jsonp",
-          crossDomain: true,
-    success: function (data) {
-        console.log(data);
-		ScanTime=["System"]["ScanTime"];
-		data["System"]["Target"]["Nodes"].forEach(function(element){
-				if(element["SSID"]=="AndroidAP" ){
-					RssiList.push(element["RSSI"]);
-					DistanceList.push(element["Distance"]);
-			}
-		
-		console.dir(DistanceList);
-		console.dir(RssiList);
-		
-		
-});
-}
-});
-Counter=Counter+1;
-}
-}
+        function getRSSI() {
+            if (Counter < Limit) {
+                $.ajax({
+                    url: 'http://192.168.7.2:34568/MyServer/Action/',
+                    jsonp: "callback",
+                    dataType: "jsonp",
+                    crossDomain: true,
+                    success: function (data) {
+                        console.log(data);
+                        ScanTime = ["System"]["ScanTime"];
+                        data["System"]["Target"]["Nodes"].forEach(function (element) {
+                            if (element["SSID"] == "AndroidAP") {
+                                RssiList.push(element["RSSI"]);
+                                DistanceList.push(element["Distance"]);
+                            }
+
+                            console.dir(DistanceList);
+                            console.dir(RssiList);
 
 
-</script>
+                        });
+                    }
+                });
+                Counter = Counter + 1;
+            }
+        }
+
+
+    </script>
 </head>
-   <canvas id="canvas" width="1300" height="1300"></canvas>
+  
+<canvas id="canvas" width="1300" height="1300"></canvas>
  </body>
 </html>

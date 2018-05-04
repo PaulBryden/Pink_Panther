@@ -1,13 +1,14 @@
 #ifndef NODEMANAGER_H
 #define NODEMANAGER_H
 
-class NodeManager {
+class NodeManager
+{
 
 private:
-	int public_list::INode_ReferenceNodeList;
+    int public_list::INode_ReferenceNodeList;
 
 public:
-	NodeManager();
+    NodeManager();
 };
 
 #endif

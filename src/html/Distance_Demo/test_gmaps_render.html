@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script>
-        jQuery(window).ready(function(){
-          g_initialize();
-          jQuery("#findLocationBtn").click(initiate_geolocation);
+        jQuery(window).ready(function () {
+            g_initialize();
+            jQuery("#findLocationBtn").click(initiate_geolocation);
         });
-        
+
         function g_initialize() {
-          
-     /*     var google_tile = "http://maps.google.com/maps/api/staticmap?sensor=false&center=32.777448,-117.070864&zoom=22&size=600x600&markers=color:blue|label:U|" +
-                          //  '32.777548299999' + ',' + '-117.070856169999';
-						  '32.777503,-117.070789';*/
-						 // path=color:0xff0000ff|weight:5|40.737102,-73.990318|40.749825,-73.987963&sensor=false
-		  var google_tile = "http://maps.google.com/maps/api/staticmap?sensor=false&center=32.77744,-117.070864&zoom=22&size=600x600&path=color:0x0000ddee|weight:2|32.777450,-117.070856169999|32.777503,-117.070856169999|32.777503,-117.070789|32.777450,-117.070789|32.777450,-117.070856169999";
-          var canvas = document.getElementById("myCanvas");
-          var context = canvas.getContext("2d");   
-          var imageObj = new Image();
-          imageObj.src = google_tile;
-          console.dir(google_tile);
-          imageObj.onload = function(){
-            context.drawImage(imageObj, 0, 0);
-          }
-        }
 
-        function initiate_geolocation() {
-            navigator.geolocation.getCurrentPosition(handle_geolocation_query,handle_errors);
-        }
-
-        function handle_errors(error)
-        {
-            switch(error.code)
-            {
-                case error.PERMISSION_DENIED: alert("user did not share geolocation data");
-                break;
-
-                case error.POSITION_UNAVAILABLE: alert("could not detect current position");
-                break;
-
-                case error.TIMEOUT: alert("retrieving position timed out");
-                break;
-
-                default: alert("unknown error");
-                break;
-            }
-        }
-        function handle_geolocation_query(position)
-        {
-            var google_tile = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + position.coords.latitude + "," +
-                            position.coords.longitude + "&zoom=30&size=300x400&markers=color:blue|label:U|" +
-                            position.coords.latitude + ',' + position.coords.longitude;
+            /*     var google_tile = "http://maps.google.com/maps/api/staticmap?sensor=false&center=32.777448,-117.070864&zoom=22&size=600x600&markers=color:blue|label:U|" +
+                                 //  '32.777548299999' + ',' + '-117.070856169999';
+                                 '32.777503,-117.070789';*/
+            // path=color:0xff0000ff|weight:5|40.737102,-73.990318|40.749825,-73.987963&sensor=false
+            var google_tile = "http://maps.google.com/maps/api/staticmap?sensor=false&center=32.77744,-117.070864&zoom=22&size=600x600&path=color:0x0000ddee|weight:2|32.777450,-117.070856169999|32.777503,-117.070856169999|32.777503,-117.070789|32.777450,-117.070789|32.777450,-117.070856169999";
             var canvas = document.getElementById("myCanvas");
-            var context = canvas.getContext("2d");   
+            var context = canvas.getContext("2d");
             var imageObj = new Image();
             imageObj.src = google_tile;
             console.dir(google_tile);
-            imageObj.onload = function(){
-              context.drawImage(imageObj, 0, 0);
+            imageObj.onload = function () {
+                context.drawImage(imageObj, 0, 0);
+            }
+        }
+
+        function initiate_geolocation() {
+            navigator.geolocation.getCurrentPosition(handle_geolocation_query, handle_errors);
+        }
+
+        function handle_errors(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("user did not share geolocation data");
+                    break;
+
+                case error.POSITION_UNAVAILABLE:
+                    alert("could not detect current position");
+                    break;
+
+                case error.TIMEOUT:
+                    alert("retrieving position timed out");
+                    break;
+
+                default:
+                    alert("unknown error");
+                    break;
+            }
+        }
+
+        function handle_geolocation_query(position) {
+            var google_tile = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + position.coords.latitude + "," +
+                position.coords.longitude + "&zoom=30&size=300x400&markers=color:blue|label:U|" +
+                position.coords.latitude + ',' + position.coords.longitude;
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+            var imageObj = new Image();
+            imageObj.src = google_tile;
+            console.dir(google_tile);
+            imageObj.onload = function () {
+                context.drawImage(imageObj, 0, 0);
             }
         }
     </script>
-  </head>
-  <body>
-        <canvas id="myCanvas" width="600px" height="600px" style="border:1px solid grey;">
-        </canvas>
-  </body>
+</head>
+<body>
+<canvas id="myCanvas" width="600px" height="600px" style="border:1px solid grey;">
+</canvas>
+</body>
 </html>

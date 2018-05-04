@@ -4,59 +4,69 @@
 
 #include <cmath>
 #include "inc/Data/TargetNode.h"
-#include "inc/Data/Node.h"
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <memory>
 
 using namespace std;
 
-void TargetNode::Update(std::shared_ptr<INode> Node) {
+void TargetNode::Update(std::shared_ptr<INode> Node)
+{
+
+    boost::mutex::scoped_lock lock(g_i_mutex);
     m_Node = Node;
     updateKalmanRSSI();
 }
 
-TargetNode::TargetNode(web::json::value node) : m_Kalman_rssi(0.001, 2.36, -32) {
+TargetNode::TargetNode(web::json::value node) : m_Kalman_rssi(0.001, 2.36, -32)
+{
     this->ParseJson(node);
 
 }
 
 TargetNode::TargetNode(web::json::value node, double calibrationParam, double Q, double R) : m_Kalman_rssi(Q, R,
-                                                                                                             -calibrationParam) {
+                                                                                                           calibrationParam)
+{
     this->ParseJson(node);
 }
 
-void TargetNode::ParseJson(web::json::value node) {
+void TargetNode::ParseJson(web::json::value node)
+{
+
+    boost::mutex::scoped_lock lock(g_i_mutex);
     m_Node = std::make_shared<Node>(node);
-    try {
+    try
+    {
         m_XCoord = node["x"].as_double();
         cout << node["x"];
-    } catch (std::exception e) {
+    } catch (std::exception e)
+    {
         printf("Error:: Cannot parse XCoord from JSON. Please check Syntax");
         std::exception ParseError;
         throw (ParseError);
     }
-    try {
+    try
+    {
         m_YCoord = node["y"].as_double();
         cout << node["y"];
-    } catch (std::exception e) {
+    } catch (std::exception e)
+    {
         printf("Error:: Cannot parse YCoord from JSON. Please check Syntax");
         std::exception ParseError;
         throw (ParseError);
     }
-    try {
+    try
+    {
         m_ZCoord = node["z"].as_double();
         cout << node["z"];
-    } catch (std::exception e) {
+    } catch (std::exception e)
+    {
         printf("Error:: Cannot parse ZCoord from JSON. Please check Syntax");
         std::exception ParseError;
         throw (ParseError);
     }
-    try {
-        m_rssi_cal = -54;
+    try
+    {
         cout << node["cal"];
-    } catch (std::exception e) {
+    } catch (std::exception e)
+    {
         printf("Error:: Cannot parse RSSICalib from JSON. Please check Syntax");
         std::exception ParseError;
         throw (ParseError);
@@ -65,7 +75,8 @@ void TargetNode::ParseJson(web::json::value node) {
 }
 
 
-web::json::value TargetNode::ToJson() {
+web::json::value TargetNode::ToJson()
+{
     using namespace web;
     json::value response = m_Node->ToJson();
 
@@ -81,53 +92,72 @@ web::json::value TargetNode::ToJson() {
 
 }
 
-int TargetNode::getRSSI() const {
+int TargetNode::getRSSI()
+{
+
     return m_Node->getRSSI();
 }
 
 
-std::string TargetNode::getSSID() {
+std::string TargetNode::getSSID()
+{
+
     return m_Node->getSSID();
 }
 
-void TargetNode::updateKalmanRSSI() {
+void TargetNode::updateKalmanRSSI()
+{
+
     m_Kalman_RSSI_Val = m_Kalman_rssi.kalmanUpdate(this->getRSSI());
 }
 
-double TargetNode::GetDistance() {
+double TargetNode::GetDistance()
+{
 
-    try {
+    try
+    {
         double Power = (-(static_cast<double>(m_Kalman_RSSI_Val - (m_rssi_cal)) / (10.0 * 2.35)));
 
         printf("Calculating Distance: %f", pow(10.0, Power));
 
         return pow(10.0, Power);
-    } catch (std::exception X) {
+    } catch (std::exception X)
+    {
         printf("Error:: No Calibration Data Available");
         return 0;
     }
 }
 
-double TargetNode::getXCoord() {
+double TargetNode::getXCoord()
+{
+
     return m_XCoord;
 }
 
-double TargetNode::getYCoord() {
+double TargetNode::getYCoord()
+{
+
     return m_YCoord;
 }
 
-double TargetNode::getZCoord() {
+double TargetNode::getZCoord()
+{
+
     return m_ZCoord;
 }
 
-std::string TargetNode::getMAC() {
+std::string TargetNode::getMAC()
+{
+
     return m_Node->getMAC();
 }
 
-bool TargetNode::getRecentlyUpdated() {
+bool TargetNode::getRecentlyUpdated()
+{
     m_Node->getRecentlyUpdated();
 }
 
-void TargetNode::setRecentlyUpdated(bool status) {
+void TargetNode::setRecentlyUpdated(bool status)
+{
     m_Node->setRecentlyUpdated(status);
 }

@@ -1,9 +1,9 @@
 //
-// Created by green on 25/10/17.
+// Created by green on 04/05/18.
 //
 
-#ifndef FOO_WIFISCANMODULE_H
-#define FOO_WIFISCANMODULE_H
+#ifndef FOO_WIFISCANMODULEX86TEST_H
+#define FOO_WIFISCANMODULEX86TEST_H
 
 #include <memory>
 #include <vector>
@@ -17,15 +17,13 @@
 #include "LocationModule.h"
 #include "Interfaces/IScanModule.h"
 
-using namespace node;
-
-class WifiScanModule : public IScanModule
+class WifiScanModulex86Test : public IScanModule
 {
 
 public:
-    WifiScanModule();
+    WifiScanModulex86Test();
 
-    ~WifiScanModule();
+    ~WifiScanModulex86Test();
 
     void initialize();
 
@@ -46,7 +44,6 @@ private:
     double m_ScanTime;
     boost::mutex g_i_mutex;
     std::shared_ptr<boost::thread> m_ScannerPtr;
-
 };
 
-#endif //FOO_WIFISCANMODULE_H
+#endif //FOO_WIFISCANMODULEX86TEST_H

@@ -4,6 +4,7 @@
 
 #ifndef FOO_NODES_H
 #define FOO_NODES_H
+
 #include "../Interfaces/INode.h"
 #include <vector>
 #include <memory>
@@ -13,8 +14,10 @@
 #include <boost/bind.hpp>
 
 
-namespace node {
-    class NodeContainer {
+namespace node
+{
+    class NodeContainer
+    {
 
     public:
 
@@ -26,7 +29,7 @@ namespace node {
 
         void ClearNodes();
 
-        std::vector<std::shared_ptr<INode>>& GetNodes();
+        std::vector<std::shared_ptr<INode>> &GetNodes();
 
         void AddNode(std::shared_ptr<INode> node);
 

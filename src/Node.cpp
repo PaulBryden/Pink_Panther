@@ -3,49 +3,53 @@
 //
 
 #include "inc/Data/Node.h"
-#include "../../build_panther/usr/local/include/cpprest/json.h"
-#include <map>
-#include <set>
-#include <cmath>
-#include <utility>
-#include <memory>
+
 using namespace std;
 
 
-Node::Node(std::string Name, int Rssi, std::string Mac):m_name(Name),m_rssi(Rssi),m_mac(Mac),m_Recently_Updated(true){
+Node::Node(std::string Name, int Rssi, std::string Mac) : m_name(Name), m_rssi(Rssi), m_mac(Mac),
+                                                          m_Recently_Updated(true)
+{
 }
 
-Node::Node(web::json::value node):m_Recently_Updated(true) {
-    try {
+Node::Node(web::json::value node) : m_Recently_Updated(true)
+{
+    try
+    {
         m_name = node["ssid"].as_string();
         cout << node["ssid"];
-    }catch(std::exception e){
+    } catch (std::exception e)
+    {
         printf("Error:: Cannot parse SSID from JSON. Please check Syntax");
         std::exception ParseError;
-        throw(ParseError);
+        throw (ParseError);
     }
-    try{
+    try
+    {
         m_rssi = node["rssi"].as_double();
         cout << node["rssi"];
-    }catch(std::exception e){
+    } catch (std::exception e)
+    {
         printf("Error:: Cannot parse RSSI from JSON. Substituing with 0");
-        m_rssi=0;
+        m_rssi = 0;
     }
-    try{
+    try
+    {
         m_mac = node["mac"].as_string();
         cout << node["mac"];
-    }catch(std::exception e){
+    } catch (std::exception e)
+    {
         printf("Error:: Cannot parse mac from JSON. Please check Syntax");
         std::exception ParseError;
-        throw(ParseError);
+        throw (ParseError);
     }
-
 
 
 }
 
-web::json::value Node::ToJson(){
-using namespace web;
+web::json::value Node::ToJson()
+{
+    using namespace web;
     //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_rssi)+" }"));
 
     json::value response = json::value::object();
@@ -56,27 +60,31 @@ using namespace web;
 }
 
 
- int Node::getRSSI() const{
+int Node::getRSSI()
+{
     return m_rssi;
 }
 
-std::string Node::getSSID() {
+std::string Node::getSSID()
+{
     return m_name;
 }
 
-std::string Node::getMAC(){
+std::string Node::getMAC()
+{
     return m_mac;
 }
+
 void Node::Update(std::shared_ptr<INode> Node)
 {
-    m_rssi=Node->getRSSI();
-    m_name=Node->getSSID();
-    m_name=Node->getMAC();
+    m_rssi = Node->getRSSI();
+    m_name = Node->getSSID();
+    m_name = Node->getMAC();
 }
 
 void Node::setRecentlyUpdated(bool status)
 {
-    m_Recently_Updated=status;
+    m_Recently_Updated = status;
 }
 
 bool Node::getRecentlyUpdated()

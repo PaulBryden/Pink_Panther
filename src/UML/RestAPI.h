@@ -1,13 +1,14 @@
 #ifndef RESTAPI_H
 #define RESTAPI_H
 
-class RestAPI {
+class RestAPI
+{
 
 
 public:
-	RestAPI();
+    RestAPI();
 
-	RestAPI(int int_p_Port);
+    RestAPI(int int_p_Port);
 };
 
 #endif

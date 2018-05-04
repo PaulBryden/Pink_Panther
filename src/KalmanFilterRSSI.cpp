@@ -13,7 +13,8 @@ KalmanFilterRSSI::KalmanFilterRSSI(double q, double r, double p)
 
 }
 
-KalmanFilterRSSI::~KalmanFilterRSSI() {
+KalmanFilterRSSI::~KalmanFilterRSSI()
+{
 }
 
 /**
@@ -22,7 +23,8 @@ KalmanFilterRSSI::~KalmanFilterRSSI() {
  * @param measurement
  * @return
  */
-double KalmanFilterRSSI::kalmanUpdate(double measurement) {
+double KalmanFilterRSSI::kalmanUpdate(double measurement)
+{
     //prediction update
     //omit _x = _x
     _p = _p + _q;

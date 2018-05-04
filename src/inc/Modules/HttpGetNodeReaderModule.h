@@ -14,7 +14,8 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/bind.hpp>
 
-class HttpGetNodeReaderModule : public INodeReaderModule{
+class HttpGetNodeReaderModule : public INodeReaderModule
+{
 
 public:
     HttpGetNodeReaderModule(std::string url);
@@ -23,13 +24,17 @@ public:
 
     bool isRunning();
 
+    void deInitialize();
+
     void initialize();
 
 private:
     bool m_isRunning;
+
     web::json::value GetRequest();
 
     const std::string m_Url;
+    boost::mutex g_i_mutex;
 
 };
 

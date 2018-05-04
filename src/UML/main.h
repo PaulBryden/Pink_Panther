@@ -1,11 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-class main {
+class main
+{
 
 
 public:
-	main();
+    main();
 };
 
 #endif

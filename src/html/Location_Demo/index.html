@@ -1,133 +1,139 @@
-
 <!DOCTYPE html>
 
 
 <html>
 <head>
     <title>Pink Panther - Location Demo</title>
-    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
     <script class="include" type="text/javascript" src="jquery.js"></script>
 
-<script>
-var XVal;
-var YVal;
-var ZVal;
-var DGELSTime;
-var DGESVTime;
-var DGETRSTime;
-var ScanTime;
-var Trig1;
-var Trig2;
-var Trig3;
-var Trig4;
-var tempX;
-var tempY;
+    <script>
+        var XVal;
+        var YVal;
+        var ZVal;
+        var DGELSTime;
+        var DGESVTime;
+        var DGETRSTime;
+        var ScanTime;
+        var Trig1;
+        var Trig2;
+        var Trig3;
+        var Trig4;
+        var tempX;
+        var tempY;
 
-function verifyy( y){
-if (y>=0&&y<1200){
-return y;
-}else{
-return tempY;}
-}
-function verifyx( x){
-if (x>=0&&x<1200){
-return x;
-}else{
-return tempX;}
-}
-$(setInterval(getRSSI, 1200));
+        function verifyy(y) {
+            if (y >= 0 && y < 1200) {
+                return y;
+            } else {
+                return tempY;
+            }
+        }
 
-function drawMap() {
-  var canvas = document.getElementById('canvas');
-  if (canvas.getContext) {
-    var ctx = canvas.getContext('2d');
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	tempX=verifyx((XVal/9)*900 +200);
-	tempY=verifyy((YVal/9.3)*900 + 200);
-	ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, 1300, 1300);
-		ctx.fillStyle = "#383838";
-    ctx.fillRect(200, 200, 900, 900);
-	ctx.beginPath();
+        function verifyx(x) {
+            if (x >= 0 && x < 1200) {
+                return x;
+            } else {
+                return tempX;
+            }
+        }
 
-	ctx.fillStyle = "red";
-	ctx.arc(tempX,tempY,20,0,2*Math.PI);
-	ctx.fill();
-	ctx.fillStyle = "white";
-	ctx.font = "20px Arial";
-	ctx.fillText("X: "+XVal.toFixed(3),tempX+20,tempY-25);
-	ctx.fillText("Y: "+YVal.toFixed(3),tempX+20,tempY);
-	ctx.fillText("Z: "+ZVal.toFixed(3),tempX+20,tempY+25);
-	
-		ctx.beginPath();
-	ctx.arc((Trig1["XCoord"]/9)*900 +200,(Trig1["YCoord"]/9.3)*900 +200,20,0,2*Math.PI);
-		ctx.fill();
-		
-	ctx.fillText("TRIG1",(Trig1["XCoord"]/9)*900 +220,(Trig1["YCoord"]/9.3)*900 +180);
-	ctx.fillText("X:"+Trig1["XCoord"],(Trig1["XCoord"]/9)*900 +225,(Trig1["YCoord"]/9.3)*900 +200);
-	ctx.fillText("Y:"+Trig1["YCoord"],(Trig1["XCoord"]/9)*900 +225,(Trig1["YCoord"]/9.3)*900 +220);
-	ctx.fillText("Z:"+Trig1["ZCoord"],(Trig1["XCoord"]/9)*900 +225,(Trig1["YCoord"]/9.3)*900 +240);
-			ctx.beginPath();
-	ctx.arc((Trig2["XCoord"]/9)*900 + 200,(Trig2["YCoord"]/9.3)*900 + 200,20,0,2*Math.PI);
-		ctx.fill();
-	ctx.fillText("TRIG2",(Trig2["XCoord"]/9)*900 +220,(Trig2["YCoord"]/9.3)*900 +180);
-	ctx.fillText("X:"+Trig2["XCoord"],(Trig2["XCoord"]/9)*900 +225,(Trig2["YCoord"]/9.3)*900 +200);
-	ctx.fillText("Y:"+Trig2["YCoord"],(Trig2["XCoord"]/9)*900 +225,(Trig2["YCoord"]/9.3)*900 +220);
-	ctx.fillText("Z:"+Trig2["ZCoord"],(Trig2["XCoord"]/9)*900 +225,(Trig2["YCoord"]/9.3)*900 +240);
-			ctx.beginPath();
-	ctx.arc((Trig3["XCoord"]/9)*900 + 200,(Trig3["YCoord"]/9.3)*900 + 200,20,0,2*Math.PI);
-		ctx.fill();
-	ctx.fillText("TRIG3",(Trig3["XCoord"]/9)*900 +220,(Trig3["YCoord"]/9.3)*900 +180);
-	ctx.fillText("X:"+Trig3["XCoord"],(Trig3["XCoord"]/9)*900 +225,(Trig3["YCoord"]/9.3)*900 +200);
-	ctx.fillText("Y:"+Trig3["YCoord"],(Trig3["XCoord"]/9)*900 +225,(Trig3["YCoord"]/9.3)*900 +220);
-	ctx.fillText("Z:"+Trig3["ZCoord"],(Trig3["XCoord"]/9)*900 +225,(Trig3["YCoord"]/9.3)*900 +240);
-			ctx.beginPath();
-	ctx.arc((Trig4["XCoord"]/9)*900 + 200,(Trig4["YCoord"]/9.3)*900 + 200,20,0,2*Math.PI);
-	ctx.fill();
-	ctx.fillText("TRIG4",(Trig4["XCoord"]/9)*900 +220,(Trig4["YCoord"]/9.3)*900 +180);
-	ctx.fillText("X:"+Trig4["XCoord"],(Trig4["XCoord"]/9)*900 +225,(Trig4["YCoord"]/9.3)*900 +200);
-	ctx.fillText("Y:"+Trig4["YCoord"],(Trig4["XCoord"]/9)*900 +225,(Trig4["YCoord"]/9.3)*900 +220);
-	ctx.fillText("Z:"+Trig4["ZCoord"],(Trig4["XCoord"]/9)*900 +225,(Trig4["YCoord"]/9.3)*900 +240);
-	
-  }
-}
-function getRSSI(){
-$.ajax({
-    url: 'http://192.168.7.2:34568/MyServer/Action/',
-	 jsonp: "callback",
-          dataType: "jsonp",
-          crossDomain: true,
-    success: function (data) {
-        console.log(data);
-		XVal=data["System"]["Location"]["DGELS"]["X"];
-		YVal=data["System"]["Location"]["DGELS"]["Y"];
-		ZVal=data["System"]["Location"]["DGELS"]["Z"];
-		DGELSTime=data["System"]["Location"]["DGELS"]["time(ns)"];
-		DGESVTime=data["System"]["Location"]["DGESV"]["time(ns)"];
-		DGETRSTime=data["System"]["Location"]["DGETRS"]["time(ns)"];
-		ScanTime=["System"]["ScanTime"];
-		data["System"]["Target"]["Nodes"].forEach(function(element){
-				if(element["SSID"]=="TRIG1" ){
-					Trig1=element;
-				}else if(element["SSID"]=="TRIG2" ){
-					Trig2=element;
-				}else if(element["SSID"]=="TRIG3" ){
-					Trig3=element;
-				}else if(element["SSID"]=="TRIG4" ){
-					Trig4=element;
-				}
-				
-			}
-		);
-		drawMap();
-    }
-		
-});
-}
+        $(setInterval(getRSSI, 1200));
+
+        function drawMap() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                tempX = verifyx((XVal / 9) * 900 + 200);
+                tempY = verifyy((YVal / 9.3) * 900 + 200);
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, 1300, 1300);
+                ctx.fillStyle = "#383838";
+                ctx.fillRect(200, 200, 900, 900);
+                ctx.beginPath();
+
+                ctx.fillStyle = "red";
+                ctx.arc(tempX, tempY, 20, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.fillStyle = "white";
+                ctx.font = "20px Arial";
+                ctx.fillText("X: " + XVal.toFixed(3), tempX + 20, tempY - 25);
+                ctx.fillText("Y: " + YVal.toFixed(3), tempX + 20, tempY);
+                ctx.fillText("Z: " + ZVal.toFixed(3), tempX + 20, tempY + 25);
+
+                ctx.beginPath();
+                ctx.arc((Trig1["XCoord"] / 9) * 900 + 200, (Trig1["YCoord"] / 9.3) * 900 + 200, 20, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.fillText("TRIG1", (Trig1["XCoord"] / 9) * 900 + 220, (Trig1["YCoord"] / 9.3) * 900 + 180);
+                ctx.fillText("X:" + Trig1["XCoord"], (Trig1["XCoord"] / 9) * 900 + 225, (Trig1["YCoord"] / 9.3) * 900 + 200);
+                ctx.fillText("Y:" + Trig1["YCoord"], (Trig1["XCoord"] / 9) * 900 + 225, (Trig1["YCoord"] / 9.3) * 900 + 220);
+                ctx.fillText("Z:" + Trig1["ZCoord"], (Trig1["XCoord"] / 9) * 900 + 225, (Trig1["YCoord"] / 9.3) * 900 + 240);
+                ctx.beginPath();
+                ctx.arc((Trig2["XCoord"] / 9) * 900 + 200, (Trig2["YCoord"] / 9.3) * 900 + 200, 20, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.fillText("TRIG2", (Trig2["XCoord"] / 9) * 900 + 220, (Trig2["YCoord"] / 9.3) * 900 + 180);
+                ctx.fillText("X:" + Trig2["XCoord"], (Trig2["XCoord"] / 9) * 900 + 225, (Trig2["YCoord"] / 9.3) * 900 + 200);
+                ctx.fillText("Y:" + Trig2["YCoord"], (Trig2["XCoord"] / 9) * 900 + 225, (Trig2["YCoord"] / 9.3) * 900 + 220);
+                ctx.fillText("Z:" + Trig2["ZCoord"], (Trig2["XCoord"] / 9) * 900 + 225, (Trig2["YCoord"] / 9.3) * 900 + 240);
+                ctx.beginPath();
+                ctx.arc((Trig3["XCoord"] / 9) * 900 + 200, (Trig3["YCoord"] / 9.3) * 900 + 200, 20, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.fillText("TRIG3", (Trig3["XCoord"] / 9) * 900 + 220, (Trig3["YCoord"] / 9.3) * 900 + 180);
+                ctx.fillText("X:" + Trig3["XCoord"], (Trig3["XCoord"] / 9) * 900 + 225, (Trig3["YCoord"] / 9.3) * 900 + 200);
+                ctx.fillText("Y:" + Trig3["YCoord"], (Trig3["XCoord"] / 9) * 900 + 225, (Trig3["YCoord"] / 9.3) * 900 + 220);
+                ctx.fillText("Z:" + Trig3["ZCoord"], (Trig3["XCoord"] / 9) * 900 + 225, (Trig3["YCoord"] / 9.3) * 900 + 240);
+                ctx.beginPath();
+                ctx.arc((Trig4["XCoord"] / 9) * 900 + 200, (Trig4["YCoord"] / 9.3) * 900 + 200, 20, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.fillText("TRIG4", (Trig4["XCoord"] / 9) * 900 + 220, (Trig4["YCoord"] / 9.3) * 900 + 180);
+                ctx.fillText("X:" + Trig4["XCoord"], (Trig4["XCoord"] / 9) * 900 + 225, (Trig4["YCoord"] / 9.3) * 900 + 200);
+                ctx.fillText("Y:" + Trig4["YCoord"], (Trig4["XCoord"] / 9) * 900 + 225, (Trig4["YCoord"] / 9.3) * 900 + 220);
+                ctx.fillText("Z:" + Trig4["ZCoord"], (Trig4["XCoord"] / 9) * 900 + 225, (Trig4["YCoord"] / 9.3) * 900 + 240);
+
+            }
+        }
+
+        function getRSSI() {
+            $.ajax({
+                url: 'http://192.168.7.2:34568/MyServer/Action/',
+                jsonp: "callback",
+                dataType: "jsonp",
+                crossDomain: true,
+                success: function (data) {
+                    console.log(data);
+                    XVal = data["System"]["Location"]["DGELS"]["X"];
+                    YVal = data["System"]["Location"]["DGELS"]["Y"];
+                    ZVal = data["System"]["Location"]["DGELS"]["Z"];
+                    DGELSTime = data["System"]["Location"]["DGELS"]["time(ns)"];
+                    DGESVTime = data["System"]["Location"]["DGESV"]["time(ns)"];
+                    DGETRSTime = data["System"]["Location"]["DGETRS"]["time(ns)"];
+                    ScanTime = ["System"]["ScanTime"];
+                    data["System"]["Target"]["Nodes"].forEach(function (element) {
+                            if (element["SSID"] == "TRIG1") {
+                                Trig1 = element;
+                            } else if (element["SSID"] == "TRIG2") {
+                                Trig2 = element;
+                            } else if (element["SSID"] == "TRIG3") {
+                                Trig3 = element;
+                            } else if (element["SSID"] == "TRIG4") {
+                                Trig4 = element;
+                            }
+
+                        }
+                    );
+                    drawMap();
+                }
+
+            });
+        }
 
 
-</script>
+    </script>
 </head>
-   <canvas id="canvas" width="1300" height="1300"></canvas>
+  
+<canvas id="canvas" width="1300" height="1300"></canvas>
  </body>
 </html>

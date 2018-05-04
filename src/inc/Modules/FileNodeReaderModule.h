@@ -11,18 +11,27 @@
 #include <memory>
 #include "Interfaces/INodeReaderModule.h"
 
-class FileNodeReaderModule : public INodeReaderModule {
+class FileNodeReaderModule : public INodeReaderModule
+{
 private:
     bool m_isRunning;
+    std::string m_filepath;
 
 
 public:
     FileNodeReaderModule(std::string filepath);
 
+    ~FileNodeReaderModule();
+
     std::shared_ptr<node::NodeContainer> readNodes();
+
+    boost::mutex g_i_mutex;
+
     void initialize();
+
+    void deInitialize();
+
     bool isRunning();
-    std::string m_filepath;
 
 };
 

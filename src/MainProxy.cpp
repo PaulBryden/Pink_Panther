@@ -8,7 +8,7 @@ using namespace http::experimental::listener;
 
 std::unique_ptr<RestModule_Post_Get_Proxy> g_http;
 
-void on_initialize(const string_t& address)
+void on_initialize(const string_t &address)
 {
     // Build our listener's URI from the configured address and the hard-coded path "MyServer/Action"
 
@@ -33,7 +33,7 @@ void on_shutdown()
 int main(int argc, wchar_t *argv[])
 {
     utility::string_t port = ("9999");
-    if(argc == 2)
+    if (argc == 2)
     {
         std::wstring ws(argv[1]);
         std::string port(ws.begin(), ws.end());
