@@ -8,7 +8,7 @@
 #include <cpprest/http_client.h>
 #include <iostream>
 #include <cpprest/json.h>
-#include "INode.h"
+#include "../Interfaces/INode.h"
 #include <atomic>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>

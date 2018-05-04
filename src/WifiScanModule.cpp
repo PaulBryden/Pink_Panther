@@ -2,7 +2,7 @@
 // Created by green on 25/10/17.
 //
 
-#include "inc/WifiScanModule.h"
+#include "inc/Modules/WifiScanModule.h"
 #include "inc/iwlib.h"
 #include <boost/timer/timer.hpp>
 #pragma GCC diagnostic ignored "-Wwrite-strings"
@@ -13,7 +13,7 @@
 #include <list>
 #include <cstdio>
 #include <cstring>
-#include "inc/Node.h"
+#include "inc/Data/Node.h"
 #include <boost/chrono.hpp>
 #include <boost/thread/thread.hpp>
 WifiScanModule::~WifiScanModule()
@@ -21,18 +21,45 @@ WifiScanModule::~WifiScanModule()
 
 }
 
-WifiScanModule::WifiScanModule(std::shared_ptr<node::Node_Container> ScannedNodesList, std::shared_ptr<node::Node_Container> Target_Nodes,std::shared_ptr<locationModule>& locMod,double& scanTime)
-        : m_Nodes(ScannedNodesList),m_TargetNodes(Target_Nodes),m_locMod(locMod),m_scanTime(scanTime)
-{
-
+WifiScanModule::WifiScanModule() : m_ScanTime(0.0), m_isRunning(false){
 
 
 }
 
+
+void WifiScanModule::initialize(){
+    if(!m_isRunning) {
+        m_ScannerPtr = std::make_shared<boost::thread>(boost::bind(&WifiScanModule::Scan, this));
+        m_isRunning = true;
+    }
+}
+
+
+void WifiScanModule::deInitialize(){
+    if(m_isRunning) {
+        m_isRunning = false;
+        boost::mutex::scoped_lock lock(g_i_mutex);
+        m_ScannerPtr->interrupt();
+    }
+}
+
+
+
+std::shared_ptr<node::NodeContainer> WifiScanModule::getScannedNodes(){
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    return m_ScannedNodes;
+}
+
+
+double WifiScanModule::getScanTime(){
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    return m_ScanTime;
+}
+
+
 void WifiScanModule::Scan()
 {
 #ifdef 	__arm__
-        boost::mutex::scoped_lock lock(g_i_mutex);
 
         wireless_scan_head head;
         wireless_scan *result;
@@ -41,7 +68,7 @@ void WifiScanModule::Scan()
 
         /* Open socket to kernel */
         sock = iw_sockets_open();
-        while(true){
+        while(m_isRunning){
             char		temp[128];
         boost::timer::auto_cpu_timer t;
         node::Node_Container tempContainer;
@@ -65,6 +92,8 @@ void WifiScanModule::Scan()
                         }
                         //printf("%d", dbLevel);
                         //result->b.freq,
+
+                        boost::mutex::scoped_lock lock(g_i_mutex);
                         std::shared_ptr<Node> newNode = std::make_shared<Node>(result->b.essid, dbLevel, iw_saether_ntop(&result->ap_addr, temp));
 
                         tempContainer.AddNode(newNode);
@@ -87,10 +116,11 @@ void WifiScanModule::Scan()
     }
 #else
 
-        boost::mutex::scoped_lock lock(g_i_mutex);
-        while(true) {
+        while(m_isRunning) {
+            boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
+            boost::mutex::scoped_lock lock(g_i_mutex);
             boost::timer::auto_cpu_timer t;
-            node::Node_Container tempContainer;
+            node::NodeContainer tempContainer;
             std::string Mac="FF:FF:FF:FF:FF:FF";
             std::string ID="TRIG1";
             std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -61,"24:F2:7F:AA:23:E1");
@@ -113,7 +143,6 @@ void WifiScanModule::Scan()
             m_locMod->CalculateLocations(m_TargetNodes);
 
 
-           boost::this_thread::sleep_for(boost::chrono::milliseconds(2000));
 
         }
 #endif

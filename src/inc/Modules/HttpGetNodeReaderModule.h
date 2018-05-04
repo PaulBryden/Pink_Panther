@@ -4,21 +4,31 @@
 
 #ifndef FOO_GETNODES_H
 #define FOO_GETNODES_H
+
 #include <string>
-#include "Node_Container.h"
-#include "Target_Node.h"
+#include "../Data/NodeContainer.h"
+#include "../Data/TargetNode.h"
+#include "Interfaces/INodeReaderModule.h"
 #include <cpprest/http_client.h>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/bind.hpp>
 
-class GETNodes {
+class HttpGetNodeReaderModule : public INodeReaderModule{
 
 public:
-    GETNodes(std::string url);
-    std::shared_ptr<node::Node_Container> get();
+    HttpGetNodeReaderModule(std::string url);
+
+    std::shared_ptr<node::NodeContainer> readNodes();
+
+    bool isRunning();
+
+    void initialize();
+
 private:
+    bool m_isRunning;
     web::json::value GetRequest();
+
     const std::string m_Url;
 
 };

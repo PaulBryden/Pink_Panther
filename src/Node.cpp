@@ -2,7 +2,7 @@
 // Created by green on 25/10/17.
 //
 
-#include "inc/Node.h"
+#include "inc/Data/Node.h"
 #include "../../build_panther/usr/local/include/cpprest/json.h"
 #include <map>
 #include <set>

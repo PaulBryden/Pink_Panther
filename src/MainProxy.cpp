@@ -1,12 +1,12 @@
 #include "inc/stdafx.h"
-#include "inc/RestModuleProxy.h"
+#include "inc/Modules/RestModulePostGetProxy.h"
 
 using namespace web;
 using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
-std::unique_ptr<MyServer> g_http;
+std::unique_ptr<RestModule_Post_Get_Proxy> g_http;
 
 void on_initialize(const string_t& address)
 {
@@ -16,7 +16,7 @@ void on_initialize(const string_t& address)
     uri.append_path(U("MyServer/Action/"));
 
     auto addr = uri.to_uri().to_string();
-    g_http = std::unique_ptr<MyServer>(new MyServer(addr));
+    g_http = std::unique_ptr<RestModule_Post_Get_Proxy>(new RestModule_Post_Get_Proxy(addr));
     g_http->open().wait();
 
     ucout << utility::string_t(U("Listening for requests at: ")) << addr << std::endl;

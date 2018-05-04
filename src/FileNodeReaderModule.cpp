@@ -2,22 +2,17 @@
 // Created by green on 24/11/17.
 //
 
-#include "inc/FileIO.h"
+#include "inc/Modules/FileNodeReaderModule.h"
 #include <fstream>
 #include <sstream>
-namespace FileIO {
-    FileIO::FileIO(std::shared_ptr<node::Node_Container> nodeList):m_NodeList(nodeList) {
-
+    FileNodeReaderModule::FileNodeReaderModule(std::string filepath) {
+        m_filepath=filepath;
     }
 
-    void FileIO::WriteOut() {
-
-    }
-
-    void FileIO::ReadIn() {
+    std::shared_ptr<node::NodeContainer> FileNodeReaderModule::readNodes(){
+        std::shared_ptr<node::NodeContainer> m_NodeList = std::make_shared<node::NodeContainer>();
         try{
-            std::string filename("Settings.json");
-            std::ifstream f(filename);
+            std::ifstream f(m_filepath);
             std::stringstream s;
             std::stringstream json;
             web::json::value v;
@@ -27,15 +22,14 @@ namespace FileIO {
                 v=web::json::value::parse(s.str());
                 std::cout <<s.str();// parse the resultant string stream.
                 for(int i=0;i<v.as_array().size();i++){
-
-                    std::shared_ptr<Target_Node> newNode(std::make_shared<Target_Node>(v.as_array()[i]));
+                    std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array()[i]));
                     std::cout << "AFTER PARSING " << i <<": " << v.serialize();
                     std::cout << v.as_array()[0];
                     m_NodeList->AddNode(newNode);
 
                 }
             }else{
-                std::cout << "Settings.json Does Not Exist";
+                std::cout << m_filepath << "Does Not Exist";
             }
         }catch(web::json::json_exception excep) {
             std::cout << "ERROR Parsing JSON: ";
@@ -43,4 +37,3 @@ namespace FileIO {
 
         }
     }
-}

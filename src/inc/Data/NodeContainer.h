@@ -4,7 +4,7 @@
 
 #ifndef FOO_NODES_H
 #define FOO_NODES_H
-#include "INode.h"
+#include "../Interfaces/INode.h"
 #include <vector>
 #include <memory>
 #include <string>
@@ -14,11 +14,11 @@
 
 
 namespace node {
-    class Node_Container {
+    class NodeContainer {
 
     public:
 
-        Node_Container();
+        NodeContainer();
 
         web::json::value ToJson();
 
@@ -30,7 +30,7 @@ namespace node {
 
         void AddNode(std::shared_ptr<INode> node);
 
-        void UpdateNodes(std::shared_ptr<Node_Container> nodes);
+        void UpdateNodes(std::shared_ptr<NodeContainer> nodes);
 
     private:
         boost::mutex g_i_mutex;

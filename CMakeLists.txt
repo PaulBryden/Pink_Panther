@@ -32,9 +32,9 @@ find_package(OpenSSL REQUIRED)
 
 #set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 
-ADD_LIBRARY(wiffy_module src/iwlib.c src/GETNodes.cpp src/inc/GETNodes.h)
+ADD_LIBRARY(wiffy_module src/iwlib.c src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Interfaces/INodeContainer.h src/inc/Modules/Interfaces/IModule.h)
 include_directories(../Pink_Panther/submodules/Kalman/kalman/*.hpp)
-ADD_LIBRARY(kalman ../Pink_Panther/submodules/Kalman/kstatics.cpp src/GETNodes.cpp src/inc/GETNodes.h)
+ADD_LIBRARY(kalman ../Pink_Panther/submodules/Kalman/kstatics.cpp src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Interfaces/INodeContainer.h src/inc/Modules/Interfaces/IModule.h)
 
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/usr/local/include)
@@ -46,7 +46,7 @@ endif()
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(trigApp src/Main.cpp src/inc/messagetypes.h src/inc/stdafx.h src/inc/RestModule.h src/RestModule.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h src/locationModule.cpp src/inc/locationModule.h src/inc/Location.h src/KamalFilterRSSI.cpp src/inc/KamalFilterRSSI.h src/GETNodes.cpp src/inc/GETNodes.h)
+add_executable(trigApp src/Main.cpp src/inc/stdafx.h src/inc/Modules/RestModule.h src/RestModule.cpp src/Node.cpp src/inc/Data/Node.h src/NodeContainer.cpp src/inc/Data/NodeContainer.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/Modules/WifiScanModule.h src/inc/Modules/FileNodeReaderModule.h src/FileNodeReaderModule.cpp src/TargetNode.cpp src/inc/Data/TargetNode.h src/inc/Interfaces/INode.h src/LocationModule.cpp src/inc/Modules/LocationModule.h src/inc/Data/Location.h src/KalmanFilterRSSI.cpp src/inc/KalmanFilterRSSI.h src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Interfaces/INodeContainer.h src/inc/Modules/Interfaces/IModule.h)
 SET_TARGET_PROPERTIES(trigApp PROPERTIES LINK_FLAGS "-lgfortran")
 
 target_link_libraries(trigApp ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libblas.a
@@ -76,7 +76,7 @@ gfortran
 )
 endif()
 
-add_executable(MainProxy src/MainProxy.cpp src/inc/messagetypes.h src/inc/stdafx.h src/inc/RestModuleProxy.h src/RestModuleProxy.cpp src/Node.cpp src/inc/Node.h src/Node_Container.cpp src/inc/Node_Container.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/WifiScanModule.h src/inc/Repository.h src/inc/Repository.inc.h src/inc/FileIO.h src/FileIO.cpp src/Target_Node.cpp src/inc/Target_Node.h src/inc/INode.h src/locationModule.cpp src/inc/locationModule.h src/inc/Location.h src/KamalFilterRSSI.cpp src/inc/KamalFilterRSSI.h src/GETNodes.cpp src/inc/GETNodes.h)
+add_executable(MainProxy src/MainProxy.cpp src/inc/stdafx.h src/inc/Modules/RestModulePostGetProxy.h src/RestModulePostGetProxy.cpp src/Node.cpp src/inc/Data/Node.h src/NodeContainer.cpp src/inc/Data/NodeContainer.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/Modules/WifiScanModule.h src/inc/Modules/FileNodeReaderModule.h src/FileNodeReaderModule.cpp src/TargetNode.cpp src/inc/Data/TargetNode.h src/inc/Interfaces/INode.h src/LocationModule.cpp src/inc/Modules/LocationModule.h src/inc/Data/Location.h src/KalmanFilterRSSI.cpp src/inc/KalmanFilterRSSI.h src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Modules/Interfaces/INodeReaderModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Interfaces/INodeContainer.h src/inc/Modules/Interfaces/IModule.h)
 SET_TARGET_PROPERTIES(MainProxy PROPERTIES LINK_FLAGS "-lgfortran")
 MESSAGE(${CMAKE_CURRENT_BINARY_DIR})
 

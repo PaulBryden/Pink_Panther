@@ -1,12 +1,12 @@
 #include "inc/stdafx.h"
-#include "inc/RestModule.h"
+#include "inc/Modules/RestModule.h"
 #include <future>
 using namespace web;
 using namespace http;
 using namespace utility;
 using namespace http::experimental::listener;
 
-std::unique_ptr<MyServer> g_http;
+std::unique_ptr<RestModule> g_http;
 
 void on_initialize(const string_t& address)
 {
@@ -16,7 +16,7 @@ void on_initialize(const string_t& address)
     uri.append_path(U("Beaglebone"));
 
     auto addr = uri.to_uri().to_string();
-    g_http = std::unique_ptr<MyServer>(new MyServer(addr));
+    g_http = std::unique_ptr<RestModule>(new RestModule(addr));
     //g_http->open().wait();
 
     std::promise<void> p;

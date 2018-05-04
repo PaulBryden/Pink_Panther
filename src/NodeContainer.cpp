@@ -2,19 +2,19 @@
 // Created by green on 25/10/17.
 //
 
-#include "inc/Node_Container.h"
+#include "inc/Data/NodeContainer.h"
 #include "../../build_panther/usr/local/include/cpprest/json.h"
 #include <iostream>
 
 using namespace node;
 using namespace std;
 using namespace web;
-Node_Container::Node_Container(){
+NodeContainer::NodeContainer(){
 
 }
 
 
-void Node_Container::PrintNodes(){
+void NodeContainer::PrintNodes(){
     for (auto const& i : m_Nodes) {
         std::cout << i->getSSID();
         std::cout << i->getRSSI();
@@ -25,7 +25,7 @@ void Node_Container::PrintNodes(){
     }
 }
 
-web::json::value Node_Container::ToJson() {
+web::json::value NodeContainer::ToJson() {
     boost::mutex::scoped_lock lock(g_i_mutex);
     web::json::value yourJson = web::json::value::object();
     yourJson[U("Nodes")] = web::json::value::array(m_Nodes.size());
@@ -37,24 +37,24 @@ web::json::value Node_Container::ToJson() {
     cout << yourJson.serialize();
     return yourJson;
 }
-void Node_Container::ClearNodes(){
+void NodeContainer::ClearNodes(){
     boost::mutex::scoped_lock lock(g_i_mutex);
     if(m_Nodes.size()>0) {
         m_Nodes.clear();
     }
 }
 
-std::vector<std::shared_ptr<INode>>& Node_Container::GetNodes(){
+std::vector<std::shared_ptr<INode>>& NodeContainer::GetNodes(){
     boost::mutex::scoped_lock lock(g_i_mutex);
     return m_Nodes;
 }
 
-void Node_Container::AddNode(std::shared_ptr<INode> node){
+void NodeContainer::AddNode(std::shared_ptr<INode> node){
     boost::mutex::scoped_lock lock(g_i_mutex);
     m_Nodes.push_back(node);
 }
 
-void Node_Container::UpdateNodes(std::shared_ptr<Node_Container> nodes) {
+void NodeContainer::UpdateNodes(std::shared_ptr<NodeContainer> nodes) {
     boost::mutex::scoped_lock lock(g_i_mutex);
 
     for (auto  &x : m_Nodes){

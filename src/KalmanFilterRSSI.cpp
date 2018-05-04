@@ -5,15 +5,15 @@
  * Created on July 12, 2016, 1:04 PM
  */
 
-#include "inc/KamalFilterRSSI.h"
+#include "inc/KalmanFilterRSSI.h"
 
-KamalFilterRSSI::KamalFilterRSSI(double q, double r, double p)
+KalmanFilterRSSI::KalmanFilterRSSI(double q, double r, double p)
         : _q(q), _q_init(q), _r(r), _r_init(0), _x(0), _p(p), _p_init(p), _k(_p / (_p + _r))
 {
 
 }
 
-KamalFilterRSSI::~KamalFilterRSSI() {
+KalmanFilterRSSI::~KalmanFilterRSSI() {
 }
 
 /**
@@ -22,7 +22,7 @@ KamalFilterRSSI::~KamalFilterRSSI() {
  * @param measurement
  * @return
  */
-double KamalFilterRSSI::kalmanUpdate(double measurement) {
+double KalmanFilterRSSI::kalmanUpdate(double measurement) {
     //prediction update
     //omit _x = _x
     _p = _p + _q;
