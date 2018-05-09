@@ -16,8 +16,8 @@ def createUser(ID, SITE):
         data = {
             'ID': ID,
             'Site': SITE,
-            'X': 71,  # random.randint(1,20),
-            'Y': 10,  # random.randint(1,20),
+            'X': 73.5,  # random.randint(1,20),
+            'Y': 15.4,  # random.randint(1,20),
             'Z': random.randint(1, 10),
         }
 

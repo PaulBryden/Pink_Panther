@@ -38,11 +38,13 @@ void on_initialize(const string_t &address)
     p_HttpGetMod = std::make_shared<HttpGetNodeReaderModule>("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap");
     targetNodes = p_HttpGetMod->readNodes();
     p_LocMod = std::make_shared<LocationModule>(targetNodes);
+
     #ifdef __arm__
     p_ScanMod = std::make_shared<WifiScanModule>();
     #else
     p_ScanMod = std::make_shared<WifiScanModulex86Test>();
     #endif
+
     p_RestMod = std::make_shared<RestModule>(addr, "http://marconi.sdsu.edu:8080/GeoLocation/resources/ap", p_LocMod,
                                              p_ScanMod, p_HttpGetMod);
 
