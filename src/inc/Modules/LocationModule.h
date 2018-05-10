@@ -45,7 +45,7 @@ private:
 
     std::shared_ptr<node::NodeContainer> GetNodeTargets(std::shared_ptr<node::NodeContainer> tempNodes);
 
-    std::shared_ptr<node::NodeContainer> m_Nodes;
+    std::shared_ptr<node::NodeContainer>& m_Nodes;
 
 
 };

@@ -9,7 +9,7 @@
 
 using boost::lexical_cast;
 
-LocationModule::LocationModule(std::shared_ptr<node::NodeContainer> &nodes) : m_Nodes(nodes),
+LocationModule::LocationModule(std::shared_ptr<node::NodeContainer>& nodes) : m_Nodes(nodes),
                                                                               m_dgelsLoc(std::make_shared<Location>()),
                                                                               m_dgetrsLoc(std::make_shared<Location>()),
                                                                               m_dgesvLoc(std::make_shared<Location>())

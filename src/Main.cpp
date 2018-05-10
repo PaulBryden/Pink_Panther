@@ -30,13 +30,10 @@ void on_initialize(const string_t &address)
 
     uri_builder uri(address);
     uri.append_path(U("Triangulation"));
-
     auto addr = uri.to_uri().to_string();
     std::cout << addr << std::endl;
-    targetNodes = make_shared<node::NodeContainer>();
 
-    p_HttpGetMod = std::make_shared<HttpGetNodeReaderModule>("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap");
-    targetNodes = p_HttpGetMod->readNodes();
+    p_HttpGetMod = std::make_shared<HttpGetNodeReaderModule>("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap",targetNodes);
     p_LocMod = std::make_shared<LocationModule>(targetNodes);
 
     #ifdef __arm__
@@ -65,11 +62,6 @@ void on_initialize(const string_t &address)
         boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
     }
 
-    std::promise<void> p;
-    p.get_future().wait();
-    ucout << utility::string_t(U("Listening for requests at: ")) << addr << std::endl;
-
-    return;
 }
 
 void on_shutdown()

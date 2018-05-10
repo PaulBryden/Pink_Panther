@@ -4,7 +4,7 @@
 
 #include "inc/Modules/HttpGetNodeReaderModule.h"
 
-HttpGetNodeReaderModule::HttpGetNodeReaderModule(std::string url) : m_Url(url)
+HttpGetNodeReaderModule::HttpGetNodeReaderModule(std::string url,std::shared_ptr<node::NodeContainer>& nodeContainer) : m_Url(url), m_NodeContainer(nodeContainer)
 {
 }
 
@@ -25,14 +25,13 @@ std::shared_ptr<node::NodeContainer> HttpGetNodeReaderModule::readNodes()
     std::shared_ptr<node::NodeContainer> p_NodeList;
     p_NodeList = std::make_shared<node::NodeContainer>();
     web::json::value v = GetRequest()["ap"];
-    //std::cout <<v.String// parse the resultant string stream.
+
     for (int i = 0; i < v.as_array().size(); i++)
     {
         try
         {
             std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array().at(i)));
             p_NodeList->AddNode(newNode);
-            p_NodeList->PrintNodes();
         } catch (std::exception e)
         {
             std::cout << "Error Node: " << i << " Invalid. Discarding..." << std::endl;
@@ -45,7 +44,15 @@ std::shared_ptr<node::NodeContainer> HttpGetNodeReaderModule::readNodes()
 
 void HttpGetNodeReaderModule::initialize()
 {
-    m_isRunning = true;
+    try
+    {
+        m_NodeContainer= readNodes();
+        m_isRunning = true;
+    }
+    catch(std::exception e)
+    {
+        std::cout<<"Couldn't initialize HTTPGetNodeReaderModule" <<std::endl;
+    }
 }
 
 void HttpGetNodeReaderModule::deInitialize()

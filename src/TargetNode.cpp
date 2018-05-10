@@ -21,8 +21,7 @@ TargetNode::TargetNode(web::json::value node) : m_Kalman_rssi(0.001, 2.36, -32)
 
 }
 
-TargetNode::TargetNode(web::json::value node, double calibrationParam, double Q, double R) : m_Kalman_rssi(Q, R,
-                                                                                                           calibrationParam)
+TargetNode::TargetNode(web::json::value node, double calibrationParam, double Q, double R) : m_Kalman_rssi(Q, R, calibrationParam)
 {
     this->ParseJson(node);
 }
@@ -64,6 +63,7 @@ void TargetNode::ParseJson(web::json::value node)
     }
     try
     {
+        m_rssi_cal = node["cal"].as_integer();
         cout << node["cal"];
     } catch (std::exception e)
     {
@@ -130,25 +130,21 @@ double TargetNode::GetDistance()
 
 double TargetNode::getXCoord()
 {
-
     return m_XCoord;
 }
 
 double TargetNode::getYCoord()
 {
-
     return m_YCoord;
 }
 
 double TargetNode::getZCoord()
 {
-
     return m_ZCoord;
 }
 
 std::string TargetNode::getMAC()
 {
-
     return m_Node->getMAC();
 }
 

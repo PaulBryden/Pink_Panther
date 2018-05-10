@@ -18,7 +18,7 @@ class HttpGetNodeReaderModule : public INodeReaderModule
 {
 
 public:
-    HttpGetNodeReaderModule(std::string url);
+    HttpGetNodeReaderModule(std::string url,std::shared_ptr<node::NodeContainer>& nodeContainer);
 
     std::shared_ptr<node::NodeContainer> readNodes();
 
@@ -35,6 +35,7 @@ private:
 
     const std::string m_Url;
     boost::mutex g_i_mutex;
+    std::shared_ptr<node::NodeContainer>& m_NodeContainer;
 
 };
 
