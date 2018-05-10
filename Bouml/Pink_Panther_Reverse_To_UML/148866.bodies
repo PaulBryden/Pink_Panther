@@ -1,0 +1,56 @@
+class Node
+!!!169474.cpp!!!	Node(in node : web::json::value)
+    try
+    {
+        m_name = node["ssid"].as_string();
+        cout << node["ssid"];
+    } catch (std::exception e)
+    {
+        printf("Error:: Cannot parse SSID from JSON. Please check Syntax");
+        std::exception ParseError;
+        throw (ParseError);
+    }
+    try
+    {
+        m_rssi = node["rssi"].as_double();
+        cout << node["rssi"];
+    } catch (std::exception e)
+    {
+        printf("Error:: Cannot parse RSSI from JSON. Substituing with 0");
+        m_rssi = 0;
+    }
+    try
+    {
+        m_mac = node["mac"].as_string();
+        cout << node["mac"];
+    } catch (std::exception e)
+    {
+        printf("Error:: Cannot parse mac from JSON. Please check Syntax");
+        std::exception ParseError;
+        throw (ParseError);
+    }
+
+
+!!!169602.cpp!!!	ToJson() : web::json::value
+    using namespace web;
+    //value::parse(U("{ \"ssid\" : \""+m_name+"\", \"m_rssi\" : "+std::to_string(m_rssi)+" }"));
+
+    json::value response = json::value::object();
+    response["ssid"] = json::value::string(m_name);
+    response["rssi"] = json::value::number(m_rssi);
+    response["mac"] = json::value::string(m_mac);
+    return response;
+!!!169730.cpp!!!	Update(in Node : std::shared_ptr<INode>) : void
+    m_rssi = Node->getRSSI();
+    m_name = Node->getSSID();
+    m_name = Node->getMAC();
+!!!169858.cpp!!!	getRSSI() : int
+    return m_rssi;
+!!!169986.cpp!!!	getSSID() : std::string
+    return m_name;
+!!!170114.cpp!!!	getMAC() : std::string
+    return m_mac;
+!!!170242.cpp!!!	setRecentlyUpdated(in status : bool) : void
+    m_Recently_Updated = status;
+!!!170370.cpp!!!	getRecentlyUpdated() : bool
+    return m_Recently_Updated;

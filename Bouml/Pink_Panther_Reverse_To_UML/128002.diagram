@@ -1,0 +1,267 @@
+format 218
+
+classcanvas 128002 class_ref 149762 // FileNodeReaderModule
+  classdiagramsettings member_max_width 0 end
+  xyz 154.854 499.729 2000
+end
+classcanvas 128130 class_ref 150018 // HttpGetNodeReaderModule
+  classdiagramsettings member_max_width 0 end
+  xyz 40.0208 823.771 2000
+end
+classcanvas 128258 class_ref 150146 // LocationModule
+  classdiagramsettings member_max_width 0 end
+  xyz 905.583 803.625 2005
+end
+classcanvas 128386 class_ref 150402 // RestModule
+  classdiagramsettings member_max_width 0 end
+  xyzwh 621.167 231.667 2005 193 215
+end
+classcanvas 128514 class_ref 150914 // WifiScanModule
+  classdiagramsettings member_max_width 0 end
+  xyz 325.604 463.188 2005
+end
+classcanvas 128642 class_ref 149890 // INodeReaderModule
+  classdiagramsettings member_max_width 0 end
+  xyz 162.854 230.062 3005
+end
+classcanvas 129154 class_ref 150274 // ILocationModule
+  classdiagramsettings member_max_width 0 end
+  xyz 914.583 229.625 3005
+end
+classcanvas 129538 class_ref 150530 // IModule
+  classdiagramsettings member_max_width 0 end
+  xyzwh 629.021 80.1667 3011 127 65
+end
+classcanvas 130050 class_ref 150658 // IScanModule
+  classdiagramsettings member_max_width 0 end
+  xyz 427.062 299.667 3017
+end
+classcanvas 131202 class_ref 151042 // WifiScanModulex86Test
+  classdiagramsettings member_max_width 0 end
+  xyz 467.208 463.188 3023
+end
+classcanvas 131458 class_ref 148994 // INode
+  classdiagramsettings member_max_width 0 end
+  xyz 256.708 1392.75 2000
+end
+classcanvas 132226 class_ref 148738 // Location
+  classdiagramsettings member_max_width 0 end
+  xyz 918.917 1146.83 2011
+end
+classcanvas 132738 class_ref 148866 // Node
+  classdiagramsettings member_max_width 0 end
+  xyz 62.875 1007.98 2006
+end
+classcanvas 132994 class_ref 149250 // TargetNode
+  classdiagramsettings member_max_width 0 end
+  xyz 62.875 1274.75 3035
+end
+classcanvas 133378 class_ref 149122 // NodeContainer
+  classdiagramsettings member_max_width 0 end
+  xyz 266.708 829.771 3029
+end
+relationcanvas 128770 relation_ref 160258 // <directional composition>
+  decenter_begin 604
+  from ref 128386 z 3006 to point 1012 359
+  line 135938 z 3006 to point 1012 40
+  line 136066 z 3006 stereotype "<<:shared_ptr>>" xyz 529 42 3006 to point 122 40
+  line 136194 z 3006 to point 122 266
+  line 136322 z 3006 to ref 128642
+  role_a_pos 73 255 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128898 relation_ref 158850 // <generalisation>
+  decenter_begin 519
+  decenter_end 582
+  from ref 128002 z 3006 to ref 128642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129026 relation_ref 158978 // <generalisation>
+  geometry VHV unfixed
+  decenter_end 304
+  from ref 128130 z 3006 to point 114 459
+  line 136706 z 3006 to point 194 459
+  line 136834 z 3006 to ref 128642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129282 relation_ref 160130 // <directional composition>
+  decenter_begin 209
+  from ref 128386 z 3006 stereotype "<<:shared_ptr>>" xyz 822.5 273.5 3006 to ref 129154
+  role_a_pos 819 260 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129410 relation_ref 159106 // <generalisation>
+  from ref 128258 z 3006 to ref 129154
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129666 relation_ref 159618 // <generalisation>
+  decenter_end 598
+  from ref 128386 z 3012 to ref 129538
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129794 relation_ref 161026 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 371
+  from ref 129154 z 3012 to point 947 188
+  line 137218 z 3012 to point 689 188
+  line 137346 z 3012 to ref 129538
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129922 relation_ref 161154 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 521
+  from ref 128642 z 3012 to point 219 188
+  line 136450 z 3012 to point 689 188
+  line 136578 z 3012 to ref 129538
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130178 relation_ref 161282 // <generalisation>
+  geometry VHV unfixed
+  decenter_end 496
+  from ref 130050 z 3018 to point 480 188
+  line 137474 z 3018 to point 689 188
+  line 137602 z 3018 to ref 129538
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130306 relation_ref 160002 // <directional composition>
+  from ref 128386 z 3018 stereotype "<<:shared_ptr>>" xyz 539 339.5 3018 to ref 130050
+  role_a_pos 549 328 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130434 relation_ref 160514 // <generalisation>
+  geometry VHV unfixed
+  from ref 128514 z 3018 to point 376 422
+  line 136962 z 3018 to point 478 422
+  line 137090 z 3018 to ref 130050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131330 relation_ref 160770 // <generalisation>
+  decenter_begin 285
+  decenter_end 762
+  from ref 131202 z 3024 to ref 130050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132354 relation_ref 159234 // <directional composition>
+  decenter_begin 512
+  from ref 128258 z 2012 stereotype "<<:shared_ptr>>" xyz 932 1068.5 2012 to ref 132226
+  role_a_pos 919 1112 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132482 relation_ref 159362 // <directional composition>
+  decenter_begin 815
+  decenter_end 177
+  from ref 128258 z 2012 stereotype "<<:shared_ptr>>" xyz 1008.5 1078 2012 to point 1084 1162
+  line 139522 z 2012 to ref 132226
+  role_a_pos 1086 1136 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132610 relation_ref 159490 // <directional composition>
+  decenter_begin 167
+  decenter_end 121
+  from ref 128258 z 2012 stereotype "<<:shared_ptr>>" xyz 848.5 1074.5 2012 to point 849 1155
+  line 139394 z 2012 to ref 132226
+  role_a_pos 797 1133 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132866 relation_ref 158082 // <generalisation>
+  decenter_begin 510
+  from ref 132738 z 2007 to point 214 1123
+  line 135170 z 2007 to point 216 1443
+  line 135298 z 2007 to ref 131458
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133122 relation_ref 158210 // <generalisation>
+  from ref 132994 z 3036 to ref 131458
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133250 relation_ref 158338 // <directional composition>
+  from ref 132994 z 3036 to point 118 1649
+  line 137730 z 3036 to point 311 1649
+  line 137858 z 3036 stereotype "<<:shared_ptr>>" xyz 273.5 1577.5 3036 to ref 131458
+  role_a_pos 325 1509 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133506 relation_ref 159746 // <directional composition>
+  geometry VHV unfixed
+  decenter_begin 77
+  decenter_end 707
+  from ref 128386 z 3030 to point 633 752
+  line 137986 z 3030 stereotype "<<:shared_ptr>>" xyz 444.5 754 3030 to point 333 752
+  line 138114 z 3030 to ref 133378
+  role_a_pos 485 678 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133634 relation_ref 159874 // <directional composition>
+  geometry VHV unfixed
+  decenter_begin 284
+  decenter_end 909
+  from ref 128386 z 3030 stereotype "<<:shared_ptr>>" xyz 634.5 612.5 3030 to point 673 778
+  line 135682 z 3030 to point 353 778
+  line 135810 z 3030 to ref 133378
+  role_a_pos 395 803 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133762 relation_ref 160642 // <directional composition>
+  geometry VHV unfixed
+  decenter_begin 148
+  decenter_end 292
+  from ref 128514 z 3030 to point 339 670
+  line 134914 z 3030 to point 292 670
+  line 135042 z 3030 stereotype "<<:shared_ptr>>" xyz 253.5 750 3030 to ref 133378
+  role_a_pos 314 679 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133890 relation_ref 160898 // <directional composition>
+  geometry VHV unfixed
+  decenter_begin 105
+  from ref 131202 z 3030 to point 480 711
+  line 135426 z 3030 to point 312 711
+  line 135554 z 3030 stereotype "<<:shared_ptr>>" xyz 273.5 770 3030 to ref 133378
+  role_a_pos 353 730 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134018 relation_ref 161410 // <directional composition>
+  decenter_begin 479
+  from ref 131458 z 3030 to ref 133378
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134530 relation_ref 161538 // <directional composition>
+  decenter_end 519
+  from ref 128258 z 3030 to ref 133378
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134658 relation_ref 161666 // <directional composition>
+  decenter_begin 846
+  decenter_end 101
+  from ref 128002 z 3030 to ref 133378
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134786 relation_ref 161794 // <directional composition>
+  decenter_begin 517
+  decenter_end 519
+  from ref 128130 z 3030 to ref 133378
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139010 relation_ref 161922 // <directional composition>
+  from ref 129538 z 3012 to point 599 80
+  line 139138 z 3012 to point 599 110
+  line 139266 z 3012 to ref 129538
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

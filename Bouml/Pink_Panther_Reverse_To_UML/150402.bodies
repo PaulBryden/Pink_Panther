@@ -1,0 +1,105 @@
+class RestModule
+!!!178690.cpp!!!	~RestModule()
+    deInitialize();
+!!!178946.cpp!!!	initialize() : void
+    try
+    {
+        if (!m_isRunning)
+        {
+            m_TargetNodes = std::make_shared<node::NodeContainer>();
+            m_LocationModule->initialize();
+            m_ScanModule->initialize();
+            m_ReaderModule->initialize();
+
+            m_TargetNodes = m_ReaderModule->readNodes();
+            m_listener.open();
+            m_listener.support(methods::GET, std::bind(&RestModule::handle_get, this, std::placeholders::_1));
+            m_listener.support(methods::PUT, std::bind(&RestModule::handle_put, this, std::placeholders::_1));
+            m_listener.support(methods::POST, std::bind(&RestModule::handle_post, this, std::placeholders::_1));
+            m_listener.support(methods::DEL, std::bind(&RestModule::handle_delete, this, std::placeholders::_1));
+            m_isRunning = true;
+            m_ScannerPtr = std::make_shared<boost::thread>(boost::bind(&RestModule::PostData, this));
+
+        }
+    }
+    catch (std::exception e)
+    {
+        ModuleInitializationException ex;
+        throw (ex);
+    }
+
+!!!179074.cpp!!!	deInitialize() : void
+    if (m_isRunning)
+    {
+        m_isRunning = false;
+        boost::mutex::scoped_lock lock(g_i_mutex);
+        m_ScannerPtr->interrupt();
+        m_listener.close().wait();
+    }
+!!!179202.cpp!!!	isRunning() : bool
+    return m_isRunning;
+!!!179330.cpp!!!	handle_get(in message : http_request) : void
+    std::cout << message.relative_uri().to_string() << std::endl;
+
+    ucout << message.to_string() << endl;
+    web::json::value yourJson;
+    yourJson[U("System")][U("Scan")] = web::json::value(m_ScanModule->getScannedNodes()->ToJson());
+    yourJson[U("System")][U("Location")] = web::json::value(m_LocationModule->GetJson());
+    yourJson[U("System")][U("ScanTime")] = web::json::value(m_ScanModule->getScanTime());
+    yourJson[U("System")][U("TargetNodes")] = web::json::value(m_TargetNodes->ToJson());
+
+    auto query_string = message.absolute_uri().query();
+    auto query_map = uri::split_query(query_string);
+    auto it = query_map.find(U("callback"));
+    if (it != query_map.end())
+    {
+        // Query uses JSONP
+        auto callback = it->second;
+        std::stringstream ss;
+        ss << callback << "(" << yourJson.serialize() << ")";
+
+        message.reply(status_codes::OK, ss.str());
+
+    } else
+    {
+        cout << "Got To Here";
+        message.reply(status_codes::OK, yourJson);
+
+    }
+
+
+!!!179458.cpp!!!	handle_put(in message : http_request) : void
+    message.reply(status_codes::OK);
+!!!179586.cpp!!!	handle_post(in message : http_request) : void
+    ucout << message.to_string() << endl;
+    message.reply(status_codes::OK);
+!!!179714.cpp!!!	handle_delete(in message : http_request) : void
+    ucout << message.to_string() << endl;
+    message.reply(status_codes::OK);
+!!!179842.cpp!!!	PostData() : void
+    while (m_isRunning)
+    {
+
+        boost::mutex::scoped_lock lock(g_i_mutex);
+
+
+        try
+        {
+            web::json::value yourJson;
+            yourJson = static_pointer_cast<LocationModule>(m_LocationModule)->BasicJson();
+            yourJson[U("ID")] = web::json::value("User0");
+            yourJson[U("Site")] = web::json::value::number(1);
+            http_client client(m_PostURL);
+
+            client.request(methods::POST, "",
+                           yourJson.serialize(), "application/json").get();
+
+        }
+        catch (std::exception e)
+        {
+
+        }
+
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
+
+    }

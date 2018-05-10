@@ -1,0 +1,86 @@
+class WifiScanModule
+!!!181378.cpp!!!	WifiScanModule()
+
+
+!!!181506.cpp!!!	~WifiScanModule()
+    deInitialize();
+!!!181634.cpp!!!	initialize() : void
+    if (!m_isRunning)
+    {
+        m_ScannerPtr = std::make_shared<boost::thread>(boost::bind(&WifiScanModule::Scan, this));
+        m_isRunning = true;
+    }
+!!!181762.cpp!!!	isRunning() : bool
+    return m_isRunning;
+!!!181890.cpp!!!	deInitialize() : void
+    if (m_isRunning)
+    {
+        m_isRunning = false;
+        boost::mutex::scoped_lock lock(g_i_mutex);
+        m_ScannerPtr->interrupt();
+    }
+!!!182018.cpp!!!	getScannedNodes() : std::shared_ptr<node::NodeContainer>
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    return m_ScannedNodes;
+!!!182146.cpp!!!	getScanTime() : double
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    return m_ScanTime;
+!!!182274.cpp!!!	Scan() : void
+    wireless_scan_head head;
+    wireless_scan *result;
+    iwrange range;
+    int sock;
+
+    /* Open socket to kernel */
+    sock = iw_sockets_open();
+    while (m_isRunning)
+    {
+
+        boost::mutex::scoped_lock lock(g_i_mutex);
+        char temp[128];
+        boost::timer::auto_cpu_timer t;
+        node::NodeContainer tempContainer;
+        /* Get some metadata to use for scanning */
+        if (iw_get_range_info(sock, "wlan0", &range) < 0)
+        {
+            printf("Error during iw_get_range_info. Aborting.\n");
+
+        } else if (iw_scan(sock, "wlan0", range.we_version_compiled, &head) < 0)
+        {
+            printf("Error during iw_scan.\n");
+
+        } else
+        {
+            /* Traverse the results */
+            result = head.result;
+            while (NULL != result)
+            {
+
+                int dbLevel = result->stats.qual.level;
+                if (dbLevel >= 64)
+                {
+                    dbLevel -= 0x100;
+                }
+
+                std::shared_ptr<Node> newNode = std::make_shared<Node>(result->b.essid, dbLevel,
+                                                                       iw_saether_ntop(&result->ap_addr, temp));
+
+                tempContainer.AddNode(newNode);
+
+                result = result->next;
+
+            }
+
+            m_ScannedNodes->ClearNodes();
+            for (auto &i : tempContainer.GetNodes())
+            {
+                m_ScannedNodes->AddNode(i);
+            }
+            std::cout << "About to update Target Nodes.";
+        }
+
+
+        m_ScanTime = t.elapsed().wall;
+    }
+
+

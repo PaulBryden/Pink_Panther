@@ -1,0 +1,57 @@
+class WifiScanModulex86Test
+!!!182402.cpp!!!	WifiScanModulex86Test()
+
+!!!182530.cpp!!!	~WifiScanModulex86Test()
+
+!!!182658.cpp!!!	initialize() : void
+    if (!m_isRunning)
+    {
+        m_ScannerPtr = std::make_shared<boost::thread>(boost::bind(&WifiScanModulex86Test::Scan, this));
+        m_isRunning = true;
+    }
+!!!182786.cpp!!!	isRunning() : bool
+    return m_isRunning;
+!!!182914.cpp!!!	deInitialize() : void
+    if (m_isRunning)
+    {
+        m_isRunning = false;
+        boost::mutex::scoped_lock lock(g_i_mutex);
+        m_ScannerPtr->interrupt();
+    }
+!!!183042.cpp!!!	getScannedNodes() : std::shared_ptr<node::NodeContainer>
+
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    return m_ScannedNodes;
+
+!!!183170.cpp!!!	getScanTime() : double
+    return m_ScanTime;
+!!!183298.cpp!!!	Scan() : void
+    while (m_isRunning)
+    {
+
+        boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
+        boost::mutex::scoped_lock lock(g_i_mutex);
+        boost::timer::auto_cpu_timer t;
+        node::NodeContainer tempContainer;
+        std::string Mac = "FF:FF:FF:FF:FF:FF";
+        std::string ID = "TRIG1";
+        std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -61, "24:F2:7F:AA:23:E1");
+        tempContainer.AddNode(newNode);
+        ID = "TRIG2";
+        newNode = std::make_shared<Node>(ID, -65, "18:64:72:34:06:00");
+        tempContainer.AddNode(newNode);
+        ID = "TRIG3";
+        newNode = std::make_shared<Node>(ID, -78, "24:F2:2F:AA:26:E3");
+        tempContainer.AddNode(newNode);
+        ID = "TRIG4";
+        newNode = std::make_shared<Node>(ID, -59, "24:F2:7F:AA:2C:01");
+        tempContainer.AddNode(newNode);
+        m_ScannedNodes->ClearNodes();
+        for (auto &i : tempContainer.GetNodes())
+        {
+            m_ScannedNodes->AddNode(i);
+        }
+
+        m_ScanTime = t.elapsed().wall;
+
+    }

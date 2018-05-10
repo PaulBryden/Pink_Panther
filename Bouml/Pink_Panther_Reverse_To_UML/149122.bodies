@@ -1,0 +1,56 @@
+class NodeContainer
+!!!171010.cpp!!!	NodeContainer()
+
+!!!171138.cpp!!!	ToJson() : web::json::value
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    web::json::value yourJson = web::json::value::object();
+    yourJson[U("Nodes")] = web::json::value::array(m_Nodes.size());
+    int i = 0;
+    for (i = 0; i < m_Nodes.size(); i++)
+    {
+
+        yourJson[U("Nodes")].as_array()[i] = web::json::value(m_Nodes[i]->ToJson());
+    }
+    cout << yourJson.serialize();
+    return yourJson;
+!!!171266.cpp!!!	PrintNodes() : void
+    for (auto const &i : m_Nodes)
+    {
+        std::cout << i->getSSID();
+        std::cout << i->getRSSI();
+        std::cout << i->getMAC();
+        std::cout << "/n";
+
+
+    }
+!!!171394.cpp!!!	ClearNodes() : void
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    if (m_Nodes.size() > 0)
+    {
+        m_Nodes.clear();
+    }
+!!!171522.cpp!!!	GetNodes() : std::vector<std::shared_ptr<INode>>
+    return m_Nodes;
+!!!171650.cpp!!!	AddNode(in node : std::shared_ptr<INode>) : void
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    m_Nodes.push_back(node);
+!!!171778.cpp!!!	UpdateNodes(in nodes : std::shared_ptr<NodeContainer>) : void
+    boost::mutex::scoped_lock lock(g_i_mutex);
+
+    for (auto &x : m_Nodes)
+    {
+
+        x->setRecentlyUpdated(false);
+    }
+    for (auto &i : nodes->GetNodes())
+    {
+        for (auto &x : m_Nodes)
+        {
+            if (x->getMAC() == i->getMAC())
+            {
+                x->Update(i);
+                x->setRecentlyUpdated(true);
+            }
+        }
+    }
+

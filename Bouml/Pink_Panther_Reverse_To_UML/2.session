@@ -1,0 +1,23 @@
+window_sizes 1920 1017 332 1582 893 72
+cleanlooks_style
+diagrams
+  active  classdiagram_ref 128002 // Pink_Panther_Diag
+    1582 893 100 A3 192 0
+end
+show_stereotypes
+selected class_ref 149122 // NodeContainer
+open
+  deploymentview_ref 130306 // inc
+  classview_ref 130178 // Data
+  classview_ref 130434 // Data
+  classview_ref 130306 // Interfaces
+  deploymentview_ref 130818 // Interfaces
+  
+  package_ref 130946 // Exceptions
+  classview_ref 130690 // Modules
+  classview_ref 130818 // Interfaces
+  deploymentview_ref 130946 // Modules
+  deploymentview_ref 131202 // src
+  classview_ref 130946 // Pink_Panther
+end
+end

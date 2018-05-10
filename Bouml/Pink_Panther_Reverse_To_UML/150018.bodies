@@ -1,0 +1,42 @@
+class HttpGetNodeReaderModule
+!!!176514.cpp!!!	readNodes() : std::shared_ptr<node::NodeContainer>
+    std::shared_ptr<node::NodeContainer> p_NodeList;
+    p_NodeList = std::make_shared<node::NodeContainer>();
+    web::json::value v = GetRequest()["ap"];
+
+    for (int i = 0; i < v.as_array().size(); i++)
+    {
+        try
+        {
+            std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array().at(i)));
+            p_NodeList->AddNode(newNode);
+        } catch (std::exception e)
+        {
+            std::cout << "Error Node: " << i << " Invalid. Discarding..." << std::endl;
+        }
+        //std::cout << "AFTER PARSING " << i <<": " << v.as_array()[i].serialize();
+    };
+    return p_NodeList;
+!!!176642.cpp!!!	isRunning() : bool
+
+    return m_isRunning;
+!!!176770.cpp!!!	deInitialize() : void
+    m_isRunning = false;
+!!!176898.cpp!!!	initialize() : void
+    try
+    {
+        m_NodeContainer= readNodes();
+        m_isRunning = true;
+    }
+    catch(std::exception e)
+    {
+        std::cout<<"Couldn't initialize HTTPGetNodeReaderModule" <<std::endl;
+    }
+!!!177026.cpp!!!	GetRequest() : web::json::value
+
+    boost::mutex::scoped_lock lock(g_i_mutex);
+    using namespace web::http::client;
+    using namespace web::http;
+    http_client client(U(m_Url));
+
+    return client.request(methods::GET, "").get().extract_json().get();
