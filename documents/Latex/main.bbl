@@ -1,0 +1,173 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global}
+  \entry{hi}{article}{}
+    \name{author}{1}{}{%
+      {{hash=hccete}{%
+  prefix={http://money.cnn.com/2018/01/30/news/economy/health-care-costs-eating-the},
+  prefixi={h\bibinitperiod-c\bibinitperiod-c\bibinitperiod-e\bibinitperiod-t\bibinitperiod},
+         family={economy/index.html},
+         familyi={e\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ehccet1}
+    \strng{fullhash}{ehccet1}
+    \field{labelnamesource}{author}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+  \endentry
+
+  \entry{kjaergaard2010indoor}{inproceedings}{}
+    \name{author}{6}{}{%
+      {{hash=KMB}{%
+         family={Kj{\ae}rgaard},
+         familyi={K\bibinitperiod},
+         given={Mikkel\bibnamedelima Baun},
+         giveni={M\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+      {{hash=BH}{%
+         family={Blunck},
+         familyi={B\bibinitperiod},
+         given={Henrik},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=GT}{%
+         family={Godsk},
+         familyi={G\bibinitperiod},
+         given={Torben},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=TT}{%
+         family={Toftkj{\ae}r},
+         familyi={T\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=CDL}{%
+         family={Christensen},
+         familyi={C\bibinitperiod},
+         given={Dan\bibnamedelima Lund},
+         giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=GK}{%
+         family={Gr{\o}nb{\ae}k},
+         familyi={G\bibinitperiod},
+         given={Kaj},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{KMB+1}
+    \strng{fullhash}{KMBBHGTTTCDLGK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{booktitle}{International conference on pervasive computing}
+    \field{pages}{38\bibrangedash 56}
+    \field{title}{Indoor positioning using GPS revisited}
+    \field{year}{2010}
+  \endentry
+
+  \entry{liu2007survey}{article}{}
+    \name{author}{4}{}{%
+      {{hash=LH}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Hui},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=DH}{%
+         family={Darabi},
+         familyi={D\bibinitperiod},
+         given={Houshang},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=BP}{%
+         family={Banerjee},
+         familyi={B\bibinitperiod},
+         given={Pat},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=LJ}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Jing},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{LH+1}
+    \strng{fullhash}{LHDHBPLJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{number}{6}
+    \field{pages}{1067\bibrangedash 1080}
+    \field{title}{Survey of wireless indoor positioning techniques and systems}
+    \field{volume}{37}
+    \field{journaltitle}{IEEE Transactions on Systems, Man, and Cybernetics,
+  Part C (Applications and Reviews)}
+    \field{year}{2007}
+  \endentry
+
+  \entry{pahlavan2002indoor}{article}{}
+    \name{author}{3}{}{%
+      {{hash=PK}{%
+         family={Pahlavan},
+         familyi={P\bibinitperiod},
+         given={Kaveh},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=LX}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Xinrong},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=MJP}{%
+         family={Makela},
+         familyi={M\bibinitperiod},
+         given={Juha-Pekka},
+         giveni={J\bibinitperiod-P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{PKLXMJP1}
+    \strng{fullhash}{PKLXMJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{number}{2}
+    \field{pages}{112\bibrangedash 118}
+    \field{title}{Indoor geolocation science and technology}
+    \field{volume}{40}
+    \field{journaltitle}{IEEE Communications Magazine}
+    \field{year}{2002}
+  \endentry
+\enddatalist
+\endinput
