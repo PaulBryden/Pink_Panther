@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 02:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 13:07
 entering extended mode
 **./main.tex
 (main.tex
@@ -1122,50 +1122,46 @@ File: 2018-05-10-PHOTO-00000079.png Graphic file (type png)
 Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 246.
 
 (pdftex.def)             Requested size: 227.60916pt x 142.25433pt.
-<Geolocation_1.jpeg, id=32, 1547.7825pt x 874.26625pt>
+ [5 <./2018-05-10-PHOTO-00000078.png> <./IMG_0796.JPG> <./2018-05-10-PHOTO-0000
+0079.png>]
+<Geolocation_1.jpeg, id=36, 1547.7825pt x 874.26625pt>
 File: Geolocation_1.jpeg Graphic file (type jpg)
 <use Geolocation_1.jpeg>
-Package pdftex.def Info: Geolocation_1.jpeg  used on input line 256.
+Package pdftex.def Info: Geolocation_1.jpeg  used on input line 258.
 (pdftex.def)             Requested size: 256.058pt x 170.71468pt.
 
-Overfull \hbox (4.058pt too wide) in paragraph at lines 256--257
+Overfull \hbox (4.058pt too wide) in paragraph at lines 258--259
+[][] 
+ []
+
+<Geolocation_2.jpeg, id=37, 1548.78625pt x 875.27pt>
+File: Geolocation_2.jpeg Graphic file (type jpg)
+<use Geolocation_2.jpeg>
+Package pdftex.def Info: Geolocation_2.jpeg  used on input line 265.
+(pdftex.def)             Requested size: 256.05862pt x 170.71034pt.
+
+Overfull \hbox (4.05862pt too wide) in paragraph at lines 265--266
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5 <./2018-05-10-PHOTO-00000078.png> <./IMG_0796.JPG> <./2018-05-10-PHOTO-0000
-0079.png>]
-<Geolocation_2.jpeg, id=37, 1548.78625pt x 875.27pt>
-File: Geolocation_2.jpeg Graphic file (type jpg)
-<use Geolocation_2.jpeg>
-Package pdftex.def Info: Geolocation_2.jpeg  used on input line 263.
-(pdftex.def)             Requested size: 256.05862pt x 170.71034pt.
-
-Overfull \hbox (4.05862pt too wide) in paragraph at lines 263--264
-[][] 
- []
 
 <Geolocation_3.jpeg, id=38, 1547.7825pt x 874.26625pt>
 File: Geolocation_3.jpeg Graphic file (type jpg)
 <use Geolocation_3.jpeg>
-Package pdftex.def Info: Geolocation_3.jpeg  used on input line 269.
+Package pdftex.def Info: Geolocation_3.jpeg  used on input line 271.
 (pdftex.def)             Requested size: 256.058pt x 170.71468pt.
 
-Overfull \hbox (4.058pt too wide) in paragraph at lines 269--270
+Overfull \hbox (4.058pt too wide) in paragraph at lines 271--272
 [][] 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 280--280
+[6 <./Geolocation_1.jpeg> <./Geolocation_2.jpeg> <./Geolocation_3.jpeg>]
+Underfull \hbox (badness 10000) in paragraph at lines 282--282
 []\OT1/ptm/m/n/10 http://money.cnn.com/2018/01/30/news/economy/health-
  []
 
-[6 <./Geolocation_1.jpeg> <./Geolocation_2.jpeg> <./Geolocation_3.jpeg>]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1191,7 +1187,7 @@ Here is how much of TeX's memory you used:
  14289 multiletter control sequences out of 15000+200000
  34706 words of font info for 70 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,8n,45p,968b,1582s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,8n,45p,1082b,1582s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 }<C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmex10.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
@@ -1205,7 +1201,7 @@ Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb>
 .pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on main.pdf (7 pages, 2494153 bytes).
+Output written on main.pdf (7 pages, 2495769 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

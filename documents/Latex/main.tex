@@ -241,41 +241,43 @@ ii) The execution time of the LAPACK functions\newline
 iii) The effectiveness of the location complete derivation toolkit.
 
 \subsubsection{Kalman Filter Results}
-The Kalman Filter, and it's performance, was
+The Kalman Filter, and it's performance, was evaluated by stationing the test platform in a single location and comparing the raw RSSI data with the Kalman Filtered RSSI data. The location was a Wireless Technologies lab with high incidences of multipath interference and obstacle induced path loss. The results of the sampling can be seen in Figure 6.
 \begin{figure}[H]
     \includegraphics[width=8cm,height=5cm]{2018-05-10-PHOTO-00000079.png}
     \caption{Kalman Results}
     \end{figure}
 \subsubsection{LAPACK Results}
-18000 ns DGELS
-10000 ns DGESV
-6000 ns DGETRS
+As was mentioned previously in the implementation section, 3 methods were utilised for solving the system of equations. DGELS, solves an over or under determined system using QR or LQ factorization of A. DGESV, solves an over or under determined system through  partial pivoting and row interchanges to factorize A. The factored form of A, is then used to solve the system of equations. DGETRS simply solves the system of equations, given the LU factorization of A. Since A is essentially a constant, as the AP locations in a location do not change, Once the LU factorization of A is computed, DGETRS can simply be used to solve the system of equations. This should theoretically be far less computationally expensive. In order to evaluate the relative "costs" of each of these methods, the time taken for each of these methods to solve the system was measured. The results can be seen below:\newline
+18000 ns DGELS\newline
+10000 ns DGESV\newline
+6000 ns DGETRS\newline
+As one can see, DGETRS is almost a 3 times cheaper computation that DGELS and as such, if this system were to be synthesized for hardware or low level system software it would be of benefit to utilize DGETRS instead of DGELS or DGESV wherever possible. However, it is worth noting that at least one call to DGESV will be required to derive the factorized A component.
 \subsubsection{Location Results}
-The system was tested in a relatively "noisy" engineering environment with electromagnetic interference and large multipath losses. The 3rd floor of the SDSU Engineering Building was the chosen environment. The test platform was found to have a scan refresh rate of around 2 Hz. There was also a settle time of ~ 10 seconds for the Kalman Filter. However, an error of approximately 3m was evident in areas of good Wireless Coverage (Less than 10m to each AP) such as in Figure 6.
+The system was tested in a relatively "noisy" engineering environment with electromagnetic interference and large multipath losses. The 3rd floor of the SDSU Engineering Building was the chosen environment. The test platform was found to have a scan refresh rate of around 2 Hz. There was also a settle time of ~ 10 seconds for the Kalman Filter. However, an error of approximately 3m was evident in areas of good Wireless Coverage (Less than 10m to each AP) such as in Figure 7.
 \begin{figure}[H]
     \includegraphics[width=9.0cm,height=6cm]{Geolocation_1.jpeg}
     \caption{Kalman Results}
     \end{figure}
 
 
-In areas of poorer coverage, an error of approximately 10m was present. Poorer coverage is designated as any situation where there it is more than 15m to 2 or more APs, or in areas of high interference and/or path loss. (See Figure 7)
+In areas of poorer coverage, an error of approximately 10m was present. Poorer coverage is designated as any situation where there it is more than 15m to 2 or more APs, or in areas of high interference and/or path loss. (See Figure 8)
 \begin{figure}[H]
     \includegraphics[width=9.0cm,height=6cm]{Geolocation_2.jpeg}
     \caption{Kalman Results}
     \end{figure}
 
-However, there is a key limitation of the system and that is its inability to differentiate between signal attenuation due to distance and signal attenuation due to obstacle-induced path loss. This means that the system may derive the location of the individual to be in the left corner of the map, outside the building boundaries instead of their actual location as shown in Figure 8.
+However, there is a key limitation of the system and that is its inability to differentiate between signal attenuation due to distance and signal attenuation due to obstacle-induced path loss. This means that the system may derive the location of the individual to be in the left corner of the map, outside the building boundaries instead of their actual location as shown in Figure 9.
 \begin{figure}[H]
     \includegraphics[width=9.0cm,height=6cm]{Geolocation_3.jpeg}
     \caption{Kalman Results}
     \end{figure}
 
 \section{Further Work}
-As one can see, the developed system is fully capabale of deriving the location of a user, given 4 or more known access points within range. However, a number of areas continue to beacon as avenues of future work. Firstly, the employment of Machine Learning, and by taking many 1000s of discrete measurements at various points around a building, it could be possible to tune the system to achieve much better location derivation results.  Furthermore, the mobile application and Web services developed in this paper was a base that might require expansion  to support multiple clients and could provide other information regarding the location of the person. The edge of this project is that it can be implemented on platforms by developing different Scan Module implementations Also various profiling of the system with different devices and antennae configurations can be done.
+As one can see, the developed system is fully capable of deriving the location of a user, given 4 or more known access points within range. However, a number of areas are avenues for future work. Machine Learning is one such area where this system could experience great improvement. Such a proposal for the application of this technology involves measuring the wireless signal strengths at several "known locations" within a facility. This information could then be used to generate a set of decision trees which would enable the system to more accurately derive it's approximate location. Furthermore, the mobile application and Web services developed in this paper are a proof of concept that will need to be expanded to support multiple clients. As was previously mentioned, the advantage of this software framework is that it can be easily compiled and run on several platforms by simply developing platform specific Scan Module implementations. Future work will include implementing several scan modules for such additional platforms as IOS, Android and Windows.
 
 \section{Conclusion}
-This paper has presented an Open Source Software framework capable of determining the exact location of a person indoors using derived trilateration theory. This design is implemented using the trilateration techniques by determining coordinates of existing access points of a location. The mobile application helps us to determine that more promising results are accomplished using this mechanism rather than using GPS. 
-\newline Implementation of this design is very economical as it can be developed without making major changes and this makes this technology more user-friendly. Our design is currently been implemented using Wifi 802.11. We offer an approach to be used by other people to develop this technology on other platforms. [TO BE REVISED]
+
+This paper has successfully out laid the development of a multiplatform, indoor, Geolocation framework compatible with 802.11 Protocol. The system is capable of deriving location to within an accuracy 3m and is also portable across multiple platforms. The complete solution provides an end to end framework for monitoring individuals from a mobile device and the software framework provides huge scope for expansion and future feature implementation. The system employs modern C+11 development principles and as a result is portable, expandable, thread and memory safe. The performance of the system has been profiled and a number of areas of further development have been outlined. As such this project has successfully met the goals of developing an affordable, Open Source Indoor Geolocation framework for tracking the location and movements of individuals. It is hoped that this technology will be employed and used in the future to help reduce the time it takes for individuals in need of care to be located, thus saving lives.
 \printbibliography
 
 \end{document}
