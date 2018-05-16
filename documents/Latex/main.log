@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 13:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 14:47
 entering extended mode
 **./main.tex
 (main.tex
@@ -588,6 +588,15 @@ ef")
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
 ))
+("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\preprint\authblk.s
+ty"
+Package: authblk 2001/02/27 1.3 (PWD)
+\affilsep=\skip49
+\@affilsep=\skip50
+\c@Maxaffil=\count111
+\c@authors=\count112
+\c@affil=\count113
+)
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.
 sty"
 Package: biblatex 2018/03/04 v3.11 programmable bibliographies (PK/MW)
@@ -622,7 +631,7 @@ Package pdftexcmds Info: \pdfdraftmode found.
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.
 sty"
 Package: etoolbox 2018/02/11 v2.5e e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count111
+\etb@tempcnta=\count114
 )
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions
 .sty"
@@ -642,7 +651,7 @@ Package etexcmds Info: Could not find \expanded.
 )))
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\logreq\logreq.sty"
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count112
+\lrq@indent=\count115
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\logreq\logreq.def"
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 )) ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty
@@ -657,62 +666,62 @@ y"
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xstring\xstring.
 tex"
 \@xs@message=\write3
-\integerpart=\count113
-\decimalpart=\count114
+\integerpart=\count116
+\decimalpart=\count117
 )
 Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 )
-\c@tabx@nest=\count115
-\c@listtotal=\count116
-\c@listcount=\count117
-\c@liststart=\count118
-\c@liststop=\count119
-\c@citecount=\count120
-\c@citetotal=\count121
-\c@multicitecount=\count122
-\c@multicitetotal=\count123
-\c@instcount=\count124
-\c@maxnames=\count125
-\c@minnames=\count126
-\c@maxitems=\count127
-\c@minitems=\count128
-\c@citecounter=\count129
-\c@savedcitecounter=\count130
-\c@uniquelist=\count131
-\c@uniquename=\count132
-\c@refsection=\count133
-\c@refsegment=\count134
-\c@maxextratitle=\count135
-\c@maxextratitleyear=\count136
-\c@maxextradate=\count137
-\c@maxextraalpha=\count138
-\c@abbrvpenalty=\count139
-\c@highnamepenalty=\count140
-\c@lownamepenalty=\count141
-\c@maxparens=\count142
-\c@parenlevel=\count143
-\blx@tempcnta=\count144
-\blx@tempcntb=\count145
-\blx@tempcntc=\count146
-\blx@maxsection=\count147
-\blx@maxsegment@0=\count148
-\blx@notetype=\count149
-\blx@parenlevel@text=\count150
-\blx@parenlevel@foot=\count151
-\blx@sectionciteorder@0=\count152
-\labelnumberwidth=\skip49
-\labelalphawidth=\skip50
-\biblabelsep=\skip51
-\bibitemsep=\skip52
-\bibnamesep=\skip53
-\bibinitsep=\skip54
-\bibparsep=\skip55
-\bibhang=\skip56
+\c@tabx@nest=\count118
+\c@listtotal=\count119
+\c@listcount=\count120
+\c@liststart=\count121
+\c@liststop=\count122
+\c@citecount=\count123
+\c@citetotal=\count124
+\c@multicitecount=\count125
+\c@multicitetotal=\count126
+\c@instcount=\count127
+\c@maxnames=\count128
+\c@minnames=\count129
+\c@maxitems=\count130
+\c@minitems=\count131
+\c@citecounter=\count132
+\c@savedcitecounter=\count133
+\c@uniquelist=\count134
+\c@uniquename=\count135
+\c@refsection=\count136
+\c@refsegment=\count137
+\c@maxextratitle=\count138
+\c@maxextratitleyear=\count139
+\c@maxextradate=\count140
+\c@maxextraalpha=\count141
+\c@abbrvpenalty=\count142
+\c@highnamepenalty=\count143
+\c@lownamepenalty=\count144
+\c@maxparens=\count145
+\c@parenlevel=\count146
+\blx@tempcnta=\count147
+\blx@tempcntb=\count148
+\blx@tempcntc=\count149
+\blx@maxsection=\count150
+\blx@maxsegment@0=\count151
+\blx@notetype=\count152
+\blx@parenlevel@text=\count153
+\blx@parenlevel@foot=\count154
+\blx@sectionciteorder@0=\count155
+\labelnumberwidth=\skip51
+\labelalphawidth=\skip52
+\biblabelsep=\skip53
+\bibitemsep=\skip54
+\bibnamesep=\skip55
+\bibinitsep=\skip56
+\bibparsep=\skip57
+\bibhang=\skip58
 \blx@bcfin=\read1
 \blx@bcfout=\write4
-\c@mincomprange=\count153
-\c@maxcomprange=\count154
-\c@mincompwidth=\count155
+\c@mincomprange=\count156
+\c@maxcomprange=\count157
+\c@mincompwidth=\count158
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -724,88 +733,88 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'numeric.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count156
-\c@savedafterword=\count157
-\c@annotator=\count158
-\c@savedannotator=\count159
-\c@author=\count160
-\c@savedauthor=\count161
-\c@bookauthor=\count162
-\c@savedbookauthor=\count163
-\c@commentator=\count164
-\c@savedcommentator=\count165
-\c@editor=\count166
-\c@savededitor=\count167
-\c@editora=\count168
-\c@savededitora=\count169
-\c@editorb=\count170
-\c@savededitorb=\count171
-\c@editorc=\count172
-\c@savededitorc=\count173
-\c@foreword=\count174
-\c@savedforeword=\count175
-\c@holder=\count176
-\c@savedholder=\count177
-\c@introduction=\count178
-\c@savedintroduction=\count179
-\c@namea=\count180
-\c@savednamea=\count181
-\c@nameb=\count182
-\c@savednameb=\count183
-\c@namec=\count184
-\c@savednamec=\count185
-\c@translator=\count186
-\c@savedtranslator=\count187
-\c@shortauthor=\count188
-\c@savedshortauthor=\count189
-\c@shorteditor=\count190
-\c@savedshorteditor=\count191
-\c@labelname=\count192
-\c@savedlabelname=\count193
-\c@institution=\count194
-\c@savedinstitution=\count195
-\c@lista=\count196
-\c@savedlista=\count197
-\c@listb=\count198
-\c@savedlistb=\count199
-\c@listc=\count266
-\c@savedlistc=\count267
-\c@listd=\count268
-\c@savedlistd=\count269
-\c@liste=\count270
-\c@savedliste=\count271
-\c@listf=\count272
-\c@savedlistf=\count273
-\c@location=\count274
-\c@savedlocation=\count275
-\c@organization=\count276
-\c@savedorganization=\count277
-\c@origlocation=\count278
-\c@savedoriglocation=\count279
-\c@origpublisher=\count280
-\c@savedorigpublisher=\count281
-\c@publisher=\count282
-\c@savedpublisher=\count283
-\c@language=\count284
-\c@savedlanguage=\count285
-\c@origlanguage=\count286
-\c@savedoriglanguage=\count287
-\c@pageref=\count288
-\c@savedpageref=\count289
-\shorthandwidth=\skip57
-\shortjournalwidth=\skip58
-\shortserieswidth=\skip59
-\shorttitlewidth=\skip60
-\shortauthorwidth=\skip61
-\shorteditorwidth=\skip62
-\locallabelnumberwidth=\skip63
-\locallabelalphawidth=\skip64
-\localshorthandwidth=\skip65
-\localshortjournalwidth=\skip66
-\localshortserieswidth=\skip67
-\localshorttitlewidth=\skip68
-\localshortauthorwidth=\skip69
-\localshorteditorwidth=\skip70
+\c@afterword=\count159
+\c@savedafterword=\count160
+\c@annotator=\count161
+\c@savedannotator=\count162
+\c@author=\count163
+\c@savedauthor=\count164
+\c@bookauthor=\count165
+\c@savedbookauthor=\count166
+\c@commentator=\count167
+\c@savedcommentator=\count168
+\c@editor=\count169
+\c@savededitor=\count170
+\c@editora=\count171
+\c@savededitora=\count172
+\c@editorb=\count173
+\c@savededitorb=\count174
+\c@editorc=\count175
+\c@savededitorc=\count176
+\c@foreword=\count177
+\c@savedforeword=\count178
+\c@holder=\count179
+\c@savedholder=\count180
+\c@introduction=\count181
+\c@savedintroduction=\count182
+\c@namea=\count183
+\c@savednamea=\count184
+\c@nameb=\count185
+\c@savednameb=\count186
+\c@namec=\count187
+\c@savednamec=\count188
+\c@translator=\count189
+\c@savedtranslator=\count190
+\c@shortauthor=\count191
+\c@savedshortauthor=\count192
+\c@shorteditor=\count193
+\c@savedshorteditor=\count194
+\c@labelname=\count195
+\c@savedlabelname=\count196
+\c@institution=\count197
+\c@savedinstitution=\count198
+\c@lista=\count199
+\c@savedlista=\count266
+\c@listb=\count267
+\c@savedlistb=\count268
+\c@listc=\count269
+\c@savedlistc=\count270
+\c@listd=\count271
+\c@savedlistd=\count272
+\c@liste=\count273
+\c@savedliste=\count274
+\c@listf=\count275
+\c@savedlistf=\count276
+\c@location=\count277
+\c@savedlocation=\count278
+\c@organization=\count279
+\c@savedorganization=\count280
+\c@origlocation=\count281
+\c@savedoriglocation=\count282
+\c@origpublisher=\count283
+\c@savedorigpublisher=\count284
+\c@publisher=\count285
+\c@savedpublisher=\count286
+\c@language=\count287
+\c@savedlanguage=\count288
+\c@origlanguage=\count289
+\c@savedoriglanguage=\count290
+\c@pageref=\count291
+\c@savedpageref=\count292
+\shorthandwidth=\skip59
+\shortjournalwidth=\skip60
+\shortserieswidth=\skip61
+\shorttitlewidth=\skip62
+\shortauthorwidth=\skip63
+\shorteditorwidth=\skip64
+\locallabelnumberwidth=\skip65
+\locallabelalphawidth=\skip66
+\localshorthandwidth=\skip67
+\localshortjournalwidth=\skip68
+\localshortserieswidth=\skip69
+\localshorttitlewidth=\skip70
+\localshortauthorwidth=\skip71
+\localshorteditorwidth=\skip72
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -831,13 +840,13 @@ Package biblatex Info: ... file 'biblatex.def' found.
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.
 def"
 File: biblatex.def 2018/03/04 v3.11 biblatex compatibility (PK/MW)
-\c@textcitecount=\count290
-\c@textcitetotal=\count291
-\c@textcitemaxnames=\count292
-\c@biburlnumpenalty=\count293
-\c@biburlucpenalty=\count294
-\c@biburllcpenalty=\count295
-\c@smartand=\count296
+\c@textcitecount=\count293
+\c@textcitetotal=\count294
+\c@textcitemaxnames=\count295
+\c@biburlnumpenalty=\count296
+\c@biburlucpenalty=\count297
+\c@biburllcpenalty=\count298
+\c@smartand=\count299
 )
 Package biblatex Info: Trying to load bibliography style 'numeric'...
 Package biblatex Info: ... file 'numeric.bbx' found.
@@ -851,8 +860,8 @@ Package biblatex Info: ... file 'standard.bbx' found.
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\stand
 ard.bbx"
 File: standard.bbx 2018/03/04 v3.11 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count297
-\c@bbx:relatedtotal=\count298
+\c@bbx:relatedcount=\count300
+\c@bbx:relatedtotal=\count301
 ))
 Package biblatex Info: Trying to load citation style 'numeric'...
 Package biblatex Info: ... file 'numeric.cbx' found.
@@ -890,39 +899,39 @@ File: english.lbx 2018/03/04 v3.11 biblatex localization (PK/MW)
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count299
-\@quotereset=\count300
+\@quotelevel=\count302
+\@quotereset=\count303
 (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 -- Lines per column: 56 (exact).
 
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
 ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count301
+\scratchcounter=\count304
 \scratchdimen=\dimen140
 \scratchbox=\box32
-\nofMPsegments=\count302
-\nofMParguments=\count303
+\nofMPsegments=\count305
+\nofMParguments=\count306
 \everyMPshowfont=\toks26
-\MPscratchCnt=\count304
+\MPscratchCnt=\count307
 \MPscratchDim=\dimen141
-\MPnumerator=\count305
-\makeMPintoPDFobject=\count306
+\MPnumerator=\count308
+\makeMPintoPDFobject=\count309
 \everyMPtoPDFconversion=\toks27
 )
 ("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-
@@ -955,15 +964,26 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
  (main.bbl)
-Package biblatex Info: Reference section=0 on input line 15.
-Package biblatex Info: Reference segment=0 on input line 15.
+Package biblatex Info: Reference section=0 on input line 16.
+Package biblatex Info: Reference segment=0 on input line 16.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 25.
+LaTeX Font Info:    Try loading font information for U+msa on input line 25.
+
+("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 25.
+("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+** WARNING: \thanks is locked out when in conference mode (line 25).
 <2018-05-10-PHOTO-00000077.jpg, id=1, 968.61874pt x 575.14874pt>
 File: 2018-05-10-PHOTO-00000077.jpg Graphic file (type jpg)
 <use 2018-05-10-PHOTO-00000077.jpg>
-Package pdftex.def Info: 2018-05-10-PHOTO-00000077.jpg  used on input line 46.
+Package pdftex.def Info: 2018-05-10-PHOTO-00000077.jpg  used on input line 52.
 (pdftex.def)             Requested size: 256.07677pt x 156.48578pt.
 
-Overfull \hbox (4.07677pt too wide) in paragraph at lines 46--47
+Overfull \hbox (4.07677pt too wide) in paragraph at lines 52--53
 [][] 
  []
 
@@ -971,99 +991,88 @@ Overfull \hbox (4.07677pt too wide) in paragraph at lines 46--47
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 49--53
-
- []
-
 <Pink_Panther_Architecture.png, id=9, 911.405pt x 313.17pt>
 File: Pink_Panther_Architecture.png Graphic file (type png)
 <use Pink_Panther_Architecture.png>
-Package pdftex.def Info: Pink_Panther_Architecture.png  used on input line 57.
+Package pdftex.def Info: Pink_Panther_Architecture.png  used on input line 61.
 (pdftex.def)             Requested size: 256.0817pt x 99.58566pt.
 
-Overfull \hbox (4.0817pt too wide) in paragraph at lines 57--58
+Overfull \hbox (4.0817pt too wide) in paragraph at lines 61--62
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--81
+Underfull \hbox (badness 10000) in paragraph at lines 66--86
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--81
+Underfull \hbox (badness 10000) in paragraph at lines 66--86
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--81
+Underfull \hbox (badness 10000) in paragraph at lines 66--86
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--81
-
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 83.
-("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 83.
-("C:\Users\green\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 85--96
+Underfull \hbox (badness 10000) in paragraph at lines 66--86
 
  []
 
 
-Underfull \hbox (badness 4995) in paragraph at lines 85--96
+Underfull \hbox (badness 10000) in paragraph at lines 90--101
+
+ []
+
+
+Underfull \hbox (badness 4995) in paragraph at lines 90--101
 \OT1/ptm/m/n/10 The op-ti-mal sig-nal prop-a-ga-tion con-stant for a noisy
  []
 
 [2 <./2018-05-10-PHOTO-00000077.jpg> <./Pink_Panther_Architecture.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 118--122
+Underfull \hbox (badness 10000) in paragraph at lines 123--127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--147
+Underfull \hbox (badness 10000) in paragraph at lines 149--152
 
  []
 
 
-Underfull \hbox (badness 7221) in paragraph at lines 144--147
+Underfull \hbox (badness 7221) in paragraph at lines 149--152
 \OT1/ptm/m/n/10 and solved us-ing a Gauss - New-ton least squares
  []
 
 
-Underfull \hbox (badness 3884) in paragraph at lines 149--155
+Underfull \hbox (badness 3884) in paragraph at lines 154--160
 \OT1/ptm/m/n/10 and adjacent-channel in-ter-fer-ence can af-fect the SNR,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--155
+Underfull \hbox (badness 10000) in paragraph at lines 154--160
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--177
+Underfull \hbox (badness 10000) in paragraph at lines 173--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--180
+Underfull \hbox (badness 10000) in paragraph at lines 183--185
 
  []
 
 <uml_9-5-18.png, id=20, 1109.1036pt x 1610.1756pt>
 File: uml_9-5-18.png Graphic file (type png)
 <use uml_9-5-18.png>
-Package pdftex.def Info: uml_9-5-18.png  used on input line 185.
+Package pdftex.def Info: uml_9-5-18.png  used on input line 190.
 (pdftex.def)             Requested size: 256.07002pt x 256.06093pt.
 
-Overfull \hbox (4.07002pt too wide) in paragraph at lines 185--186
+Overfull \hbox (4.07002pt too wide) in paragraph at lines 190--191
 [][] 
  []
 
@@ -1071,33 +1080,33 @@ Overfull \hbox (4.07002pt too wide) in paragraph at lines 185--186
 Underfull \vbox (badness 5331) has occurred while \output is active []
 
  [3]
-Underfull \hbox (badness 10000) in paragraph at lines 189--202
+Underfull \hbox (badness 10000) in paragraph at lines 194--207
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--212
+Underfull \hbox (badness 10000) in paragraph at lines 213--217
 
  []
 
 
-Underfull \hbox (badness 1867) in paragraph at lines 213--219
+Underfull \hbox (badness 1867) in paragraph at lines 218--224
 \OT1/ptm/m/n/10 Glass-fish li-brary and frame-work. The ser-vices ba-si-cally
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--219
+Underfull \hbox (badness 10000) in paragraph at lines 218--224
 
  []
 
 
-Underfull \hbox (badness 1430) in paragraph at lines 220--222
+Underfull \hbox (badness 1430) in paragraph at lines 225--227
  \OT1/ptm/m/it/10 2) Back end Database: [][] \OT1/ptm/m/n/10 Post-greSQL is the
  back end
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 220--222
+Underfull \hbox (badness 10000) in paragraph at lines 225--227
 
  []
 
@@ -1105,13 +1114,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 220--222
 <2018-05-10-PHOTO-00000078.png, id=29, 450.18187pt x 268.75406pt>
 File: 2018-05-10-PHOTO-00000078.png Graphic file (type png)
 <use 2018-05-10-PHOTO-00000078.png>
-Package pdftex.def Info: 2018-05-10-PHOTO-00000078.png  used on input line 226.
+Package pdftex.def Info: 2018-05-10-PHOTO-00000078.png  used on input line 231.
 
 (pdftex.def)             Requested size: 227.62512pt x 142.26263pt.
 <IMG_0796.JPG, id=30, 4047.12pt x 3035.34pt>
 File: IMG_0796.JPG Graphic file (type jpg)
 <use IMG_0796.JPG>
-Package pdftex.def Info: IMG_0796.JPG  used on input line 233.
+Package pdftex.def Info: IMG_0796.JPG  used on input line 238.
 (pdftex.def)             Requested size: 227.56348pt x 142.2349pt.
 
 Underfull \vbox (badness 2865) has occurred while \output is active []
@@ -1119,7 +1128,7 @@ Underfull \vbox (badness 2865) has occurred while \output is active []
 <2018-05-10-PHOTO-00000079.png, id=31, 1840.8775pt x 824.07875pt>
 File: 2018-05-10-PHOTO-00000079.png Graphic file (type png)
 <use 2018-05-10-PHOTO-00000079.png>
-Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 246.
+Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 251.
 
 (pdftex.def)             Requested size: 227.60916pt x 142.25433pt.
  [5 <./2018-05-10-PHOTO-00000078.png> <./IMG_0796.JPG> <./2018-05-10-PHOTO-0000
@@ -1127,20 +1136,20 @@ Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 246.
 <Geolocation_1.jpeg, id=36, 1547.7825pt x 874.26625pt>
 File: Geolocation_1.jpeg Graphic file (type jpg)
 <use Geolocation_1.jpeg>
-Package pdftex.def Info: Geolocation_1.jpeg  used on input line 258.
+Package pdftex.def Info: Geolocation_1.jpeg  used on input line 263.
 (pdftex.def)             Requested size: 256.058pt x 170.71468pt.
 
-Overfull \hbox (4.058pt too wide) in paragraph at lines 258--259
+Overfull \hbox (4.058pt too wide) in paragraph at lines 263--264
 [][] 
  []
 
 <Geolocation_2.jpeg, id=37, 1548.78625pt x 875.27pt>
 File: Geolocation_2.jpeg Graphic file (type jpg)
 <use Geolocation_2.jpeg>
-Package pdftex.def Info: Geolocation_2.jpeg  used on input line 265.
+Package pdftex.def Info: Geolocation_2.jpeg  used on input line 270.
 (pdftex.def)             Requested size: 256.05862pt x 170.71034pt.
 
-Overfull \hbox (4.05862pt too wide) in paragraph at lines 265--266
+Overfull \hbox (4.05862pt too wide) in paragraph at lines 270--271
 [][] 
  []
 
@@ -1150,15 +1159,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <Geolocation_3.jpeg, id=38, 1547.7825pt x 874.26625pt>
 File: Geolocation_3.jpeg Graphic file (type jpg)
 <use Geolocation_3.jpeg>
-Package pdftex.def Info: Geolocation_3.jpeg  used on input line 271.
+Package pdftex.def Info: Geolocation_3.jpeg  used on input line 276.
 (pdftex.def)             Requested size: 256.058pt x 170.71468pt.
 
-Overfull \hbox (4.058pt too wide) in paragraph at lines 271--272
+Overfull \hbox (4.058pt too wide) in paragraph at lines 276--277
 [][] 
  []
 
 [6 <./Geolocation_1.jpeg> <./Geolocation_2.jpeg> <./Geolocation_3.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 282--282
+Underfull \hbox (badness 10000) in paragraph at lines 287--287
 []\OT1/ptm/m/n/10 http://money.cnn.com/2018/01/30/news/economy/health-
  []
 
@@ -1181,13 +1190,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 10888 strings out of 493305
- 187310 string characters out of 3129802
- 460344 words of memory out of 3000000
- 14289 multiletter control sequences out of 15000+200000
- 34706 words of font info for 70 fonts, out of 3000000 for 9000
+ 10991 strings out of 493305
+ 188588 string characters out of 3129802
+ 461086 words of memory out of 3000000
+ 14383 multiletter control sequences out of 15000+200000
+ 40038 words of font info for 87 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,8n,45p,1082b,1582s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,10n,45p,1082b,1582s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 }<C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmex10.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
@@ -1201,7 +1210,7 @@ Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb>
 .pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on main.pdf (7 pages, 2495769 bytes).
+Output written on main.pdf (7 pages, 2495200 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -7,27 +7,36 @@
 \usepackage{amssymb}
 \usepackage{array}
 \usepackage[english]{babel}
+\usepackage{authblk}
 \title{Open Source Software Framework for Indoor Geolocation Using 802.11 Protocol}
-\author{Authors Name }
+
 \date{April 2018}
 \usepackage[backend=bibtex,style=numeric]{biblatex}
 \bibliography{main.bib} 
 \begin{document}
+\author[1]{Paul Bryden\thanks{Paul.Bryden.2014@uni.strath.ac.uk}}
+\author[2]{Kinjal Gala\thanks{kgala@sdsu.edu}}
+\author[2]{Christopher Paolini\thanks{cpaolini@sdsu.edu}}
+\author[2]{Mahasweta Sarkar\thanks{msarkar@sdsu.edu}}
+\affil[1]{Department of Electronic and Electrical Engineering, University of Strathclyde}
+\affil[2]{Department of Electrical and Computer Engineering, San Diego State University}
+
+\renewcommand\Authands{ and }
 \maketitle
 \begin{abstract}
-	1 in 4 Americans over the age of 65 fall every year. [1] Most of these falls are very serious and can result in major mobility injuries and/or death. The shorter the amount of time it takes for fall victims to get medical attention, the higher their odds of recovery are. As such, it would be very beneficial to develop an Open Source Software Framework capable of identifying the location of a victim within a building or indoor environment using existing infrastructure. 
-\newline This paper discusses the development of a platform-agnostic Open Source Software Framework capable of deriving the location of an individual down to ~3m accuracy using 802.11 WiFi protocol (in areas of good WiFi coverage). A complete end to end framework has been sketched and comprises of the Sensor Software (Embedded Layer), Web Services and Mobile Application for monitoring the movements of individuals. The location is calculated using a derived theory of trilateration and Kalman Filtering is employed to reduce the effect of multipath interference. The Software Framework is written mostly in C++ 11 and takes full advantage of modern design principles to ensure platform portability and flexibility. The sketched solution provides a real, affordable, extendible solution to the problem out laid and it is hoped that thousands of individuals may benefit from it's application in the field.
+	One in Four Americans over the age of 65 fall every year [1].  Most of these falls are very serious and can result in major mobility injuries and/or death. The shorter the amount of time it takes for fall victims to get medical attention, the greater their odds of recovery. As such, it would be very beneficial to develop an Open Source Software Framework capable of identifying the location of a victim within a building, or indoor environment, using existing infrastructure. 
+\newline \indent This paper discusses the development of a platform-agnostic open source software framework capable of deriving the location of an individual down to 3m accuracy using 802.11 WiFi protocol (in areas of good WiFi coverage). A complete end to end framework has been sketched and is comprised of the sensor software (embedded layer), Web Services and a mobile application for monitoring the movements of individuals. The location of a user is calculated using trilateration and Kalman Filtering is employed to reduce the effect of multipath interference. The software framework is written mostly in C++11 and takes full advantage of modern Object Oriented design principles to ensure platform portability and flexibility. The solution provides a real, no cost, extendible solution to the problem of indoor geolocation and it is hoped that many individuals will benefit from this work.
 \end{abstract}
 \section{Introduction}
-According to the Centers for Medicare and Medicaid Services, health-care in the United States has seen a tremendous growth in past decade. It projects 5.9\% growth increase in 2018 and projects to see 19.9\% National Health spending as a share of GDP. The maximum percentage of this is needed by people above the age of 55 which comprise approximately 29\% of the population in America \cite{hi}. The primary reasons for injuries in elderly people are falls due to their debility with respect to their age. Some of these injuries can be fatal or may create a psyche of fear in the individual resulting in them losing the ability to walk properly after the fall. Many algorithms and embedded technologies have been in research and development for the past several years which aim to work towards the basic goal of detecting a fall and reporting the location of the fallen individual to the respective authority.
-\newline Indoor geolocation tracking is an evolving technology which helps to get an accurate location of a person indoors. One of the promising classes of this emerging technology is to take advantage of the existing infrastructure to determine the location \cite{pahlavan2002indoor}. Much work has been carried out to use GPS for Indoor location tracking \cite{kjaergaard2010indoor}. However, the GPS has only 50 \% precision within 7.3 m range in Indoor Geolocation tracking \cite{liu2007survey}. In addition, GPS does not derive an altitude for the user's location which prevents floor-level determination from taking place. 
-\newline This paper sketches the development of an Open Source Software Platform capable of tracking the movements of individuals using existing 802.11 WiFi(R) Infrastructure. The modularity of the Software Framework developed, and it's strong use of C++11 Design Principles, also enables it to be easily adapted to a variety of hardware platforms and radio technologies such as Bluetooth or LoraWAN.
+According to the Centers for Medicare and Medicaid Services (CMS), health-care in the United States has seen a tremendous growth in the past decade. The CMS projects a 5.9\% growth increase in 2018 and projects national health spending to be 19.9\% of GDP. The maximum percentage of funds allocated to healthcare is needed by people above the age of 55, which comprises approximately 29\% of the American population \cite{hi}. The primary reasons for injuries in elderly people are falls due to their debility with respect to their age. Some of these injuries can be fatal or may create a psychology of fear in the individual, resulting in them losing the ability to walk properly after a fall. Many algorithms and embedded technologies have been in research and development for the past several years, which aim to work towards the basic goal of detecting a fall and reporting the location of the fallen individual to a respective authority.
+\newline  Indoor geolocation tracking is an evolving technology which aims the derive the location of an individual within an indoor environment. One of the promising classes of this emerging technology is to take advantage of existing infrastructure to determine the location of a user. \cite{pahlavan2002indoor}. Much work has been carried out to use GPS for indoor location tracking \cite{kjaergaard2010indoor}. However, GPS has an only has an accuracy of 5-50m in an indoor environment. \cite{liu2007survey}.
+\newline \indent This paper presents the development of an open source software platform capable of tracking the movements of individuals using existing 802.11 WiFi Infrastructure. The modularity of the Software Framework developed, and its strong use of C++11 design principles, also enables it to be easily adapted to a variety of hardware platforms and radio technologies such as Bluetooth or LoraWAN.
 \section{Background}
-\noindent As was mentioned, the ability to identify the geographic location of an individual residing outside of a building by latitude, longitude, and altitude is easily accomplished using a relatively inexpensive GPS receiver. Typical commercially available receivers for under \$100 can provide coordinates within a sampling time of the 30s to an accuracy of \newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}} 3m. For example, the Copernicus II 12-channel GPS module from Trimble is under \$70 and can provide updated coordinates with a period of 3s. GPS receivers typically use a carrier wave in the L1 band at 1575.42 MHz on which navigation messages are modulated. Unfortunately, such microwave signals are significantly attenuated by building roofs and walls, rendering GPS unusable indoors. [2]
-The indoor position measurements can be accomplished using different mechanisms such as radio signals, magnetic fields, and sound waves. Newer, emerging technologies employ computer vision to identify objects in the field of a camera's view. The vision system can then measure distances in between recognized objects, and between the user and recognized objects. These measurements provide a system with depth perception and can identify how far a user is away from a surface or other rigid body in a field of view.
-This research project utilizes radio signals, specifically radio signals from 802.11 Wi-fi Access Points. After calculating the known location of these Access Points and the signal strength at the receiver, the distance can be derived using a modification of the free space equation. In this proposal, four access points are employed to derive the location of the user by calculating the distance between them using the trilateration principles.
+\noindent As was mentioned, the ability to identify the geographic location of an individual residing outside of a building by latitude, longitude, and altitude is easily accomplished using a relatively inexpensive GPS receiver. Typical commercially available receivers for under \$100 can provide coordinates within a sampling time of 30s to an accuracy of \newcommand{\rpm}{\raisebox{.2ex}{$\scriptstyle\pm$}} 3m. For example, the Copernicus II 12-channel GPS module from Trimble is under \$70 and can provide updated coordinates with a period of 3s. GPS receivers typically use a carrier wave in the L1 band at 1575.42 MHz on which navigation messages are modulated. Unfortunately, such microwave signals are significantly attenuated by building roofs and walls, rendering GPS unusable indoors [2].
+Indoor position measurements can be accomplished using different mechanisms such as radio signals, magnetic fields, and sound waves. Newer, emerging technologies employ computer vision to identify objects in the field of a camera's view. The vision system can then measure distances in between recognized objects, and between the user and recognized objects. These measurements provide a system with depth perception and can identify how far a user is away from a surface or other rigid body in a field of view.
+This research project utilizes radio signals, specifically radio signals from 802.11 WiFi access points. After calculating the known location of these access points and the signal strength at a receiver, the distance can be derived using a modification of the free space equation. In this software framework, four access points are employed to derive the location of the user by calculating the distance between them using trilateration.
 \section{Software Framework Architecture}
-The Software Framework which has been developed to solve the outlined problem can be broken down into 3 components:
+The software framework, presented in this paper, is composed of three components.
 \newline
 1) Embedded Layer
 \newline
@@ -35,33 +44,29 @@ The Software Framework which has been developed to solve the outlined problem ca
 \newline
 3) Mobile Application Layer
 \newline
-The Embedded Layer comprises all of the software which runs on the sensor node attached to the user.
-\newline
-The MiddleWare Layer comprises all of the RESTful Web Services and the PostgreSQL database which connects the Embedded and Mobile Application layers and ultimately drives the solution.
-\newline
-The Mobile Application Layer consists of the Android Application which is used to render the derived user locations.
-\newline
-A diagram of the complete software framework can be seen in Figure 1.
+The embedded layer is comprised of all of the software which runs on the sensor node held by the user.
+The middleware layer is comprised of RESTful Web Services and a PostgreSQL database, which connects the Embedded and Mobile Application layers.
+The mobile application layer consists of an Android Application, which is used to render a user's location.
+A diagram of the complete software framework is shown in Figure 1.
 \begin{figure}[H]
     \includegraphics[width=9 cm,height=5.5 cm]{2018-05-10-PHOTO-00000077.jpg}
     \caption{Software Framework Architecture Overview}
     \end{figure}
-As was mentioned previously, the RESTful API is the fundamental interface between all components of the software framework. In terms of data flow, the web services provide the relative coordinates of known access points to the sensor node and the node responds with the relative X, Y, Z coordinates of its own derived location. The web services then translate these coordinates into absolute latitude, longitude, and altitude which are consumed by the web application.
-\newline
-\newline
-These respective layers and their operation will now be discussed in detail.
+The RESTful API is the fundamental interface between all components of the software framework. In terms of data flow, the web services provide the relative coordinates of known access points to the sensor node, and the node responds with the relative X, Y, Z coordinates (m) of its own derived location. The web services then translate these coordinates into absolute latitude, longitude, and altitude which are consumed by a mobile application.
+The 3 respective layers and their operation will now be discussed in detail.
 \subsection{Embedded Layer}
-The Embedded Layer is the component of the software framework which runs on the sensory device operated or worn by the user. The Embedded Layer was written entirely in C++ using C++11 design principles and is portable across Linux, Windows, IOS, Android and more platforms. This is possible thanks to the use of modern OOP design principles and the employment of such cross-platform libraries as BOOST and CPPRestSDK which remove the requirement of platform awareness for the majority of the system. As one can see from Figure 2, the only part of the system that requires awareness of the underlying OS/Platform is the Node Scanner Module. A Node in the framework is defined as any 802.11 Access Point. Direct OS interaction is required at this layer due to the low level of access required to the Wireless Hardware.
-Boost is used mainly to enable straightforward, cross-platform, thread safety and thread handling and the CPPRestSDK are used to handle all JSON construction and parsing along with all HTTP Requests.
+The embedded layer is the component of the software framework which runs on a sensory device operated or worn by a user. The embedded layer was written in C++ using C++11 design principles and is portable across Linux, Windows, iOS, Android, and other platforms. This portability is possible thanks to the use of modern OOP design principles and the employment of  cross-platform libraries as BOOST and CPPRestSDK, which removes platform awareness for the majority of the system. As one can see from Figure 2, the only part of the system that requires awareness of the underlying OS/Platform is the Node Scanner Module. A Node in the framework is defined as an 802.11 Access Point. Direct OS interaction is required at this layer due to the low level of access required to the wireless hardware.
+BOOST is used mainly to enable straightforward, cross-platform, thread safety and thread handling and the CPPRestSDK is used to handle JSON construction and parsing along with HTTP Requests.
 \begin{figure}[H]
     \includegraphics[width=9 cm,height=3.5 cm]{Pink_Panther_Architecture.png}
     \caption{Embedded Layer Architecture}
     \end{figure}
 
 \subsubsection{Modules Overview}
-Node Reader Module:
+\rule[-10pt]{0pt}{10pt}\\
+ Node Reader Module:
 \newline
-The Node Reader Module is responsible for creating a known list of nodes and their location.  This has been implemented in 2 different flavors - a file reader, and a HTTP GET reader. The recommended module to utilize is the HTTP GET reader. This module simply grabs the know list of nodes in JSON format from the middleware web services and populates a list of nodes known to the Location and REST Modules.
+The Node Reader Module is responsible for creating a known list of nodes and their locations.  This has been implemented in two different flavors - a file reader, and a HTTP GET reader. The recommended module to utilize is the HTTP GET reader. This module simply grabs the known list of nodes in JSON format from the middleware Web Services and populates a list of nodes known to the Location and REST Modules.
 \newline
 \newline
 Node Scanner Module:
