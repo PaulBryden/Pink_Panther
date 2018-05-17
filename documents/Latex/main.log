@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 14:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 23:05
 entering extended mode
 **./main.tex
 (main.tex
@@ -1085,28 +1085,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 194--207
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--217
+Underfull \hbox (badness 10000) in paragraph at lines 213--216
 
  []
 
 
-Underfull \hbox (badness 1867) in paragraph at lines 218--224
+Underfull \hbox (badness 1867) in paragraph at lines 217--223
 \OT1/ptm/m/n/10 Glass-fish li-brary and frame-work. The ser-vices ba-si-cally
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 218--224
+Underfull \hbox (badness 10000) in paragraph at lines 217--223
 
  []
 
 
-Underfull \hbox (badness 1430) in paragraph at lines 225--227
+Underfull \hbox (badness 1430) in paragraph at lines 224--226
  \OT1/ptm/m/it/10 2) Back end Database: [][] \OT1/ptm/m/n/10 Post-greSQL is the
  back end
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--227
+Underfull \hbox (badness 10000) in paragraph at lines 224--226
 
  []
 
@@ -1114,13 +1114,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 225--227
 <2018-05-10-PHOTO-00000078.png, id=29, 450.18187pt x 268.75406pt>
 File: 2018-05-10-PHOTO-00000078.png Graphic file (type png)
 <use 2018-05-10-PHOTO-00000078.png>
-Package pdftex.def Info: 2018-05-10-PHOTO-00000078.png  used on input line 231.
+Package pdftex.def Info: 2018-05-10-PHOTO-00000078.png  used on input line 230.
 
 (pdftex.def)             Requested size: 227.62512pt x 142.26263pt.
 <IMG_0796.JPG, id=30, 4047.12pt x 3035.34pt>
 File: IMG_0796.JPG Graphic file (type jpg)
 <use IMG_0796.JPG>
-Package pdftex.def Info: IMG_0796.JPG  used on input line 238.
+Package pdftex.def Info: IMG_0796.JPG  used on input line 237.
 (pdftex.def)             Requested size: 227.56348pt x 142.2349pt.
 
 Underfull \vbox (badness 2865) has occurred while \output is active []
@@ -1128,7 +1128,7 @@ Underfull \vbox (badness 2865) has occurred while \output is active []
 <2018-05-10-PHOTO-00000079.png, id=31, 1840.8775pt x 824.07875pt>
 File: 2018-05-10-PHOTO-00000079.png Graphic file (type png)
 <use 2018-05-10-PHOTO-00000079.png>
-Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 251.
+Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 250.
 
 (pdftex.def)             Requested size: 227.60916pt x 142.25433pt.
  [5 <./2018-05-10-PHOTO-00000078.png> <./IMG_0796.JPG> <./2018-05-10-PHOTO-0000
@@ -1136,20 +1136,20 @@ Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 251.
 <Geolocation_1.jpeg, id=36, 1547.7825pt x 874.26625pt>
 File: Geolocation_1.jpeg Graphic file (type jpg)
 <use Geolocation_1.jpeg>
-Package pdftex.def Info: Geolocation_1.jpeg  used on input line 263.
+Package pdftex.def Info: Geolocation_1.jpeg  used on input line 262.
 (pdftex.def)             Requested size: 256.058pt x 170.71468pt.
 
-Overfull \hbox (4.058pt too wide) in paragraph at lines 263--264
+Overfull \hbox (4.058pt too wide) in paragraph at lines 262--263
 [][] 
  []
 
 <Geolocation_2.jpeg, id=37, 1548.78625pt x 875.27pt>
 File: Geolocation_2.jpeg Graphic file (type jpg)
 <use Geolocation_2.jpeg>
-Package pdftex.def Info: Geolocation_2.jpeg  used on input line 270.
+Package pdftex.def Info: Geolocation_2.jpeg  used on input line 269.
 (pdftex.def)             Requested size: 256.05862pt x 170.71034pt.
 
-Overfull \hbox (4.05862pt too wide) in paragraph at lines 270--271
+Overfull \hbox (4.05862pt too wide) in paragraph at lines 269--270
 [][] 
  []
 
@@ -1159,15 +1159,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <Geolocation_3.jpeg, id=38, 1547.7825pt x 874.26625pt>
 File: Geolocation_3.jpeg Graphic file (type jpg)
 <use Geolocation_3.jpeg>
-Package pdftex.def Info: Geolocation_3.jpeg  used on input line 276.
+Package pdftex.def Info: Geolocation_3.jpeg  used on input line 275.
 (pdftex.def)             Requested size: 256.058pt x 170.71468pt.
 
-Overfull \hbox (4.058pt too wide) in paragraph at lines 276--277
+Overfull \hbox (4.058pt too wide) in paragraph at lines 275--276
 [][] 
  []
 
 [6 <./Geolocation_1.jpeg> <./Geolocation_2.jpeg> <./Geolocation_3.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 287--287
+Underfull \hbox (badness 10000) in paragraph at lines 286--286
 []\OT1/ptm/m/n/10 http://money.cnn.com/2018/01/30/news/economy/health-
  []
 
@@ -1196,7 +1196,7 @@ Here is how much of TeX's memory you used:
  14383 multiletter control sequences out of 15000+200000
  40038 words of font info for 87 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,10n,45p,1082b,1582s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,10n,45p,1084b,1582s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 }<C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmex10.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
@@ -1210,7 +1210,7 @@ Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb>
 .pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on main.pdf (7 pages, 2495200 bytes).
+Output written on main.pdf (7 pages, 2495136 bytes).
 PDF statistics:
  79 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
