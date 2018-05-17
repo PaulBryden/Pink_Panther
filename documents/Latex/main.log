@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 23:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 23:45
 entering extended mode
 **./main.tex
 (main.tex
@@ -977,13 +977,13 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 25.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 ** WARNING: \thanks is locked out when in conference mode (line 25).
-<2018-05-10-PHOTO-00000077.jpg, id=1, 968.61874pt x 575.14874pt>
-File: 2018-05-10-PHOTO-00000077.jpg Graphic file (type jpg)
-<use 2018-05-10-PHOTO-00000077.jpg>
-Package pdftex.def Info: 2018-05-10-PHOTO-00000077.jpg  used on input line 52.
-(pdftex.def)             Requested size: 256.07677pt x 156.48578pt.
+<System_Diagram.jpg, id=1, 1110.1475pt x 750.805pt>
+File: System_Diagram.jpg Graphic file (type jpg)
+<use System_Diagram.jpg>
+Package pdftex.def Info: System_Diagram.jpg  used on input line 52.
+(pdftex.def)             Requested size: 256.07388pt x 156.48224pt.
 
-Overfull \hbox (4.07677pt too wide) in paragraph at lines 52--53
+Overfull \hbox (4.07388pt too wide) in paragraph at lines 52--53
 [][] 
  []
 
@@ -991,13 +991,13 @@ Overfull \hbox (4.07677pt too wide) in paragraph at lines 52--53
 
 
 ]
-<Pink_Panther_Architecture.png, id=9, 911.405pt x 313.17pt>
-File: Pink_Panther_Architecture.png Graphic file (type png)
-<use Pink_Panther_Architecture.png>
-Package pdftex.def Info: Pink_Panther_Architecture.png  used on input line 61.
-(pdftex.def)             Requested size: 256.0817pt x 99.58566pt.
+<Pink_Panther_Architecture.jpg, id=9, 910.40125pt x 313.17pt>
+File: Pink_Panther_Architecture.jpg Graphic file (type jpg)
+<use Pink_Panther_Architecture.jpg>
+Package pdftex.def Info: Pink_Panther_Architecture.jpg  used on input line 61.
+(pdftex.def)             Requested size: 256.0775pt x 99.58566pt.
 
-Overfull \hbox (4.0817pt too wide) in paragraph at lines 61--62
+Overfull \hbox (4.0775pt too wide) in paragraph at lines 61--62
 [][] 
  []
 
@@ -1031,7 +1031,7 @@ Underfull \hbox (badness 4995) in paragraph at lines 90--101
 \OT1/ptm/m/n/10 The op-ti-mal sig-nal prop-a-ga-tion con-stant for a noisy
  []
 
-[2 <./2018-05-10-PHOTO-00000077.jpg> <./Pink_Panther_Architecture.png>]
+[2 <./System_Diagram.jpg> <./Pink_Panther_Architecture.jpg>]
 Underfull \hbox (badness 10000) in paragraph at lines 123--127
 
  []
@@ -1066,7 +1066,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 183--185
 
  []
 
-<uml_9-5-18.png, id=20, 1109.1036pt x 1610.1756pt>
+<uml_9-5-18.png, id=18, 1109.1036pt x 1610.1756pt>
 File: uml_9-5-18.png Graphic file (type png)
 <use uml_9-5-18.png>
 Package pdftex.def Info: uml_9-5-18.png  used on input line 190.
@@ -1111,13 +1111,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 224--226
  []
 
 [4 <./uml_9-5-18.png>]
-<2018-05-10-PHOTO-00000078.png, id=29, 450.18187pt x 268.75406pt>
+<2018-05-10-PHOTO-00000078.png, id=27, 450.18187pt x 268.75406pt>
 File: 2018-05-10-PHOTO-00000078.png Graphic file (type png)
 <use 2018-05-10-PHOTO-00000078.png>
 Package pdftex.def Info: 2018-05-10-PHOTO-00000078.png  used on input line 230.
 
 (pdftex.def)             Requested size: 227.62512pt x 142.26263pt.
-<IMG_0796.JPG, id=30, 4047.12pt x 3035.34pt>
+<IMG_0796.JPG, id=28, 4047.12pt x 3035.34pt>
 File: IMG_0796.JPG Graphic file (type jpg)
 <use IMG_0796.JPG>
 Package pdftex.def Info: IMG_0796.JPG  used on input line 237.
@@ -1125,7 +1125,7 @@ Package pdftex.def Info: IMG_0796.JPG  used on input line 237.
 
 Underfull \vbox (badness 2865) has occurred while \output is active []
 
-<2018-05-10-PHOTO-00000079.png, id=31, 1840.8775pt x 824.07875pt>
+<2018-05-10-PHOTO-00000079.png, id=29, 1840.8775pt x 824.07875pt>
 File: 2018-05-10-PHOTO-00000079.png Graphic file (type png)
 <use 2018-05-10-PHOTO-00000079.png>
 Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 250.
@@ -1133,7 +1133,7 @@ Package pdftex.def Info: 2018-05-10-PHOTO-00000079.png  used on input line 250.
 (pdftex.def)             Requested size: 227.60916pt x 142.25433pt.
  [5 <./2018-05-10-PHOTO-00000078.png> <./IMG_0796.JPG> <./2018-05-10-PHOTO-0000
 0079.png>]
-<Geolocation_1.jpeg, id=36, 1547.7825pt x 874.26625pt>
+<Geolocation_1.jpeg, id=35, 1547.7825pt x 874.26625pt>
 File: Geolocation_1.jpeg Graphic file (type jpg)
 <use Geolocation_1.jpeg>
 Package pdftex.def Info: Geolocation_1.jpeg  used on input line 262.
@@ -1143,7 +1143,7 @@ Overfull \hbox (4.058pt too wide) in paragraph at lines 262--263
 [][] 
  []
 
-<Geolocation_2.jpeg, id=37, 1548.78625pt x 875.27pt>
+<Geolocation_2.jpeg, id=36, 1548.78625pt x 875.27pt>
 File: Geolocation_2.jpeg Graphic file (type jpg)
 <use Geolocation_2.jpeg>
 Package pdftex.def Info: Geolocation_2.jpeg  used on input line 269.
@@ -1156,7 +1156,7 @@ Overfull \hbox (4.05862pt too wide) in paragraph at lines 269--270
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<Geolocation_3.jpeg, id=38, 1547.7825pt x 874.26625pt>
+<Geolocation_3.jpeg, id=37, 1547.7825pt x 874.26625pt>
 File: Geolocation_3.jpeg Graphic file (type jpg)
 <use Geolocation_3.jpeg>
 Package pdftex.def Info: Geolocation_3.jpeg  used on input line 275.
@@ -1191,7 +1191,7 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  10991 strings out of 493305
- 188588 string characters out of 3129802
+ 188533 string characters out of 3129802
  461086 words of memory out of 3000000
  14383 multiletter control sequences out of 15000+200000
  40038 words of font info for 87 fonts, out of 3000000 for 9000
@@ -1210,9 +1210,9 @@ Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb>
 .pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on main.pdf (7 pages, 2495136 bytes).
+Output written on main.pdf (7 pages, 2577467 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
+ 78 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -49,7 +49,7 @@ The middleware layer is comprised of RESTful Web Services and a PostgreSQL datab
 The mobile application layer consists of an Android Application, which is used to render a user's location.
 A diagram of the complete software framework is shown in Figure 1.
 \begin{figure}[H]
-    \includegraphics[width=9 cm,height=5.5 cm]{2018-05-10-PHOTO-00000077.jpg}
+    \includegraphics[width=9 cm,height=5.5 cm]{System_Diagram.jpg}
     \caption{Software Framework Architecture Overview}
     \end{figure}
 The RESTful API is the fundamental interface between all components of the software framework. In terms of data flow, the web services provide the relative coordinates of known access points to the sensor node, and the node responds with the relative X, Y, Z coordinates (m) of its own derived location. The web services then translate these coordinates into absolute latitude, longitude, and altitude which are consumed by a mobile application.
@@ -58,7 +58,7 @@ The 3 respective layers and their operation will now be discussed in detail.
 The embedded layer is the component of the software framework which runs on a sensory device operated or worn by a user. The embedded layer was written in C++ using C++11 design principles and is portable across Linux, Windows, iOS, Android, and other platforms. This portability is possible thanks to the use of modern OOP design principles and the employment of cross-platform libraries as BOOST and CPPRestSDK, which removes platform awareness for the majority of the system. As one can see from Figure 2, the only part of the system that requires awareness of the underlying OS/Platform is the Node Scanner Module. A Node in the framework is defined as an 802.11 Access Point. Direct OS interaction is required at this layer due to the low level of access required to the wireless hardware.
 BOOST is used mainly to enable straightforward, cross-platform, thread safety and thread handling and the CPPRestSDK are used to handle JSON construction and parsing along with HTTP Requests.
 \begin{figure}[H]
-    \includegraphics[width=9 cm,height=3.5 cm]{Pink_Panther_Architecture.png}
+    \includegraphics[width=9 cm,height=3.5 cm]{Pink_Panther_Architecture.jpg}
     \caption{Embedded Layer Architecture}
     \end{figure}
 
