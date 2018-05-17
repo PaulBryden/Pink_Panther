@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  16 MAY 2018 23:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.15)  17 MAY 2018 11:38
 entering extended mode
 **./main.tex
 (main.tex
@@ -1090,11 +1090,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 213--216
  []
 
 
-Underfull \hbox (badness 1867) in paragraph at lines 217--223
-\OT1/ptm/m/n/10 Glass-fish li-brary and frame-work. The ser-vices ba-si-cally
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 217--223
 
  []
@@ -1190,13 +1185,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 10991 strings out of 493305
- 188533 string characters out of 3129802
- 461086 words of memory out of 3000000
- 14383 multiletter control sequences out of 15000+200000
+ 10995 strings out of 493305
+ 188667 string characters out of 3129802
+ 461110 words of memory out of 3000000
+ 14387 multiletter control sequences out of 15000+200000
  40038 words of font info for 87 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,10n,45p,1084b,1582s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,10n,45p,1084b,1583s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc
 }<C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmex10.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
@@ -1210,7 +1205,7 @@ Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb>
 .pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Users/green/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/time
 s/utmri8a.pfb>
-Output written on main.pdf (7 pages, 2577467 bytes).
+Output written on main.pdf (7 pages, 2577573 bytes).
 PDF statistics:
  78 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

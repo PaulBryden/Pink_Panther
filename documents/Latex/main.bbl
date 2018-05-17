@@ -16,7 +16,7 @@
   {}
 \endgroup
 
-\datalist[entry]{nty/global//global/global}
+\datalist[entry]{none/global//global/global}
   \entry{hi}{article}{}
     \name{author}{1}{}{%
       {{hash=hccete}{%
@@ -29,8 +29,42 @@
     \strng{namehash}{ehccet1}
     \strng{fullhash}{ehccet1}
     \field{labelnamesource}{author}
-    \field{sortinit}{E}
-    \field{sortinithash}{E}
+  \endentry
+
+  \entry{pahlavan2002indoor}{article}{}
+    \name{author}{3}{}{%
+      {{hash=PK}{%
+         family={Pahlavan},
+         familyi={P\bibinitperiod},
+         given={Kaveh},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=LX}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Xinrong},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=MJP}{%
+         family={Makela},
+         familyi={M\bibinitperiod},
+         given={Juha-Pekka},
+         giveni={J\bibinitperiod-P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{PKLXMJP1}
+    \strng{fullhash}{PKLXMJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{2}
+    \field{pages}{112\bibrangedash 118}
+    \field{title}{Indoor geolocation science and technology}
+    \field{volume}{40}
+    \field{journaltitle}{IEEE Communications Magazine}
+    \field{year}{2002}
   \endentry
 
   \entry{kjaergaard2010indoor}{inproceedings}{}
@@ -79,8 +113,6 @@
     \strng{fullhash}{KMBBHGTTTCDLGK1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{K}
-    \field{sortinithash}{K}
     \field{booktitle}{International conference on pervasive computing}
     \field{pages}{38\bibrangedash 56}
     \field{title}{Indoor positioning using GPS revisited}
@@ -121,8 +153,6 @@
     \strng{fullhash}{LHDHBPLJ1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{L}
-    \field{sortinithash}{L}
     \field{number}{6}
     \field{pages}{1067\bibrangedash 1080}
     \field{title}{Survey of wireless indoor positioning techniques and systems}
@@ -132,42 +162,23 @@
     \field{year}{2007}
   \endentry
 
-  \entry{pahlavan2002indoor}{article}{}
-    \name{author}{3}{}{%
-      {{hash=PK}{%
-         family={Pahlavan},
-         familyi={P\bibinitperiod},
-         given={Kaveh},
-         giveni={K\bibinitperiod},
-      }}%
-      {{hash=LX}{%
-         family={Li},
-         familyi={L\bibinitperiod},
-         given={Xinrong},
-         giveni={X\bibinitperiod},
-      }}%
-      {{hash=MJP}{%
-         family={Makela},
-         familyi={M\bibinitperiod},
-         given={Juha-Pekka},
-         giveni={J\bibinitperiod-P\bibinitperiod},
+  \entry{KalmanFilter}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=DL}{%
+         family={Dao},
+         familyi={D\bibinitperiod},
+         given={Long},
+         giveni={L\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {IEEE}%
+    \list{organization}{1}{%
+      {Mbed}%
     }
-    \strng{namehash}{PKLXMJP1}
-    \strng{fullhash}{PKLXMJP1}
+    \strng{namehash}{DL1}
+    \strng{fullhash}{DL1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{P}
-    \field{sortinithash}{P}
-    \field{number}{2}
-    \field{pages}{112\bibrangedash 118}
-    \field{title}{Indoor geolocation science and technology}
-    \field{volume}{40}
-    \field{journaltitle}{IEEE Communications Magazine}
-    \field{year}{2002}
+    \field{title}{C++ KalmanFilter Implementation}
   \endentry
 \enddatalist
 \endinput
