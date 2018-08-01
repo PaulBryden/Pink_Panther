@@ -4,7 +4,7 @@
 
 #include "inc/Modules/FileNodeReaderModule.h"
 
-FileNodeReaderModule::FileNodeReaderModule(std::string filepath) : m_isRunning(false), m_filepath(filepath)
+FileNodeReaderModule::FileNodeReaderModule(std::string filepath, std::shared_ptr<node::NodeContainer>& nodeList) : m_isRunning(false), m_filepath(filepath),m_Nodes(nodeList)
 {
 
 }
@@ -12,17 +12,16 @@ FileNodeReaderModule::FileNodeReaderModule(std::string filepath) : m_isRunning(f
 std::shared_ptr<node::NodeContainer> FileNodeReaderModule::readNodes()
 {
     std::shared_ptr<node::NodeContainer> m_NodeList = std::make_shared<node::NodeContainer>();
+    boost::mutex::scoped_lock lock(g_i_mutex);
     try
     {
-        boost::mutex::scoped_lock lock(g_i_mutex);
         std::ifstream f(m_filepath);
         std::stringstream s;
         std::stringstream json;
         web::json::value v;
         if (f)
         {
-            s
-                    << f.rdbuf();                                         // stream results of reading from file stream into string stream
+            s<< f.rdbuf();                                         // stream results of reading from file stream into string stream
             f.close();                                              // close the filestream
             v = web::json::value::parse(s.str());
             std::cout << s.str();// parse the resultant string stream.
@@ -44,11 +43,14 @@ std::shared_ptr<node::NodeContainer> FileNodeReaderModule::readNodes()
         std::cout << excep.what();
 
     }
+    fflush(stdout);
+    return m_NodeList;
 }
 
 void FileNodeReaderModule::initialize()
 {
     m_isRunning = true;
+    m_Nodes=readNodes();
 
 }
 

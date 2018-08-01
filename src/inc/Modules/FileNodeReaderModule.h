@@ -19,9 +19,8 @@ private:
 
 
 public:
-    FileNodeReaderModule(std::string filepath);
-
-    ~FileNodeReaderModule();
+    FileNodeReaderModule(std::string filepath, std::shared_ptr<node::NodeContainer>& nodeList);
+    std::shared_ptr<node::NodeContainer>& m_Nodes;
 
     std::shared_ptr<node::NodeContainer> readNodes();
 
