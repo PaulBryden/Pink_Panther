@@ -1,6 +1,8 @@
 //
 // Created by green on 04/12/17.
 //
+#include <iostream>     // std::cout, std::fixed
+#include <iomanip>      // std::setprecision
 
 #include "inc/Modules/LocationModule.h"
 #include <boost/lexical_cast.hpp>
@@ -9,6 +11,7 @@
 
 using boost::lexical_cast;
 
+// I think nodes should be the scanned nodes m_ScannedNodes
 LocationModule::LocationModule(std::shared_ptr<node::NodeContainer>& nodes) : m_Nodes(nodes),
                                                                               m_dgelsLoc(std::make_shared<Location>()),
                                                                               m_dgetrsLoc(std::make_shared<Location>()),
@@ -22,13 +25,17 @@ void LocationModule::CalculateLocations()
     boost::mutex::scoped_lock lock(g_i_mutex);
     try
     {
-        calculateDgels(GetNodeTargets(m_Nodes));
-        calculateDgesvDgetrs(GetNodeTargets(m_Nodes));
-    } catch (std::exception e)
+      // I think m_Nodes should be the nodes read from Settings.json by the FileNodeReaderModule
+      calculateDgels(GetNodeTargets(m_Nodes)); // m_Nodes is a container of AP nodes, with known (x,y,z) coordinates
+
+      calculateDgesvDgetrs(GetNodeTargets(m_Nodes));
+      std::cerr << std::endl; // skip a line
+    }
+    catch (std::exception e)
     {
-        std::cout << "Not Enough Nodes in Range." << std::endl;
-        // UnsupportedOperationException ex;
-        // throw(ex);
+      //std::cout << "Not Enough Nodes in Range." << std::endl;
+      // UnsupportedOperationException ex;
+      // throw(ex);
     }
 
 }
@@ -41,6 +48,8 @@ std::shared_ptr<Location> LocationModule::GetLocation()
 
 std::shared_ptr<node::NodeContainer> LocationModule::GetNodeTargets(std::shared_ptr<node::NodeContainer> tempNodes)
 {
+  // I think tempNodes should be the nodes read from Settings.json by the FileNodeReaderModule
+  
     if (tempNodes == NULL)
     {
         UnsupportedOperationException ex;
@@ -55,25 +64,23 @@ std::shared_ptr<node::NodeContainer> LocationModule::GetNodeTargets(std::shared_
               });
     for (auto &i : tempNodes->GetNodes())
     {
-        if (targetNodes->GetNodes().size() < 4 && i->getRSSI() != 0 && i->getRecentlyUpdated())
+      // std::cerr << "LocationModule::GetNodeTargets: tempNode: " << i->getSSID() << std::endl;
+      
+      if (targetNodes->GetNodes().size() < 4 && i->getRSSI() != 0 && i->getRecentlyUpdated())
         {
-
-            targetNodes->AddNode(i);
-
+	  // add node to use in LSQ location calculation
+	  targetNodes->AddNode(i); 
         }
     }
     for (auto &i : targetNodes->GetNodes())
     {
-
-        std::cout << "RSSI ORDERING" << i->getRSSI() << i->getMAC() << std::endl;
+      // std::cout << "RSSI ORDERING (SSID,RSSI,MAC): " << i->getSSID() << ", " << i->getRSSI() << ", " << i->getMAC() << std::endl;
     }
-
     if (targetNodes->GetNodes().size() < 4)
     {
         std::exception e;
         throw (e);
     }
-
     return targetNodes;
 }
 
@@ -98,8 +105,6 @@ web::json::value LocationModule::BasicJson()
 
 void LocationModule::calculateDgesvDgetrs(std::shared_ptr<node::NodeContainer> nodes)
 {
-
-
     if (nodes->GetNodes().size() != 4)
     {
         throw ("Error::Too few Nodes!");
@@ -109,9 +114,7 @@ void LocationModule::calculateDgesvDgetrs(std::shared_ptr<node::NodeContainer> n
 
     for (std::shared_ptr<INode> a: nodes->GetNodes())
     {
-        std::cout << a->getSSID();
         Nodes.push_back(std::static_pointer_cast<TargetNode>(a));
-
     }
 
     double A[3][3] = {2 * (Nodes[1]->getXCoord() - Nodes[0]->getXCoord()),
@@ -158,19 +161,19 @@ void LocationModule::calculateDgesvDgetrs(std::shared_ptr<node::NodeContainer> n
         return;
     }
 
-    printf("Calcuated values.");
-    fflush(stdout);
+    // printf("Calcuated values.");
+    // fflush(stdout);
     m_dgesvLoc->updateCoords(B[0][0], B[1][0], B[2][0]);
     /*m_dgesvLoc->xCoord=(B[0][0]);
     m_dgesvLoc->yCoord=(B[1][0]);
     m_dgesvLoc->zCoord=(B[2][0]);*/
     m_dgesvLoc->m_calculationTime = t.elapsed().wall;
 
-    printf("Calculated Location: ");
-    std::cout << "X:" << lexical_cast<std::string>(B[0][0]) << " Y:" << lexical_cast<std::string>(B[1][0]) << " Z:"
-              << lexical_cast<std::string>(B[2][0]) << "Time:"
+    std::cerr << "Calculated Location (dgesv): ";
+    std::cerr << std::fixed << std::setprecision(4);
+    std::cerr <<  "X:" << lexical_cast<std::string>(B[0][0]) << " Y:" << lexical_cast<std::string>(B[1][0]) << " Z:"
+              << lexical_cast<std::string>(B[2][0]) << " Time:"
               << lexical_cast<std::string>(m_dgesvLoc->m_calculationTime) << std::endl;
-
 
     double B2[3][1] = {(pow(Nodes[0]->GetDistance(), 2.0)) - (pow(Nodes[1]->GetDistance(), 2.0)) -
                        (pow(Nodes[0]->getXCoord(), 2.0)) + (pow(Nodes[1]->getXCoord(), 2.0)) -
@@ -204,30 +207,34 @@ void LocationModule::calculateDgesvDgetrs(std::shared_ptr<node::NodeContainer> n
 
     m_dgetrsLoc->m_calculationTime = t.elapsed().wall - m_dgesvLoc->m_calculationTime;
 
-    std::cout << "X:" << lexical_cast<std::string>(B2[0][0]) << " Y:" << lexical_cast<std::string>(B2[1][0]) << " Z:"
-              << lexical_cast<std::string>(B2[2][0]) << "Time:"
+    std::cerr << "Calculated Location (dgetrs): ";
+    std::cerr << std::setprecision(4) << "X:" << lexical_cast<std::string>(B2[0][0]) << " Y:" << lexical_cast<std::string>(B2[1][0]) << " Z:"
+              << lexical_cast<std::string>(B2[2][0]) << " Time:"
               << lexical_cast<std::string>(m_dgetrsLoc->m_calculationTime) << std::endl;
-
 
     return;
 }
 
 
+/*
+ * LocationModule::calculateDgels
+ *
+ * Input: nodes is a container of access point nodes, with known (x,y,z) coordinates
+ *
+ */
 void LocationModule::calculateDgels(std::shared_ptr<node::NodeContainer> nodes)
 {
-
     if (nodes->GetNodes().size() != 4)
     {
         throw ("Error::Too few Nodes!");
     }
 
-    std::vector<std::shared_ptr<TargetNode>> Nodes;
+    std::vector<std::shared_ptr<TargetNode>> Nodes; // TargetNodes with known (x,y,z) coordinates
 
     for (std::shared_ptr<INode> a: nodes->GetNodes())
     {
-        std::cout << a->getSSID();
+	// I think we need to get the corresponding node from the TargetNodes container
         Nodes.push_back(std::static_pointer_cast<TargetNode>(a));
-
     }
 
     double A[3][3] = {2 * (Nodes[1]->getXCoord() - Nodes[0]->getXCoord()),
@@ -274,9 +281,9 @@ void LocationModule::calculateDgels(std::shared_ptr<node::NodeContainer> nodes)
     m_dgelsLoc->updateCoords(B[0][0], B[1][0], B[2][0]);
     m_dgelsLoc->m_calculationTime = t.elapsed().wall;
 
-    printf("Calculated Location Dgels: ");
-    std::cout << "X:" << lexical_cast<std::string>(B[0][0]) << " Y:" << lexical_cast<std::string>(B[1][0]) << " Z:"
-              << lexical_cast<std::string>(B[2][0]) << "Time:"
+    std::cerr << "Calculated Location (dgels): ";
+    std::cerr << std::setprecision(5) << "X:" << lexical_cast<std::string>(B[0][0]) << " Y:" << lexical_cast<std::string>(B[1][0]) << " Z:"
+              << lexical_cast<std::string>(B[2][0]) << " Time:"
               << lexical_cast<std::string>(m_dgelsLoc->m_calculationTime) << std::endl;
 
     return;
@@ -288,7 +295,6 @@ void LocationModule::initialize()
 {
     m_isRunning = true;
 }
-
 
 void LocationModule::deInitialize()
 {

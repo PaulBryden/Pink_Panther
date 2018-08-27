@@ -31,12 +31,13 @@ void on_initialize(const string_t &address)
     uri_builder uri(address);
     uri.append_path(U("Triangulation"));
     auto addr = uri.to_uri().to_string();
-    std::cout << addr << std::endl;
+    // std::cout << addr << std::endl;
 
     p_HttpGetMod = std::make_shared<FileNodeReaderModule>("Settings.json",targetNodes);
+
     p_LocMod = std::make_shared<LocationModule>(targetNodes);
     #ifdef __arm__
-    p_ScanMod = std::make_shared<WifiScanModule>();
+    p_ScanMod = std::make_shared<WifiScanModule>(targetNodes);
     #else
     p_ScanMod = std::make_shared<WifiScanModulex86Test>();
     #endif
@@ -51,16 +52,13 @@ void on_initialize(const string_t &address)
 
     for (auto &i : moduleList)
     {
-        i->initialize();
+      i->initialize();
     }
-
-
     while (true)
     {
-        targetNodes->UpdateNodes(p_ScanMod->getScannedNodes());
-        boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
+      targetNodes->UpdateNodes(p_ScanMod->getScannedNodes());
+      boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
     }
-
 }
 
 void on_shutdown()

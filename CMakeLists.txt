@@ -21,6 +21,11 @@ find_package(Boost CONFIG REQUIRED random system thread filesystem atomic date_t
 hunter_add_package(OpenSSL)
 find_package(OpenSSL REQUIRED)
 
+SET (BOOST_ROOT "/home/paolini/.hunter/_Base/e99ddb1/24add81/9a337fa/Install")
+SET (BOOST_INCLUDEDIR "/home/paolini/.hunter/_Base/e99ddb1/24add81/9a337fa/Install/include")
+SET (BOOST_LIBRARYDIR "/home/paolini/.hunter/_Base/e99ddb1/24add81/9a337fa/Install/lib")
+
+#SET(CMAKE_SYSROOT "/usr/arm-linux-gnueabihf")
 
 #SET(CMAKE_FIND_LIBRARY_SUFFIXES .a)
 #set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -33,23 +38,27 @@ find_package(OpenSSL REQUIRED)
 #set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 
 ADD_LIBRARY(wiffy_module src/iwlib.c src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Modules/Interfaces/IModule.h src/WifiScanModulex86Test.cpp src/inc/Modules/WifiScanModulex86Test.h)
-include_directories(../Pink_Panther/submodules/Kalman/kalman/*.hpp)
-ADD_LIBRARY(kalman ../Pink_Panther/submodules/Kalman/kstatics.cpp src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Modules/Interfaces/IModule.h src/WifiScanModulex86Test.cpp src/inc/Modules/WifiScanModulex86Test.h)
+#include_directories(/home/paolini/Pink_Panther/submodules/Kalman/kalman/*.hpp)
+include_directories(/home/paolini/Pink_Panther/submodules/Kalman)
+include_directories(/home/paolini/Pink_Panther/submodules/cpprestsdk/Release/include)
+ADD_LIBRARY(kalman /home/paolini/Pink_Panther/submodules/Kalman/kstatics.cpp src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Modules/Interfaces/IModule.h src/WifiScanModulex86Test.cpp src/inc/Modules/WifiScanModulex86Test.h)
 
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/usr/local/include)
+#include_directories(${CMAKE_CURRENT_BINARY_DIR}/usr/local/include)
 if(RASPBERRY_PI)
 else()
-include_directories(/home/green/software/build_panther/usr/local/include)
+include_directories(/home/paolini/Pink_Panther/build_panther/usr/local/include)
 endif()
 #include_directories(/home/green/software/build_panther/usr/local/include)
 include_directories(SYSTEM ${CPP_REST_INCLUDE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(/home/paolini/.hunter/_Base/e99ddb1/24add81/9a337fa/Install/include)
+include_directories(/home/paolini/Pink_Panther/submodules/lapack/LAPACKE/include)
 
 add_executable(trigApp src/Main.cpp src/inc/stdafx.h src/inc/Modules/RestModule.h src/RestModule.cpp src/Node.cpp src/inc/Data/Node.h src/NodeContainer.cpp src/inc/Data/NodeContainer.h src/inc/wireless.h src/WifiScanModule.cpp src/inc/Modules/WifiScanModule.h src/inc/Modules/FileNodeReaderModule.h src/FileNodeReaderModule.cpp src/TargetNode.cpp src/inc/Data/TargetNode.h src/inc/Interfaces/INode.h src/LocationModule.cpp src/inc/Modules/LocationModule.h src/inc/Data/Location.h src/KalmanFilterRSSI.cpp src/inc/KalmanFilterRSSI.h src/HttpGetNodeReaderModule.cpp src/inc/Modules/HttpGetNodeReaderModule.h src/inc/Modules/Interfaces/IScanModule.h src/inc/Modules/Interfaces/ILocationModule.h src/inc/Exceptions/UnsupportedOperationException.h src/inc/Modules/Interfaces/IModule.h src/WifiScanModulex86Test.cpp src/inc/Modules/WifiScanModulex86Test.h)
 SET_TARGET_PROPERTIES(trigApp PROPERTIES LINK_FLAGS "-lgfortran")
 
-target_link_libraries(trigApp ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libblas.a
+target_link_libraries(trigApp ${CMAKE_CURRENT_BINARY_DIR}/../submodules/cpprestsdk/Release/build/Binaries/libcpprest-arm.a ${CMAKE_CURRENT_BINARY_DIR}/../submodules/lapack/liblapacke-arm.a ${CMAKE_CURRENT_BINARY_DIR}/../submodules/lapack/liblapack-arm.a ${CMAKE_CURRENT_BINARY_DIR}/../submodules/lapack/libblas-arm.a
   Boost::boost
   Boost::random
   Boost::timer
@@ -71,7 +80,9 @@ target_link_libraries(trigApp
 )
 else()
 target_link_libraries(trigApp
+lapacke
 lapack
+refblas
 gfortran
 )
 endif()
@@ -80,7 +91,7 @@ add_executable(MainProxy src/MainProxy.cpp src/inc/stdafx.h src/inc/Modules/Rest
 SET_TARGET_PROPERTIES(MainProxy PROPERTIES LINK_FLAGS "-lgfortran")
 MESSAGE(${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(MainProxy ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libcpprestd.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapacke.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/liblapack.a ${CMAKE_CURRENT_BINARY_DIR}/usr/local/lib/libblas.a
+target_link_libraries(MainProxy ${CMAKE_CURRENT_BINARY_DIR}/../submodules/cpprestsdk/Release/build/Binaries/libcpprest-arm.a ${CMAKE_CURRENT_BINARY_DIR}/../submodules/lapack/liblapacke-arm.a ${CMAKE_CURRENT_BINARY_DIR}/../submodules/lapack/liblapack-arm.a ${CMAKE_CURRENT_BINARY_DIR}/../submodules/lapack/libblas-arm.a
   Boost::boost
   Boost::random
   Boost::timer

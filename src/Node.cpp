@@ -16,8 +16,7 @@ Node::Node(web::json::value node) : m_Recently_Updated(true)
 {
     try
     {
-        m_name = node["ssid"].as_string();
-        cout << node["ssid"];
+        m_name = node["SSID"].as_string();
     } catch (std::exception e)
     {
         printf("Error:: Cannot parse SSID from JSON. Please check Syntax");
@@ -26,8 +25,7 @@ Node::Node(web::json::value node) : m_Recently_Updated(true)
     }
     try
     {
-        m_rssi = node["rssi"].as_double();
-        cout << node["rssi"];
+        m_rssi = node["RSSI"].as_double();
     } catch (std::exception e)
     {
         printf("Error:: Cannot parse RSSI from JSON. Substituing with 0");
@@ -35,16 +33,13 @@ Node::Node(web::json::value node) : m_Recently_Updated(true)
     }
     try
     {
-        m_mac = node["mac"].as_string();
-        cout << node["mac"];
+        m_mac = node["MAC"].as_string();
     } catch (std::exception e)
     {
         printf("Error:: Cannot parse mac from JSON. Please check Syntax");
         std::exception ParseError;
         throw (ParseError);
     }
-
-
 }
 
 web::json::value Node::ToJson()
@@ -79,7 +74,8 @@ void Node::Update(std::shared_ptr<INode> Node)
 {
     m_rssi = Node->getRSSI();
     m_name = Node->getSSID();
-    m_name = Node->getMAC();
+    //    m_name = Node->getMAC();
+    m_mac = Node->getMAC();
 }
 
 void Node::setRecentlyUpdated(bool status)

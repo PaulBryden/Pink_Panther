@@ -9,7 +9,6 @@ using namespace std;
 
 void TargetNode::Update(std::shared_ptr<INode> Node)
 {
-
     boost::mutex::scoped_lock lock(g_i_mutex);
     m_Node = Node;
     updateKalmanRSSI();
@@ -28,14 +27,13 @@ TargetNode::TargetNode(web::json::value node, double calibrationParam, double Q,
 
 void TargetNode::ParseJson(web::json::value node)
 {
-
     boost::mutex::scoped_lock lock(g_i_mutex);
     m_Node = std::make_shared<Node>(node);
     try
     {
         m_XCoord = node["x"].as_double();
-        cout << node["x"];
-    } catch (std::exception e)
+    }
+    catch (std::exception e)
     {
         printf("Error:: Cannot parse XCoord from JSON. Please check Syntax");
         std::exception ParseError;
@@ -44,8 +42,8 @@ void TargetNode::ParseJson(web::json::value node)
     try
     {
         m_YCoord = node["y"].as_double();
-        cout << node["y"];
-    } catch (std::exception e)
+    }
+    catch (std::exception e)
     {
         printf("Error:: Cannot parse YCoord from JSON. Please check Syntax");
         std::exception ParseError;
@@ -54,8 +52,8 @@ void TargetNode::ParseJson(web::json::value node)
     try
     {
         m_ZCoord = node["z"].as_double();
-        cout << node["z"];
-    } catch (std::exception e)
+    }
+    catch (std::exception e)
     {
         printf("Error:: Cannot parse ZCoord from JSON. Please check Syntax");
         std::exception ParseError;
@@ -64,14 +62,13 @@ void TargetNode::ParseJson(web::json::value node)
     try
     {
         m_rssi_cal = node["cal"].as_integer();
-        cout << node["cal"];
-    } catch (std::exception e)
+    }
+    catch (std::exception e)
     {
         printf("Error:: Cannot parse RSSICalib from JSON. Please check Syntax");
         std::exception ParseError;
         throw (ParseError);
     }
-
 }
 
 
@@ -118,7 +115,7 @@ double TargetNode::GetDistance()
     {
         double Power = (-(static_cast<double>(m_Kalman_RSSI_Val - (m_rssi_cal)) / (10.0 * 2.35)));
 
-        printf("Calculating Distance: %f", pow(10.0, Power));
+        // printf("Calculating Distance: %f\n", pow(10.0, Power));
 
         return pow(10.0, Power);
     } catch (std::exception X)

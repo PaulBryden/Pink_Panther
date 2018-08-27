@@ -38,7 +38,6 @@ namespace node
     private:
         boost::mutex g_i_mutex;
         std::vector<std::shared_ptr<INode>> m_Nodes;
-
     };
 }
 

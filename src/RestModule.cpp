@@ -26,17 +26,14 @@ void RestModule::initialize()
         if (!m_isRunning)
         {
             m_TargetNodes = std::make_shared<node::NodeContainer>();
-
-
-            //m_TargetNodes = m_ReaderModule->readNodes();
+	    m_TargetNodes = m_ReaderModule->readNodes(); // GET request to retrieve AP coordinates from database
             m_listener.open();
             m_listener.support(methods::GET, std::bind(&RestModule::handle_get, this, std::placeholders::_1));
             m_listener.support(methods::PUT, std::bind(&RestModule::handle_put, this, std::placeholders::_1));
             m_listener.support(methods::POST, std::bind(&RestModule::handle_post, this, std::placeholders::_1));
             m_listener.support(methods::DEL, std::bind(&RestModule::handle_delete, this, std::placeholders::_1));
             m_isRunning = true;
-            //m_ScannerPtr = std::make_shared<boost::thread>(boost::bind(&RestModule::PostData, this));
-
+            m_ScannerPtr = std::make_shared<boost::thread>(boost::bind(&RestModule::PostData, this));
         }
     }
     catch (std::exception e)
@@ -44,9 +41,7 @@ void RestModule::initialize()
         ModuleInitializationException ex;
         throw (ex);
     }
-
 }
-
 
 void RestModule::deInitialize()
 {
@@ -59,23 +54,21 @@ void RestModule::deInitialize()
     }
 }
 
-
 bool RestModule::isRunning()
 {
     return m_isRunning;
 }
 
-
 void RestModule::handle_get(http_request message)
 {
-    std::cout << message.relative_uri().to_string() << std::endl;
+  // std::cout << message.relative_uri().to_string() << std::endl;
 
     ucout << message.to_string() << endl;
     web::json::value yourJson;
     yourJson[U("System")][U("Scan")] = web::json::value(m_ScanModule->getScannedNodes()->ToJson());
     yourJson[U("System")][U("Location")] = web::json::value(m_LocationModule->GetJson());
     yourJson[U("System")][U("ScanTime")] = web::json::value(m_ScanModule->getScanTime());
-  //  yourJson[U("System")][U("TargetNodes")] = web::json::value(m_TargetNodes->ToJson());
+    yourJson[U("System")][U("TargetNodes")] = web::json::value(m_TargetNodes->ToJson());
 
     auto query_string = message.absolute_uri().query();
     auto query_map = uri::split_query(query_string);
@@ -120,28 +113,23 @@ void RestModule::PostData()
 {
     while (m_isRunning)
     {
-
         boost::mutex::scoped_lock lock(g_i_mutex);
-
-
-        try
+	try
         {
             web::json::value yourJson;
-            yourJson = static_pointer_cast<LocationModule>(m_LocationModule)->BasicJson();
+            yourJson = static_pointer_cast<LocationModule>(m_LocationModule)->GetJson();
+	    // yourJson = static_pointer_cast<LocationModule>(m_LocationModule)->BasicJson();
             yourJson[U("ID")] = web::json::value("User0");
             yourJson[U("Site")] = web::json::value::number(1);
             http_client client(m_PostURL);
-
+	    // cerr << "RestModule::PostData: " << yourJson.serialize() << endl;
             client.request(methods::POST, "",
                            yourJson.serialize(), "application/json").get();
-
         }
         catch (std::exception e)
         {
-
+	  // std::cerr << "RestModule::PostData: " << e.what();
         }
-
         boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
-
     }
 }

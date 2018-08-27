@@ -1,4 +1,9 @@
 # CMake toolchain file for building ARM software on OI environment
+SET (BOOST_ROOT /home/paolini/.hunter/_Base/e99ddb1/24add81/9a337fa/Install)
+SET (BOOST_INCLUDEDIR /home/paolini/.hunter/_Base/e99ddb1/24add81/9a337fa/Install/include)
+SET (BOOST_LIBRARYDIR /home/paolini/.hunter/_Base/e99ddb1/24add81/9a337fa/Install/lib)
+
+
 
 # this one is important
 SET(CMAKE_SYSTEM_NAME Linux)

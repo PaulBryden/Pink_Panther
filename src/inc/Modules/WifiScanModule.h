@@ -23,7 +23,7 @@ class WifiScanModule : public IScanModule
 {
 
 public:
-    WifiScanModule();
+  WifiScanModule(std::shared_ptr<node::NodeContainer> &nodes);
 
     ~WifiScanModule();
 
@@ -43,6 +43,9 @@ private:
     void Scan();
 
     std::shared_ptr<node::NodeContainer> m_ScannedNodes;
+
+    std::shared_ptr<node::NodeContainer>& targetNodes;
+
     double m_ScanTime;
     boost::mutex g_i_mutex;
     std::shared_ptr<boost::thread> m_ScannerPtr;

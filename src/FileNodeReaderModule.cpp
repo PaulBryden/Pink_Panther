@@ -27,11 +27,10 @@ std::shared_ptr<node::NodeContainer> FileNodeReaderModule::readNodes()
             std::cout << s.str();// parse the resultant string stream.
             for (int i = 0; i < v.as_array().size(); i++)
             {
-                std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array()[i]));
-                std::cout << "AFTER PARSING " << i << ": " << v.serialize();
-                std::cout << v.as_array()[0];
-                m_NodeList->AddNode(newNode);
-
+	      std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array()[i]));
+	      // std::cerr << "AFTER PARSING " << i << ": " << v.serialize();
+	      // std::cerr << v.as_array()[0] << std::endl;
+	      m_NodeList->AddNode(newNode); // m_NodeList contains TargerNodes with coordinates
             }
         } else
         {
@@ -49,15 +48,13 @@ std::shared_ptr<node::NodeContainer> FileNodeReaderModule::readNodes()
 
 void FileNodeReaderModule::initialize()
 {
-    m_isRunning = true;
-    m_Nodes=readNodes();
-
+  m_isRunning = true;
+  m_Nodes=readNodes();
 }
 
 void FileNodeReaderModule::deInitialize()
 {
     m_isRunning = false;
-
 }
 
 bool FileNodeReaderModule::isRunning()
