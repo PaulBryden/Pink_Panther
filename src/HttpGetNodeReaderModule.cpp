@@ -30,10 +30,10 @@ std::shared_ptr<node::NodeContainer> HttpGetNodeReaderModule::readNodes()
     {
         try
         {
-            std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array().at(i)));
-
-            std::cout << " Node: " << newNode->ToJson() << " Invalid. Discarding..." << std::endl;
-            p_NodeList->AddNode(newNode);
+	  // Initially, nodes will not have an RSSI defined in the JSON obtained from the database
+	  //
+	  std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array().at(i)));
+	  p_NodeList->AddNode(newNode);
         } catch (std::exception e)
         {
             std::cout << "Error Node: " << i << " Invalid. Discarding..." << std::endl;

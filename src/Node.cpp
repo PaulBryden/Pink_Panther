@@ -19,17 +19,19 @@ Node::Node(web::json::value node) : m_Recently_Updated(true)
         m_name = node["ssid"].as_string();
     } catch (std::exception e)
     {
-        printf("Error:: Cannot parse SSID from JSON. Please check Syntax");
+        printf("Error:: Cannot parse SSID from JSON. Please check Syntax\n");
         std::exception ParseError;
         throw (ParseError);
     }
     try
     {
-        m_rssi = node["rssi"].as_double();
+      m_rssi = node["rssi"].as_double();
     } catch (std::exception e)
     {
-        printf("Error:: Cannot parse RSSI from JSON. Substituing with 0");
-        m_rssi = 0;
+      // Initially, nodes will not have an RSSI defined in the JSON obtained from the database
+      //
+      // printf("Error:: Cannot parse RSSI from JSON. Substituing with 0\n");
+      m_rssi = 0;
     }
     try
     {

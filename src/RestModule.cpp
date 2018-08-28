@@ -127,7 +127,7 @@ void RestModule::PostData()
         }
         catch (std::exception e)
         {
-	  std::cerr << "RestModule::PostData::ERROR " << e.what();
+	  std::cerr << "RestModule::PostData::error: " << e.what() << std::endl;
         }
         boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
     }
