@@ -66,11 +66,11 @@ void WifiScanModulex86Test::Scan()
         boost::timer::auto_cpu_timer t;
         node::NodeContainer tempContainer;
         std::string Mac = "FF:FF:FF:FF:FF:FF";
-        std::string ID = "TRIG1";
-        std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -61, "24:F2:7F:AA:23:E1");
+        std::string ID = "eduroam";
+        std::shared_ptr<Node> newNode = std::make_shared<Node>(ID, -61, "24:F2:7F:AA:2A:21");
         tempContainer.AddNode(newNode);
         ID = "TRIG2";
-        newNode = std::make_shared<Node>(ID, -65, "18:64:72:34:06:00");
+        newNode = std::make_shared<Node>(ID, -65, "24:F2:7F:AA:29:E1");
         tempContainer.AddNode(newNode);
         ID = "TRIG3";
         newNode = std::make_shared<Node>(ID, -78, "24:F2:2F:AA:26:E3");

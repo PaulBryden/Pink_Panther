@@ -20,7 +20,7 @@ public:
     web::json::value ToJson()
     {
         using namespace web;
-        json::value response = json::value::object();
+        json::value response;
         response["X"] = json::value::number(xCoord);
         response["Y"] = json::value::number(yCoord);
         response["Z"] = json::value::number(zCoord);
@@ -36,10 +36,10 @@ public:
 
     }
 
-    std::atomic<double> xCoord;
-    std::atomic<double> yCoord;
-    std::atomic<double> zCoord;
-    std::atomic<double> m_calculationTime;
+    double xCoord;
+    double yCoord;
+    double zCoord;
+    double m_calculationTime;
 };
 
 #endif //FOO_LOCATION_H

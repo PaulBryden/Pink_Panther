@@ -14,7 +14,7 @@ using namespace utility;
 using namespace http::experimental::listener;
 
 std::shared_ptr<RestModule> p_RestMod;
-std::shared_ptr<FileNodeReaderModule> p_HttpGetMod;
+std::shared_ptr<HttpGetNodeReaderModule> p_HttpGetMod;
 std::shared_ptr<LocationModule> p_LocMod;
 #ifdef __arm__
 std::shared_ptr<WifiScanModule> p_ScanMod;
@@ -32,9 +32,7 @@ void on_initialize(const string_t &address)
     uri.append_path(U("Triangulation"));
     auto addr = uri.to_uri().to_string();
     // std::cout << addr << std::endl;
-
-    p_HttpGetMod = std::make_shared<FileNodeReaderModule>("Settings.json",targetNodes);
-
+    p_HttpGetMod = std::make_shared<HttpGetNodeReaderModule>("http://marconi.sdsu.edu:8080/GeoLocation/resources/ap",targetNodes);
     p_LocMod = std::make_shared<LocationModule>(targetNodes);
     #ifdef __arm__
     p_ScanMod = std::make_shared<WifiScanModule>(targetNodes);
@@ -42,7 +40,7 @@ void on_initialize(const string_t &address)
     p_ScanMod = std::make_shared<WifiScanModulex86Test>();
     #endif
 
-    p_RestMod = std::make_shared<RestModule>(addr, "http://marconi.sdsu.edu:8080/GeoLocation/resources/ap", p_LocMod,
+    p_RestMod = std::make_shared<RestModule>(addr, "http://127.0.0.1:8000/", p_LocMod,
                                              p_ScanMod, p_HttpGetMod);
 
     moduleList.push_back(p_HttpGetMod);

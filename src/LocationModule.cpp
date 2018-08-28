@@ -87,7 +87,7 @@ std::shared_ptr<node::NodeContainer> LocationModule::GetNodeTargets(std::shared_
 web::json::value LocationModule::GetJson()
 {
     CalculateLocations();
-    web::json::value response = web::json::value::object();
+    web::json::value response;
     response["DGESV"] = m_dgesvLoc->ToJson();
     response["DGETRS"] = m_dgetrsLoc->ToJson();
     response["DGELS"] = m_dgelsLoc->ToJson();
@@ -98,8 +98,12 @@ web::json::value LocationModule::GetJson()
 
 web::json::value LocationModule::BasicJson()
 {
-    web::json::value response = web::json::value::object();
-    response = m_dgesvLoc->ToJson();
+    CalculateLocations();
+    web::json::value response;
+    response["DGESV"] = m_dgesvLoc->ToJson();
+    response["DGETRS"] = m_dgetrsLoc->ToJson();
+    response["DGELS"] = m_dgelsLoc->ToJson();
+    response = m_dgelsLoc->ToJson();
     return response;
 }
 

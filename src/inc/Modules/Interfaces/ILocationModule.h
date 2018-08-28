@@ -16,6 +16,7 @@ public:
 
     virtual web::json::value GetJson() = 0;
 
+
     virtual std::shared_ptr<Location> GetLocation() = 0;
 
     virtual void initialize() = 0;

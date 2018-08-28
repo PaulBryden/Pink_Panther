@@ -66,8 +66,8 @@ void RestModule::handle_get(http_request message)
     ucout << message.to_string() << endl;
     web::json::value yourJson;
     yourJson[U("System")][U("Scan")] = web::json::value(m_ScanModule->getScannedNodes()->ToJson());
-    yourJson[U("System")][U("Location")] = web::json::value(m_LocationModule->GetJson());
-    yourJson[U("System")][U("ScanTime")] = web::json::value(m_ScanModule->getScanTime());
+   yourJson[U("System")][U("Location")] = web::json::value(m_LocationModule->GetJson());
+   yourJson[U("System")][U("ScanTime")] = web::json::value(m_ScanModule->getScanTime());
     yourJson[U("System")][U("TargetNodes")] = web::json::value(m_TargetNodes->ToJson());
 
     auto query_string = message.absolute_uri().query();
@@ -117,18 +117,17 @@ void RestModule::PostData()
 	try
         {
             web::json::value yourJson;
-            yourJson = static_pointer_cast<LocationModule>(m_LocationModule)->GetJson();
-	    // yourJson = static_pointer_cast<LocationModule>(m_LocationModule)->BasicJson();
+	        yourJson[U("Location")] = web::json::value(m_LocationModule->GetJson())["DGELS"];
             yourJson[U("ID")] = web::json::value("User0");
             yourJson[U("Site")] = web::json::value::number(1);
             http_client client(m_PostURL);
-	    // cerr << "RestModule::PostData: " << yourJson.serialize() << endl;
             client.request(methods::POST, "",
                            yourJson.serialize(), "application/json").get();
+            std::cout << "RestModule::PostData: " << yourJson.serialize() << endl;
         }
         catch (std::exception e)
         {
-	  // std::cerr << "RestModule::PostData: " << e.what();
+	  std::cerr << "RestModule::PostData::ERROR " << e.what();
         }
         boost::this_thread::sleep_for(boost::chrono::milliseconds(500));
     }

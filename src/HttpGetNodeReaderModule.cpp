@@ -31,6 +31,8 @@ std::shared_ptr<node::NodeContainer> HttpGetNodeReaderModule::readNodes()
         try
         {
             std::shared_ptr<TargetNode> newNode(std::make_shared<TargetNode>(v.as_array().at(i)));
+
+            std::cout << " Node: " << newNode->ToJson() << " Invalid. Discarding..." << std::endl;
             p_NodeList->AddNode(newNode);
         } catch (std::exception e)
         {
