@@ -40,7 +40,7 @@ void on_initialize(const string_t &address)
     p_ScanMod = std::make_shared<WifiScanModulex86Test>();
     #endif
 
-    p_RestMod = std::make_shared<RestModule>(addr, "http://127.0.0.1:8000/", p_LocMod,
+    p_RestMod = std::make_shared<RestModule>(addr, "http://marconi.sdsu.edu:8080/GeoLocation/resources/ap", p_LocMod,
                                              p_ScanMod, p_HttpGetMod);
 
     moduleList.push_back(p_HttpGetMod);
