@@ -1,0 +1,86 @@
+format 218
+"src" // src
+  revision 1
+  modified_by 2 "green"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "/mnt/c/Users/green/Documents/Personal_Software/Pink_Panther/src/"
+  cpp_src_dir "/mnt/c/Users/green/Documents/Personal_Software/Pink_Panther/src/"
+  package_ref 130434 // inc
+
+  deploymentview 131202 "src"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 138370 "main"
+      stereotype "source"
+      cpp_src "int main(int argc, wchar_t *argv[])
+{
+    utility::string_t port = U(\"34568\");
+    if (argc == 2)
+    {
+        std::wstring ws(argv[1]);
+        std::string port(ws.begin(), ws.end());
+
+    }
+
+    utility::string_t address = U(\"http://0.0.0.0:\");
+    address.append(port);
+
+    on_initialize(address);
+    std::promise<void> p;
+    p.get_future().wait();
+
+    on_shutdown();
+    return 0;
+}
+"
+      associated_elems
+      end
+    end
+  end
+
+  classview 130946 "Pink_Panther"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    classdiagram 128002 "Pink_Panther_Diag"
+      classdiagramsettings show_members_visibility yes member_max_width 0 end
+      size A3
+    end
+  end
+end

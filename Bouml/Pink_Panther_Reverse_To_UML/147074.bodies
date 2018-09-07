@@ -1,0 +1,13 @@
+class KalmanFilterRSSI
+!!!167426.cpp!!!	KalmanFilterRSSI(in q : double, in r : double, in p : double)
+
+!!!168194.cpp!!!	kalmanUpdate(in measurement : double) : double
+    //prediction update
+    //omit _x = _x
+    _p = _p + _q;
+    //measurement update
+    _k = _p / (_p + _r);
+    _x = _x + _k * (measurement - _x);
+    _p = (1 - _k) * _p;
+
+    return _x;

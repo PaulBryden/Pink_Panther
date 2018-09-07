@@ -1,0 +1,184 @@
+format 218
+"Exceptions" // src::inc::Exceptions
+  revision 1
+  modified_by 2 "green"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "/mnt/c/Users/green/Documents/Personal_Software/Pink_Panther/src/inc/Exceptions/"
+  cpp_src_dir "/mnt/c/Users/green/Documents/Personal_Software/Pink_Panther/src/inc/Exceptions/"
+  classview 130562 "Exceptions"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 149378 "ModuleInitializationException"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158594 // <generalisation>
+	relation 158594 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 158594 // <generalisation>
+	  b parent class_ref 149506 // typedef1
+      end
+
+      operation 174466 "what"
+	const cpp_virtual cpp_inline private explicit_return_type "char"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 149506 "typedef1"
+      visibility package stereotype "typedef" explicit_base_type "std::exception"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 149634 "UnsupportedOperationException"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158722 // <generalisation>
+	relation 158722 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 158722 // <generalisation>
+	  b parent class_ref 149506 // typedef1
+      end
+
+      operation 174594 "what"
+	const cpp_virtual cpp_inline private explicit_return_type "char"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 130690 "Exceptions"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 136578 "ModuleInitializationException"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 149506 // typedef1
+	class_ref 149378 // ModuleInitializationException
+      end
+    end
+
+    artifact 136706 "UnsupportedOperationException"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 149634 // UnsupportedOperationException
+      end
+    end
+  end
+end

@@ -1,0 +1,81 @@
+class RestModule_Post_Get_Proxy
+!!!180098.cpp!!!	RestModule_Post_Get_Proxy(in url : utility::string_t)
+    m_Json = json::value();
+!!!180226.cpp!!!	initialize() : void
+    try
+    {
+        if (!m_isRunning)
+        {
+
+            m_listener.support(methods::GET,
+                               std::bind(&RestModule_Post_Get_Proxy::handle_get, this, std::placeholders::_1));
+            m_listener.support(methods::PUT,
+                               std::bind(&RestModule_Post_Get_Proxy::handle_put, this, std::placeholders::_1));
+            m_listener.support(methods::POST,
+                               std::bind(&RestModule_Post_Get_Proxy::handle_post, this, std::placeholders::_1));
+            m_listener.support(methods::DEL,
+                               std::bind(&RestModule_Post_Get_Proxy::handle_delete, this, std::placeholders::_1));
+            m_isRunning = true;
+        }
+    }
+    catch (std::exception e)
+    {
+        ModuleInitializationException ex;
+        throw (ex);
+    }
+
+!!!180354.cpp!!!	deInitialize() : void
+    if (m_isRunning)
+    {
+        m_isRunning = false;
+        m_listener.close().wait();
+    }
+
+!!!180482.cpp!!!	isRunning() : bool
+    return m_isRunning;
+!!!180866.cpp!!!	handle_get(in message : http_request) : void
+
+    auto query_string = message.absolute_uri().query();
+    auto query_map = uri::split_query(query_string);
+    auto it = query_map.find(U("callback"));
+    if (it != query_map.end())
+    {
+        // Query uses JSONP
+        auto callback = it->second;
+        std::stringstream ss;
+        ss << callback << "(" << m_Json.serialize() << ")";
+
+        message.reply(status_codes::OK, ss.str());
+
+    } else
+    {
+        cout << "Got To Here";
+        message.reply(status_codes::OK, m_Json);
+
+    }
+
+
+!!!180994.cpp!!!	handle_put(in message : http_request) : void
+
+    ucout << message.to_string() << endl;
+    message.reply(status_codes::OK);
+!!!181122.cpp!!!	handle_post(in message : http_request) : void
+
+
+    message.reply(status_codes::OK)
+            .wait();
+    message.extract_json().then([=](json::value request)
+                                {
+                                    boost::posix_time::ptime timeLocal = boost::posix_time::second_clock::local_time();
+                                    std::stringstream localTimeString;
+                                    localTimeString << timeLocal << std::endl;
+                                    m_Json = json::value(request);
+                                    m_Json["POST_Time"] = json::value::string(localTimeString.str());
+
+                                }).wait();
+
+    message.reply(status_codes::OK);
+
+!!!181250.cpp!!!	handle_delete(in message : http_request) : void
+    ucout << message.to_string() << endl;
+    message.reply(status_codes::OK);

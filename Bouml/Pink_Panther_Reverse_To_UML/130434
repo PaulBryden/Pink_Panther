@@ -1,0 +1,3535 @@
+format 218
+"inc" // src::inc
+  revision 1
+  modified_by 2 "green"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "/mnt/c/Users/green/Documents/Personal_Software/Pink_Panther/src/inc/"
+  cpp_src_dir "/mnt/c/Users/green/Documents/Personal_Software/Pink_Panther/src/inc/"
+  classview 130050 "inc"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 144130 "iw_pk_event"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 178946 "len"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Real lenght of this stuff "
+      end
+
+      attribute 179074 "cmd"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Wireless IOCTL "
+      end
+
+      classrelation 150274 // u (<directional composition>)
+	relation 150274 *-->
+	  a role_name "u" public
+	    comment " IOCTL fixed payload "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 150274 // u (<directional composition>)
+	  b parent class_ref 144258 // iwreq_data
+      end
+    end
+
+    class 144258 "iwreq_data"
+      visibility package stereotype "union"
+      cpp_decl "${comment}${template}union ${name} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " ------------------------ IOCTL REQUEST ------------------------ 
+
+This structure defines the payload of an ioctl, and is used 
+below.
+
+Note that this structure should fit on the memory footprint
+of iwreq (which is the same as ifreq), which mean a max size of
+16 octets = 128 bits. Warning, pointers might be 64 bits wide...
+You should check this when increasing the structures defined
+above in this file...
+"
+      attribute 191234 "name"
+	public explicit_type "char"
+	multiplicity "[IFNAMSIZ]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Config - generic 
+"
+      end
+
+      classrelation 155394 // essid (<directional composition>)
+	relation 155394 *-->
+	  a role_name "essid" public
+	    comment " Name : used to verify the presence of  wireless extensions.
+Name of the protocol/provider... 
+ Extended network name "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155394 // essid (<directional composition>)
+	  b parent class_ref 147202 // iw_point
+      end
+
+      classrelation 155522 // nwid (<directional composition>)
+	relation 155522 *-->
+	  a role_name "nwid" public
+	    comment " network id (or domain - the cell) "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155522 // nwid (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 155650 // freq (<directional composition>)
+	relation 155650 *-->
+	  a role_name "freq" public
+	    comment " frequency or channel :
+0-1000 = channel
+> 1000 = frequency in Hz "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155650 // freq (<directional composition>)
+	  b parent class_ref 145282 // iw_freq
+      end
+
+      classrelation 155778 // sens (<directional composition>)
+	relation 155778 *-->
+	  a role_name "sens" public
+	    comment " signal level threshold "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155778 // sens (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 155906 // bitrate (<directional composition>)
+	relation 155906 *-->
+	  a role_name "bitrate" public
+	    comment " default bit rate "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155906 // bitrate (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 156034 // txpower (<directional composition>)
+	relation 156034 *-->
+	  a role_name "txpower" public
+	    comment " default transmit power "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156034 // txpower (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 156162 // rts (<directional composition>)
+	relation 156162 *-->
+	  a role_name "rts" public
+	    comment " RTS threshold threshold "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156162 // rts (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 156290 // frag (<directional composition>)
+	relation 156290 *-->
+	  a role_name "frag" public
+	    comment " Fragmentation threshold "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156290 // frag (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      attribute 191362 "mode"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Operation mode "
+      end
+
+      classrelation 156418 // retry (<directional composition>)
+	relation 156418 *-->
+	  a role_name "retry" public
+	    comment " Retry limits & lifetime "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156418 // retry (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 156546 // encoding (<directional composition>)
+	relation 156546 *-->
+	  a role_name "encoding" public
+	    comment " Encoding stuff : tokens "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156546 // encoding (<directional composition>)
+	  b parent class_ref 147202 // iw_point
+      end
+
+      classrelation 156674 // power (<directional composition>)
+	relation 156674 *-->
+	  a role_name "power" public
+	    comment " PM duration/timeout "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156674 // power (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 156802 // qual (<directional composition>)
+	relation 156802 *-->
+	  a role_name "qual" public
+	    comment " Quality part of statistics "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156802 // qual (<directional composition>)
+	  b parent class_ref 145538 // iw_quality
+      end
+
+      classrelation 156930 // ap_addr (<directional composition>)
+	relation 156930 *-->
+	  a role_name "ap_addr" public
+	    comment " Access point address "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 156930 // ap_addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      classrelation 157058 // addr (<directional composition>)
+	relation 157058 *-->
+	  a role_name "addr" public
+	    comment " Destination address (hw/mac) "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 157058 // addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      classrelation 157186 // param (<directional composition>)
+	relation 157186 *-->
+	  a role_name "param" public
+	    comment " Other small parameters "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 157186 // param (<directional composition>)
+	  b parent class_ref 145026 // iw_param
+      end
+
+      classrelation 157314 // data (<directional composition>)
+	relation 157314 *-->
+	  a role_name "data" public
+	    comment " Other large parameters "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 157314 // data (<directional composition>)
+	  b parent class_ref 147202 // iw_point
+      end
+    end
+
+    class 144386 "iw_pk_point"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 179202 "length"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Pointer to the data  (in user space) 
+ number of fields or size in bytes "
+      end
+
+      attribute 179330 "flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Optional params "
+      end
+    end
+
+    class 144514 "iw_statistics"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " ------------------------ WIRELESS STATS ------------------------ 
+
+Wireless statistics (used for /proc/net/wireless)
+"
+      attribute 191106 "status"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Status
+- device dependent for now "
+      end
+
+      classrelation 155010 // qual (<directional composition>)
+	relation 155010 *-->
+	  a role_name "qual" public
+	    comment " Quality of the link
+(instant/mean/max) "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155010 // qual (<directional composition>)
+	  b parent class_ref 145538 // iw_quality
+      end
+
+      classrelation 155138 // discard (<directional composition>)
+	relation 155138 *-->
+	  a role_name "discard" public
+	    comment " Packet discarded counts "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155138 // discard (<directional composition>)
+	  b parent class_ref 147330 // iw_discarded
+      end
+
+      classrelation 155266 // miss (<directional composition>)
+	relation 155266 *-->
+	  a role_name "miss" public
+	    comment " Packet missed counts "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 155266 // miss (<directional composition>)
+	  b parent class_ref 147458 // iw_missed
+      end
+    end
+
+    class 144642 "iwstats"
+      visibility package stereotype "typedef" base_type class_ref 144514 // iw_statistics
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " TYPES *****************************
+ Shortcuts "
+      classrelation 150402 // <dependency>
+	relation 150402 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 150402 // <dependency>
+	  b parent class_ref 144514 // iw_statistics
+      end
+    end
+
+    class 144770 "iw_range"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " -------------------------- IOCTL DATA -------------------------- 
+
+	For those ioctl which want to exchange mode data that what could
+	fit in the above structure...
+
+
+	Range of parameters
+"
+      attribute 191618 "throughput"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Informative stuff (to choose between different interface) 
+ To give an idea... "
+      end
+
+      attribute 191746 "min_nwid"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " In theory this value should be the maximum benchmarked
+TCP/IP throughput, because with most of these devices the
+bit rate is meaningless (overhead an co) to estimate how
+fast the connection will go and pick the fastest one.
+I suggest people to play with Netperf or any benchmark...
+
+ NWID (or domain id) 
+ Minimal NWID we are able to set "
+      end
+
+      attribute 191874 "max_nwid"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal NWID we are able to set "
+      end
+
+      attribute 192002 "old_num_channels"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Old Frequency (backward compat - moved lower ) 
+"
+      end
+
+      attribute 192130 "old_num_frequency"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 192258 "event_capa"
+	public explicit_type "__u32"
+	multiplicity "[6]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Wireless event capability bitmasks 
+"
+      end
+
+      attribute 192386 "sensitivity"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " signal level threshold range 
+"
+      end
+
+      classrelation 157570 // max_qual (<directional composition>)
+	relation 157570 *-->
+	  a role_name "max_qual" public
+	    comment " Quality of link & SNR stuff 
+ Quality range (link, level, noise)
+If the quality is absolute, it will be in the range [0 ; max_qual],
+if the quality is dBm, it will be in the range [max_qual ; 0].
+Don't forget that we use 8 bit arithmetics... 
+ Quality of the link "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 157570 // max_qual (<directional composition>)
+	  b parent class_ref 145538 // iw_quality
+      end
+
+      classrelation 157698 // avg_qual (<directional composition>)
+	relation 157698 *-->
+	  a role_name "avg_qual" public
+	    comment " This should contain the average/typical values of the quality
+indicator. This should be the threshold between a \"good\" and
+a \"bad\" link (example : monitor going from green to orange).
+Currently, user space apps like quality monitors don't have any
+way to calibrate the measurement. With this, they can split
+the range between 0 and max_qual in different quality level
+(using a geometric subdivision centered on the average).
+I expect that people doing the user space apps will feedback
+us on which value we need to put in each driver... 
+ Quality of the link "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 157698 // avg_qual (<directional composition>)
+	  b parent class_ref 145538 // iw_quality
+      end
+
+      attribute 192514 "num_bitrates"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Rates 
+ Number of entries in the list "
+      end
+
+      attribute 192642 "bitrate"
+	public explicit_type "__s32"
+	multiplicity "[IW_MAX_BITRATES]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " list, in bps "
+      end
+
+      attribute 192770 "min_rts"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " RTS threshold 
+ Minimal RTS threshold "
+      end
+
+      attribute 192898 "max_rts"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal RTS threshold "
+      end
+
+      attribute 193026 "min_frag"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Frag threshold 
+ Minimal frag threshold "
+      end
+
+      attribute 193154 "max_frag"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal frag threshold "
+      end
+
+      attribute 193282 "min_pmp"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Power Management duration & timeout 
+ Minimal PM period "
+      end
+
+      attribute 193410 "max_pmp"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal PM period "
+      end
+
+      attribute 193538 "min_pmt"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Minimal PM timeout "
+      end
+
+      attribute 193666 "max_pmt"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal PM timeout "
+      end
+
+      attribute 193794 "pmp_flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " How to decode max/min PM period "
+      end
+
+      attribute 193922 "pmt_flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " How to decode max/min PM timeout "
+      end
+
+      attribute 194050 "pm_capa"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " What PM options are supported "
+      end
+
+      attribute 194178 "encoding_size"
+	public explicit_type "__u16"
+	multiplicity "[IW_MAX_ENCODING_SIZES]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Encoder stuff 
+ Different token sizes "
+      end
+
+      attribute 194306 "num_encoding_sizes"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Number of entry in the list "
+      end
+
+      attribute 194434 "max_encoding_tokens"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Max number of tokens "
+      end
+
+      attribute 194562 "encoding_login_index"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " For drivers that need a \"login/passwd\" form 
+ token index for login token "
+      end
+
+      attribute 194690 "txpower_capa"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Transmit power 
+ What options are supported "
+      end
+
+      attribute 194818 "num_txpower"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Number of entries in the list "
+      end
+
+      attribute 194946 "txpower"
+	public explicit_type "__s32"
+	multiplicity "[IW_MAX_TXPOWER]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " list, in bps "
+      end
+
+      attribute 195074 "we_version_compiled"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Wireless Extension version info 
+ Must be WIRELESS_EXT "
+      end
+
+      attribute 195202 "we_version_source"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Last update of source "
+      end
+
+      attribute 195330 "retry_capa"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Retry limits and lifetime 
+ What retry options are supported "
+      end
+
+      attribute 195458 "retry_flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " How to decode max/min retry limit "
+      end
+
+      attribute 195586 "r_time_flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " How to decode max/min retry life "
+      end
+
+      attribute 195714 "min_retry"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Minimal number of retries "
+      end
+
+      attribute 195842 "max_retry"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal number of retries "
+      end
+
+      attribute 195970 "min_r_time"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Minimal retry lifetime "
+      end
+
+      attribute 196098 "max_r_time"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal retry lifetime "
+      end
+
+      attribute 196226 "num_channels"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Frequency 
+ Number of channels [0; num - 1] "
+      end
+
+      attribute 196354 "num_frequency"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Number of entry in the list "
+      end
+
+      classrelation 157826 // freq (<directional composition>)
+	relation 157826 *-->
+	  a role_name "freq" multiplicity "[IW_MAX_FREQUENCIES]" public
+	    comment " list "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	    classrelation_ref 157826 // freq (<directional composition>)
+	  b parent class_ref 145282 // iw_freq
+      end
+
+      attribute 196482 "enc_capa"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Note : this frequency list doesn't need to fit channel numbers,
+because each entry contain its channel index 
+ IW_ENC_CAPA_* bit field "
+      end
+
+      attribute 196610 "min_pms"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " More power management stuff 
+ Minimal PM saving "
+      end
+
+      attribute 196738 "max_pms"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Maximal PM saving "
+      end
+
+      attribute 196866 "pms_flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " How to decode max/min PM saving "
+      end
+
+      attribute 196994 "modul_capa"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " All available modulations for driver (hw may support less) 
+ IW_MODUL_* bit field "
+      end
+
+      attribute 197122 "bitrate_capa"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " More bitrate stuff 
+ Types of bitrates supported "
+      end
+    end
+
+    class 144898 "iwrange"
+      visibility package stereotype "typedef" base_type class_ref 144770 // iw_range
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 150530 // <dependency>
+	relation 150530 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 150530 // <dependency>
+	  b parent class_ref 144770 // iw_range
+      end
+    end
+
+    class 145026 "iw_param"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " TYPES *****************************
+ --------------------------- SUBTYPES --------------------------- 
+
+	Generic format for most parameters that fit in an int
+"
+      attribute 185858 "value"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " The value of the parameter itself "
+      end
+
+      attribute 185986 "fixed"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Hardware should not use auto select "
+      end
+
+      attribute 186114 "disabled"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Disable the feature "
+      end
+
+      attribute 186242 "flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Various specifc flags (if any) "
+      end
+    end
+
+    class 145154 "iwparam"
+      visibility package stereotype "typedef" base_type class_ref 145026 // iw_param
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 150658 // <dependency>
+	relation 150658 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 150658 // <dependency>
+	  b parent class_ref 145026 // iw_param
+      end
+    end
+
+    class 145282 "iw_freq"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "	A frequency
+	For numbers lower than 10^9, we encode the number in 'm' and
+	set 'e' to 0
+	For number greater than 10^9, we divide it by the lowest power
+	of 10 to get 'm' lower than 10^9, with 'm'= f / (10^'e')...
+	The power of 10 is in 'e', the result of the division is in 'm'.
+"
+      attribute 186626 "m"
+	public explicit_type "__s32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Mantissa "
+      end
+
+      attribute 186754 "e"
+	public explicit_type "__s16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Exponent "
+      end
+
+      attribute 186882 "i"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " List index (when in range struct) "
+      end
+
+      attribute 187010 "flags"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Flags (fixed/auto) "
+      end
+    end
+
+    class 145410 "iwfreq"
+      visibility package stereotype "typedef" base_type class_ref 145282 // iw_freq
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 150786 // <dependency>
+	relation 150786 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 150786 // <dependency>
+	  b parent class_ref 145282 // iw_freq
+      end
+    end
+
+    class 145538 "iw_quality"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "	Quality of the link
+"
+      attribute 187138 "qual"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " link quality (%retries, SNR,
+%missed beacons or better...) "
+      end
+
+      attribute 187266 "level"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " signal level (dBm) "
+      end
+
+      attribute 187394 "noise"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " noise level (dBm) "
+      end
+
+      attribute 187522 "updated"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Flags to know if updated "
+      end
+    end
+
+    class 145666 "iwqual"
+      visibility package stereotype "typedef" base_type class_ref 145538 // iw_quality
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 150914 // <dependency>
+	relation 150914 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 150914 // <dependency>
+	  b parent class_ref 145538 // iw_quality
+      end
+    end
+
+    class 145794 "iw_priv_args"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Private ioctl interface information
+"
+      attribute 197250 "cmd"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Number of the ioctl to issue "
+      end
+
+      attribute 197378 "set_args"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Type and number of args "
+      end
+
+      attribute 197506 "get_args"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Type and number of args "
+      end
+
+      attribute 197634 "name"
+	public explicit_type "char"
+	multiplicity "[IFNAMSIZ]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Name of the extension "
+      end
+    end
+
+    class 145922 "iwprivargs"
+      visibility package stereotype "typedef" base_type class_ref 145794 // iw_priv_args
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 151042 // <dependency>
+	relation 151042 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 151042 // <dependency>
+	  b parent class_ref 145794 // iw_priv_args
+      end
+    end
+
+    class 146050 "sockaddr"
+      visibility package stereotype "typedef" base_type class_ref 146050 // sockaddr
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 151170 // <dependency>
+	relation 151170 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 151170 // <dependency>
+	  b parent class_ref 146050 // sockaddr
+      end
+    end
+
+    class 146178 "wireless_config"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " Structure for storing all wireless information for each device
+This is a cut down version of the one above, containing only
+the things *truly* needed to configure a card.
+Don't add other junk, I'll remove it... "
+      attribute 179458 "name"
+	public explicit_type "char"
+	multiplicity "[IFNAMSIZ + 1]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Wireless/protocol name "
+      end
+
+      attribute 179586 "has_nwid"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 151298 // nwid (<directional composition>)
+	relation 151298 *-->
+	  a role_name "nwid" public
+	    comment " Network ID "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151298 // nwid (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 179714 "has_freq"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 179842 "freq"
+	public explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Frequency/channel "
+      end
+
+      attribute 179970 "freq_flags"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 180098 "has_key"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 180226 "key"
+	public explicit_type "byte"
+	multiplicity "[IW_ENCODING_TOKEN_MAX]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Encoding key used "
+      end
+
+      attribute 180354 "key_size"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Number of bytes "
+      end
+
+      attribute 180482 "key_flags"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Various flags "
+      end
+
+      attribute 180610 "has_essid"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 180738 "essid_on"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 180866 "essid"
+	public explicit_type "char"
+	multiplicity "[IW_ESSID_MAX_SIZE + 1]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " ESSID (extended network) "
+      end
+
+      attribute 180994 "has_mode"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 181122 "mode"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Operation mode "
+      end
+    end
+
+    class 146306 "wireless_info"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " Structure for storing all wireless information for each device
+This is pretty exhaustive... "
+      classrelation 151426 // b (<directional composition>)
+	relation 151426 *-->
+	  a role_name "b" public
+	    comment " Basic information "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151426 // b (<directional composition>)
+	  b parent class_ref 146178 // wireless_config
+      end
+
+      attribute 181250 "has_sens"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 151554 // sens (<directional composition>)
+	relation 151554 *-->
+	  a role_name "sens" public
+	    comment " sensitivity "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151554 // sens (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 181378 "has_nickname"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 181506 "nickname"
+	public explicit_type "char"
+	multiplicity "[IW_ESSID_MAX_SIZE + 1]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " NickName "
+      end
+
+      attribute 181634 "has_ap_addr"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 151682 // ap_addr (<directional composition>)
+	relation 151682 *-->
+	  a role_name "ap_addr" public
+	    comment " Access point address "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151682 // ap_addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      attribute 181762 "has_bitrate"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 151810 // bitrate (<directional composition>)
+	relation 151810 *-->
+	  a role_name "bitrate" public
+	    comment " Bit rate in bps "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151810 // bitrate (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 181890 "has_rts"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 151938 // rts (<directional composition>)
+	relation 151938 *-->
+	  a role_name "rts" public
+	    comment " RTS threshold in bytes "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 151938 // rts (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 182018 "has_frag"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 152066 // frag (<directional composition>)
+	relation 152066 *-->
+	  a role_name "frag" public
+	    comment " Fragmentation threshold in bytes "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 152066 // frag (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 182146 "has_power"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 152194 // power (<directional composition>)
+	relation 152194 *-->
+	  a role_name "power" public
+	    comment " Power management parameters "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 152194 // power (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 182274 "has_txpower"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 152322 // txpower (<directional composition>)
+	relation 152322 *-->
+	  a role_name "txpower" public
+	    comment " Transmit Power in dBm "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 152322 // txpower (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 182402 "has_retry"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 152450 // retry (<directional composition>)
+	relation 152450 *-->
+	  a role_name "retry" public
+	    comment " Retry limit or lifetime "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 152450 // retry (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      classrelation 152578 // stats (<directional composition>)
+	relation 152578 *-->
+	  a role_name "stats" public
+	    comment " Stats 
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 152578 // stats (<directional composition>)
+	  b parent class_ref 144642 // iwstats
+      end
+
+      attribute 182530 "has_stats"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 152706 // range (<directional composition>)
+	relation 152706 *-->
+	  a role_name "range" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 152706 // range (<directional composition>)
+	  b parent class_ref 144898 // iwrange
+      end
+
+      attribute 182658 "has_range"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 182786 "auth_key_mgmt"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Auth params for WPA/802.1x/802.11i 
+"
+      end
+
+      attribute 182914 "has_auth_key_mgmt"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 183042 "auth_cipher_pairwise"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 183170 "has_auth_cipher_pairwise"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 183298 "auth_cipher_group"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 183426 "has_auth_cipher_group"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 146434 "wireless_scan"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " Structure for storing an entry of a wireless scan.
+This is only a subset of all possible information, the flexible
+structure of scan results make it impossible to capture all
+information in such a static structure. "
+      classrelation 152834 // next (<unidirectional association>)
+	relation 152834 --->
+	  a role_name "next" public
+	    comment " Linked list 
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 152834 // next (<unidirectional association>)
+	  b parent class_ref 146434 // wireless_scan
+      end
+
+      attribute 183554 "has_ap_addr"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Cell identifiaction 
+"
+      end
+
+      classrelation 152962 // ap_addr (<directional composition>)
+	relation 152962 *-->
+	  a role_name "ap_addr" public
+	    comment " Access point address "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 152962 // ap_addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      classrelation 153090 // b (<directional composition>)
+	relation 153090 *-->
+	  a role_name "b" public
+	    comment " Other information 
+ Basic information "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 153090 // b (<directional composition>)
+	  b parent class_ref 146178 // wireless_config
+      end
+
+      classrelation 153218 // stats (<directional composition>)
+	relation 153218 *-->
+	  a role_name "stats" public
+	    comment " Signal strength "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 153218 // stats (<directional composition>)
+	  b parent class_ref 144642 // iwstats
+      end
+
+      attribute 183682 "has_stats"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 153346 // maxbitrate (<directional composition>)
+	relation 153346 *-->
+	  a role_name "maxbitrate" public
+	    comment " Max bit rate in bps "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 153346 // maxbitrate (<directional composition>)
+	  b parent class_ref 145154 // iwparam
+      end
+
+      attribute 183810 "has_maxbitrate"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 146562 "wireless_scan_head"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "Context used for non-blocking scan.
+"
+      classrelation 153474 // result (<unidirectional association>)
+	relation 153474 --->
+	  a role_name "result" public
+	    comment " Result of the scan "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 153474 // result (<unidirectional association>)
+	  b parent class_ref 146434 // wireless_scan
+      end
+
+      attribute 183938 "retry"
+	public explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Retry level "
+      end
+    end
+
+    class 146690 "stream_descr"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " Structure used for parsing event streams, such as Wireless Events
+and scan results "
+      attribute 184066 "end"
+	public explicit_type "char"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " End of the stream "
+      end
+
+      attribute 184194 "current"
+	public explicit_type "char"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Current event in stream of events "
+      end
+
+      attribute 184322 "value"
+	public explicit_type "char"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Current value in event "
+      end
+    end
+
+    class 146818 "iw_enum_handler"
+      visibility package stereotype "typedef" explicit_base_type "int"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " Prototype for handling display of each single interface on the
+system - see iw_enum_devices() "
+    end
+
+    class 146946 "iw_modul_descr"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " Describe a modulation "
+      attribute 184450 "mask"
+	public explicit_type "uint"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Modulation bitmask "
+      end
+
+      attribute 184578 "cmd"
+	public explicit_type "char"
+	multiplicity "[8]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Short name "
+      end
+
+      attribute 184706 "verbose"
+	public explicit_type "char"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Verbose description "
+      end
+    end
+
+    class 147074 "KalmanFilterRSSI"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 167426 "KalmanFilterRSSI"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param in name "q" explicit_type "double"
+	  param in name "r" explicit_type "double"
+	  param in name "p" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167554 "~KalmanFilterRSSI"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167682 "init"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "x" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167810 "setProcessNoiseCovariance"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "i" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167938 "setMeasurementNoiseCovariance"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "i" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168066 "setEstimatiomErrorCovariance"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "i" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168194 "kalmanUpdate"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "double"
+	nparams 1
+	  param in name "measurement" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168322 "reset"
+	cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168450 "getProcessNoiseCovariance"
+	cpp_inline public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168578 "getMeasurementNoiseCovariance"
+	cpp_inline public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168706 "getEstimatiomErrorCovariance"
+	cpp_inline public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168834 "getKalmanGain"
+	cpp_inline public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 184834 "_q"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "process noise covariance"
+      end
+
+      attribute 184962 "_q_init"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185090 "_r"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "measurement noise covariance"
+      end
+
+      attribute 185218 "_r_init"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185346 "_x"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "value"
+      end
+
+      attribute 185474 "_p"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "estimation error covariance"
+      end
+
+      attribute 185602 "_p_init"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185730 "_k"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "kalman gain"
+      end
+    end
+
+    class 147202 "iw_point"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "	For all data larger than 16 octets, we need to use a
+	pointer to memory allocated in user space.
+"
+      attribute 186370 "length"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Pointer to the data  (in user space) 
+ number of fields or size in bytes "
+      end
+
+      attribute 186498 "flags"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Optional params "
+      end
+    end
+
+    class 147330 "iw_discarded"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "	Packet discarded in the wireless adapter due to
+	\"wireless\" specific problems...
+	Note : the list of counter and statistics in net_device_stats
+	is already pretty exhaustive, and you should use that first.
+	This is only additional stats...
+"
+      attribute 187650 "nwid"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Rx : Wrong nwid/essid "
+      end
+
+      attribute 187778 "code"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Rx : Unable to code/decode (WEP) "
+      end
+
+      attribute 187906 "fragment"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Rx : Can't perform MAC reassembly "
+      end
+
+      attribute 188034 "retries"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Tx : Max MAC retries num reached "
+      end
+
+      attribute 188162 "misc"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Others cases "
+      end
+    end
+
+    class 147458 "iw_missed"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "	Packet/Time period missed in the wireless adapter due to
+	\"wireless\" specific problems...
+"
+      attribute 188290 "beacon"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Missed beacons/superframe "
+      end
+    end
+
+    class 147586 "iw_thrspy"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "	Quality range (for spy threshold)
+"
+      classrelation 153602 // addr (<directional composition>)
+	relation 153602 *-->
+	  a role_name "addr" public
+	    comment " Source address (hw/mac) "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 153602 // addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      classrelation 153730 // qual (<directional composition>)
+	relation 153730 *-->
+	  a role_name "qual" public
+	    comment " Quality of the link "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 153730 // qual (<directional composition>)
+	  b parent class_ref 145538 // iw_quality
+      end
+
+      classrelation 153858 // low (<directional composition>)
+	relation 153858 *-->
+	  a role_name "low" public
+	    comment " Low threshold "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 153858 // low (<directional composition>)
+	  b parent class_ref 145538 // iw_quality
+      end
+
+      classrelation 153986 // high (<directional composition>)
+	relation 153986 *-->
+	  a role_name "high" public
+	    comment " High threshold "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 153986 // high (<directional composition>)
+	  b parent class_ref 145538 // iw_quality
+      end
+    end
+
+    class 147714 "iw_scan_req"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "	Optional data for scan request
+
+	Note: these optional parameters are controlling parameters for the
+	scanning behavior, these do not apply to getting scan results
+	(SIOCGIWSCAN). Drivers are expected to keep a local BSS table and
+	provide a merged results with all BSSes even if the previous scan
+	request limited scanning to a subset, e.g., by specifying an SSID.
+	Especially, scan results are required to include an entry for the
+	current BSS if the driver is in Managed mode and associated with an AP.
+"
+      attribute 188418 "scan_type"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " IW_SCAN_TYPE_{ACTIVE,PASSIVE} "
+      end
+
+      attribute 188546 "essid_len"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188674 "num_channels"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " num entries in channel_list;
+0 = scan all allowed channels "
+      end
+
+      attribute 188802 "flags"
+	public explicit_type "__u8"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " reserved as padding; use zero, this may
+be used in the future for adding flags
+to request different scan behavior "
+      end
+
+      classrelation 154114 // bssid (<directional composition>)
+	relation 154114 *-->
+	  a role_name "bssid" public
+	    comment " ff:ff:ff:ff:ff:ff for broadcast BSSID or
+individual address of a specific BSS "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 154114 // bssid (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      attribute 188930 "essid"
+	public explicit_type "__u8"
+	multiplicity "[IW_ESSID_MAX_SIZE]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Use this ESSID if IW_SCAN_THIS_ESSID flag is used instead of using
+the current ESSID. This allows scan requests for specific ESSID
+without having to change the current ESSID and potentially breaking
+the current association.
+
+"
+      end
+
+      attribute 189058 "min_channel_time"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Optional parameters for changing the default scanning behavior.
+These are based on the MLME-SCAN.request from IEEE Std 802.11.
+TU is 1.024 ms. If these are set to 0, driver is expected to use
+reasonable default values. min_channel_time defines the time that
+will be used to wait for the first reply on each channel. If no
+replies are received, next channel will be scanned after this. If
+replies are received, total time waited on the channel is defined by
+max_channel_time.
+
+ in TU "
+      end
+
+      attribute 189186 "max_channel_time"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " in TU "
+      end
+
+      classrelation 154242 // channel_list (<directional composition>)
+	relation 154242 *-->
+	  a role_name "channel_list" multiplicity "[IW_MAX_FREQUENCIES]" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	    classrelation_ref 154242 // channel_list (<directional composition>)
+	  b parent class_ref 145282 // iw_freq
+      end
+    end
+
+    class 147842 "iw_encode_ext"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " ------------------------- WPA SUPPORT ------------------------- 
+
+	Extended data structure for get/set encoding (this is used with
+	SIOCSIWENCODEEXT/SIOCGIWENCODEEXT. struct iw_point and IW_ENCODE_*
+	flags are used in the same way as with SIOCSIWENCODE/SIOCGIWENCODE and
+	only the data contents changes (key data -> this structure, including
+	key data).
+
+	If the new key is the first group key, it will be set as the default
+	TX key. Otherwise, default TX key index is only changed if
+	IW_ENCODE_EXT_SET_TX_KEY flag is set.
+
+	Key will be changed with SIOCSIWENCODEEXT in all cases except for
+	special \"change TX key index\" operation which is indicated by setting
+	key_len = 0 and ext_flags |= IW_ENCODE_EXT_SET_TX_KEY.
+
+	tx_seq/rx_seq are only used when respective
+	IW_ENCODE_EXT_{TX,RX}_SEQ_VALID flag is set in ext_flags. Normal
+	TKIP/CCMP operation is to set RX seq with SIOCSIWENCODEEXT and start
+	TX seq from zero whenever key is changed. SIOCGIWENCODEEXT is normally
+	used only by an Authenticator (AP or an IBSS station) to get the
+	current TX sequence number. Using TX_SEQ_VALID for SIOCSIWENCODEEXT and
+	RX_SEQ_VALID for SIOCGIWENCODEEXT are optional, but can be useful for
+	debugging/testing.
+"
+      attribute 189314 "ext_flags"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " IW_ENCODE_EXT_* "
+      end
+
+      attribute 189442 "tx_seq"
+	public explicit_type "__u8"
+	multiplicity "[IW_ENCODE_SEQ_MAX_SIZE]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " LSB first "
+      end
+
+      attribute 189570 "rx_seq"
+	public explicit_type "__u8"
+	multiplicity "[IW_ENCODE_SEQ_MAX_SIZE]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " LSB first "
+      end
+
+      classrelation 154370 // addr (<directional composition>)
+	relation 154370 *-->
+	  a role_name "addr" public
+	    comment " ff:ff:ff:ff:ff:ff for broadcast/multicast
+(group) keys or unicast address for
+individual keys "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 154370 // addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      attribute 189698 "alg"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " IW_ENCODE_ALG_* "
+      end
+
+      attribute 189826 "key_len"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 189954 "key"
+	public explicit_type "__u8"
+	multiplicity "[0]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 147970 "iw_mlme"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " SIOCSIWMLME data "
+      attribute 190082 "cmd"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " IW_MLME_* "
+      end
+
+      attribute 190210 "reason_code"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 154498 // addr (<directional composition>)
+	relation 154498 *-->
+	  a role_name "addr" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 154498 // addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+    end
+
+    class 148098 "iw_pmksa"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 190338 "cmd"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " IW_PMKSA_* "
+      end
+
+      classrelation 154626 // bssid (<directional composition>)
+	relation 154626 *-->
+	  a role_name "bssid" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 154626 // bssid (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      attribute 190466 "pmkid"
+	public explicit_type "__u8"
+	multiplicity "[IW_PMKID_LEN]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 148226 "iw_michaelmicfailure"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " IWEVMICHAELMICFAILURE data "
+      attribute 190594 "flags"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 154754 // src_addr (<directional composition>)
+	relation 154754 *-->
+	  a role_name "src_addr" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 154754 // src_addr (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+
+      attribute 190722 "tsc"
+	public explicit_type "__u8"
+	multiplicity "[IW_ENCODE_SEQ_MAX_SIZE]"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${multiplicity}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " LSB first "
+      end
+    end
+
+    class 148354 "iw_pmkid_cand"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 190850 "flags"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " IW_PMKID_CAND_* "
+      end
+
+      attribute 190978 "index"
+	public explicit_type "__u32"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " the smaller the index, the higher the
+priority "
+      end
+
+      classrelation 154882 // bssid (<directional composition>)
+	relation 154882 *-->
+	  a role_name "bssid" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 154882 // bssid (<directional composition>)
+	  b parent class_ref 146050 // sockaddr
+      end
+    end
+
+    class 148482 "iwreq"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "The structure to exchange data for ioctl.
+This structure is the same as 'struct ifreq', but (re)defined for
+convenience...
+Do I need to remind you about structure size (32 octets) ?
+"
+      attribute 191490 "ifr_ifrn"
+	public explicit_type "<complex type>"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 157442 // u (<directional composition>)
+	relation 157442 *-->
+	  a role_name "u" public
+	    comment " Data part (defined just above) 
+"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 157442 // u (<directional composition>)
+	  b parent class_ref 144258 // iwreq_data
+      end
+    end
+
+    class 148610 "iw_event"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " ----------------------- WIRELESS EVENTS ----------------------- 
+
+Wireless events are carried through the rtnetlink socket to user
+space. They are encapsulated in the IFLA_WIRELESS field of
+a RTM_NEWLINK message.
+
+
+A Wireless Event. Contains basically the same data as the ioctl...
+"
+      attribute 197762 "len"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Real lenght of this stuff "
+      end
+
+      attribute 197890 "cmd"
+	public explicit_type "__u16"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Wireless IOCTL "
+      end
+
+      classrelation 157954 // u (<directional composition>)
+	relation 157954 *-->
+	  a role_name "u" public
+	    comment " IOCTL fixed payload "
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 157954 // u (<directional composition>)
+	  b parent class_ref 144258 // iwreq_data
+      end
+    end
+  end
+
+  deploymentview 130306 "inc"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 135682 "iwlib"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 144130 // iw_pk_event
+	class_ref 144386 // iw_pk_point
+	class_ref 144642 // iwstats
+	class_ref 144898 // iwrange
+	class_ref 145154 // iwparam
+	class_ref 145410 // iwfreq
+	class_ref 145666 // iwqual
+	class_ref 145922 // iwprivargs
+	class_ref 146050 // sockaddr
+	class_ref 146178 // wireless_config
+	class_ref 146306 // wireless_info
+	class_ref 146434 // wireless_scan
+	class_ref 146562 // wireless_scan_head
+	class_ref 146690 // stream_descr
+	class_ref 146818 // iw_enum_handler
+	class_ref 146946 // iw_modul_descr
+      end
+    end
+
+    artifact 135810 "KalmanFilterRSSI"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 147074 // KalmanFilterRSSI
+      end
+    end
+
+    artifact 135938 "wireless"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145026 // iw_param
+	class_ref 147202 // iw_point
+	class_ref 145282 // iw_freq
+	class_ref 145538 // iw_quality
+	class_ref 147330 // iw_discarded
+	class_ref 147458 // iw_missed
+	class_ref 147586 // iw_thrspy
+	class_ref 147714 // iw_scan_req
+	class_ref 147842 // iw_encode_ext
+	class_ref 147970 // iw_mlme
+	class_ref 148098 // iw_pmksa
+	class_ref 148226 // iw_michaelmicfailure
+	class_ref 148354 // iw_pmkid_cand
+	class_ref 144514 // iw_statistics
+	class_ref 144258 // iwreq_data
+	class_ref 148482 // iwreq
+	class_ref 144770 // iw_range
+	class_ref 145794 // iw_priv_args
+	class_ref 148610 // iw_event
+      end
+    end
+  end
+
+  package_ref 130562 // Data
+
+  package_ref 130690 // Interfaces
+
+  package_ref 130946 // Exceptions
+
+  package_ref 131074 // Modules
+end
