@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Geolocation Tracker</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="outside_notification"> outside_notification</string>
+    <string name="outside_notification_description">sends_when_outside</string>
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/icon_info_window_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/titleBackground"
+        android:background="@color/window_green"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp">
+
+        <!--icon-->
+        <ImageView
+            android:id="@+id/person_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:src="@drawable/ic_person_icon" />
+
+        <!--title-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:layout_toRightOf = "@+id/person_icon"
+            android:paddingLeft="10dp"
+            android:paddingTop = "5dp"
+            android:paddingRight = "10dp"
+            android:paddingBottom="7dp"
+            android:ellipsize="end"
+            android:maxLines = "1"
+            android:textSize = "14sp"
+            android:textColor = "#000"
+            android:textStyle="bold"
+           />
+
+
+
+    </RelativeLayout>
+
+    <!--line-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:id="@+id/line"
+        android:layout_below="@+id/person_icon"
+        android:background = "#000"
+        android:layout_marginBottom="5dp"/>
+
+    <!--timestamp-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timestamp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize = "14sp"
+        android:textColor = "#000"
+        android:paddingLeft ="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="1dp"
+        />
+
+    <!--location-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/location"
+        android:textSize="14sp"
+        android:textColor="#000"
+        android:paddingLeft ="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="1dp"/>
+
+    <!--status-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/status"
+        android:textSize = "14sp"
+        android:textColor = "#000"
+        android:paddingLeft ="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp" />
+
+</LinearLayout>
